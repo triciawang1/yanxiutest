@@ -25,4 +25,7 @@ public class YanxiuTrain {
 	public SiderbarPage siderbarPage(){
 		return new SiderbarPage(driver);
 	}
+	public PageBase mainPage(){
+		return new PageBase(driver);
+	}
 }

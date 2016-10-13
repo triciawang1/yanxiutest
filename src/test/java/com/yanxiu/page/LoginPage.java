@@ -28,9 +28,7 @@ public class LoginPage extends PageBase {
 	@iOSFindBy(xpath = "//UIAApplication[1]/UIAWindow[1]/UIAScrollView[1]/UIAButton[3]")
 	private MobileElement loginButton;
 	
-	@AndroidFindBy(id="com.yanxiu.gphone.training.teacher:id/img_left")
-	@iOSFindBy(xpath="//UIAApplication[1]/UIAWindow[1]/UIANavigationBar[1]/UIAButton[1]")
-	private MobileElement avatorImage;
+
 	
 	public LoginPage(AppiumDriver<MobileElement> driver){
 		super(driver);		
@@ -40,17 +38,10 @@ public class LoginPage extends PageBase {
 		username_text.sendKeys(username);
 		password_text.sendKeys(password);
 		loginButton.click();
-		try {
-			new WebDriverWait(driver, 30).until(ExpectedConditions
-					.elementToBeClickable(avatorImage));
-		} catch (Exception e) {
-
-		}
+		waitForMainPageLoaded();
 	}
     
-    public boolean isAvatorDisplayed(){
-    	return avatorImage.isDisplayed();
-    }
+
     
     public boolean isLoginButtonDisplayed(){
     	return loginButton.isDisplayed();
@@ -59,6 +50,8 @@ public class LoginPage extends PageBase {
     public void loginWithDefaultUser(){
     	login("XY02735506@yanxiu.com","123456");
     }
+    
+ 
 	
 	
 
