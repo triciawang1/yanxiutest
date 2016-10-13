@@ -14,7 +14,7 @@ public class LeadingPage extends PageBase{
 	@iOSFindBy(className="UIAScrollView")
 	private MobileElement scrollView;
 	
-	@AndroidFindBy(xpath="//android.widget.TextView[contains(@text,'¿ªÊ¼ÌåÑé')]")
+	@AndroidFindBy(xpath="//android.widget.TextView[contains(@text,'ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½')]")
 	@iOSFindBy(className="UIAButton")
 	private MobileElement exButton;
 	
@@ -23,6 +23,7 @@ public class LeadingPage extends PageBase{
 	}
 	
 	public void skipLeadingPage(){
+		waitForElementVisible(scrollView);
 		for(int i=0;i<2;i++){
 			
 			scrollView.swipe(SwipeElementDirection.LEFT, 100, 100, 500);

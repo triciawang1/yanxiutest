@@ -58,5 +58,14 @@ public class PageBase {
 		
 		return pageTitle.isDisplayed();
 	}
+    
+    protected void waitForElementVisible(MobileElement element){
+		try {
+			new WebDriverWait(driver, 30).until(ExpectedConditions
+					.visibilityOf(element));
+		} catch (Exception e) {
+
+		}
+    }
 	
 }
