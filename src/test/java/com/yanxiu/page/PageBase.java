@@ -13,7 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class PageBase {
 
-	@iOSFindBy(xpath="//*[contains(@name,'返回')]")
+	@iOSFindBy(xpath="//UIAButton[contains(@name,'返回')]")
 	private MobileElement backButton;
 	
 	@AndroidFindBy(id="com.yanxiu.gphone.training.teacher:id/img_left")
