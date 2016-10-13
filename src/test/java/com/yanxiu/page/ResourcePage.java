@@ -7,14 +7,14 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.iOSFindBy;
 
-public class HotpotPage extends PageBase {
+public class ResourcePage extends PageBase{
 
-	public HotpotPage(AppiumDriver<MobileElement> driver) {
+	public ResourcePage(AppiumDriver<MobileElement> driver) {
 		super(driver);
 		// TODO Auto-generated constructor stub
 	}
 
-	@iOSFindBy(uiAutomator=".navigationBars()[0].staticTexts().withPredicate(\"name == '热点'\")")
+	@iOSFindBy(xpath="//UIAButton[contains(@name,'全部资源')]")
 	private MobileElement pageTitle;
 	
 	public boolean isPageLoaded(){

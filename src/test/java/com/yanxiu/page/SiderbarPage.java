@@ -13,7 +13,14 @@ public class SiderbarPage extends PageBase{
 	@iOSFindBy(xpath="//UIATableCell[contains(@name,'热点')]")
 	private MobileElement hotPot;
 	
+	@iOSFindBy(xpath="//UIATableCell[contains(@name,'资源')]")
+	private MobileElement resource;
+	
 	public void enterHotPotPage(){
 		hotPot.click();
+	}
+	
+	public void enterResourcePage(){
+		resource.click();
 	}
 }

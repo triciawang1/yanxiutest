@@ -47,5 +47,16 @@ public class PageBase {
     public void gotoSiderbar(){
     	avatorImage.click();
     }
+    
+    protected Boolean isPageLoaded(MobileElement pageTitle){
+		try {
+			new WebDriverWait(driver, 30).until(ExpectedConditions
+					.visibilityOf(pageTitle));
+		} catch (Exception e) {
+
+		}
+		
+		return pageTitle.isDisplayed();
+	}
 	
 }
