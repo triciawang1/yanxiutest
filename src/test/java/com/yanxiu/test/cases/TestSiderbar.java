@@ -6,6 +6,7 @@ public class TestSiderbar extends BaseCase {
 
 	@Test
 	public void testHotpot(){
+		app.loginPage().loginWithDefaultUser();
 		app.siderbarPage().enterHotPotPage();
 	}
 }
