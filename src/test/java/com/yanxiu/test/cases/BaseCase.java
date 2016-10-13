@@ -66,7 +66,7 @@ public class BaseCase {
 		return (AndroidDriver<MobileElement>)driver;
 	}
 
-	@BeforeMethod
+	@BeforeMethod(alwaysRun=true)
 	public void setUp() throws InterruptedException, IOException {
 
 	         Map<String,String> devices_android = CommonUtil.getAndroidDevices();
@@ -85,7 +85,7 @@ public class BaseCase {
 	         app.leadingPage().skipLeadingPage();
 	    }
 
-	@AfterMethod
+	@AfterMethod(alwaysRun=true)
 	public void tearDown() {
 		driver.quit();
 		Server.stopServer();
