@@ -31,4 +31,7 @@ public class YanxiuTrain {
 	public HotpotPage hotpotPage(){
 		return new HotpotPage(driver);
 	}
+	public ResourcePage resourcePage(){
+		return new ResourcePage(driver);
+	}
 }

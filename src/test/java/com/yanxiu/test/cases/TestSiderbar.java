@@ -26,7 +26,7 @@ public class TestSiderbar extends BaseCase {
 	public void testResourceEntrance(){
 
 		app.siderbarPage().enterResourcePage();
-		Assert.assertTrue(app.hotpotPage().isPageLoaded());
+		Assert.assertTrue(app.resourcePage().isPageLoaded());
 		app.mainPage().pressBackButton();
 	}
 }
