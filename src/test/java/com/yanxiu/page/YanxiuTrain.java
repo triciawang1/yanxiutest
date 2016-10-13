@@ -22,4 +22,7 @@ public class YanxiuTrain {
 	public ExaminePage examinPage(){
 		return new ExaminePage(driver);
 	}
+	public SiderbarPage siderbarPage(){
+		return new SiderbarPage(driver);
+	}
 }

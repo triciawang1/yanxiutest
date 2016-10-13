@@ -10,8 +10,8 @@ import org.openqa.selenium.support.PageFactory;
 
 public class PageBase {
 
-	@iOSFindBy(tagName="返回")
-	private MobileElement backButton;
+//	@iOSFindBy(tagName="返回")
+//	private MobileElement backButton;
 	
 	protected AppiumDriver<MobileElement> driver;
 	public PageBase(AppiumDriver<MobileElement> driver){
@@ -21,6 +21,6 @@ public class PageBase {
 	}
 	
 	public void pressBackButton(){
-		backButton.click();
+//		backButton.click();
 	}
 }
