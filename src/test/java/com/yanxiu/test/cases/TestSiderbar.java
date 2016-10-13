@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 public class TestSiderbar extends BaseCase {
 
 	@BeforeMethod
-	public void setUp(){
+	public void setup(){
 		app.loginPage().loginWithDefaultUser();
 		app.mainPage().gotoSiderbar();
 	}
