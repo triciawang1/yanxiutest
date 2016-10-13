@@ -12,5 +12,7 @@ public class TestExamine extends BaseCase{
 		app.loginPage().loginWithDefaultUser();
 		app.examinPage().checkScoreDetai();
 		Assert.assertTrue(app.examinPage().isScoreDetailPageLoaded());
+		app.examinPage().pressBackButton();
+		
 	}
 }

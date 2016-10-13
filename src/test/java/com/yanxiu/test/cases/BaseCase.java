@@ -30,7 +30,7 @@ public class BaseCase {
 	protected DesiredCapabilities capabilities = new DesiredCapabilities();
 
 	protected  AppiumDriver<MobileElement> driver;
-//	protected String appiumServer = "http://192.168.7.48:4723/wd/hub";
+//	protected String appiumServer = "http://192.168.7.117:4723/wd/hub";
 	protected YanxiuTrain app;
 	protected String appiumServer = "http://127.0.0.1:4723/wd/hub";
 	protected IOSDriver<MobileElement> iosDriver = null;
