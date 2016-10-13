@@ -56,7 +56,9 @@ public class LoginPage extends PageBase {
     	return loginButton.isDisplayed();
     }
 	
-
+    public void loginWithDefaultUser(){
+    	login("XY02735506@yanxiu.com","123456");
+    }
 	
 	
 
