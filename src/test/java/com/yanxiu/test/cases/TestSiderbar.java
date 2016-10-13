@@ -1,8 +1,9 @@
 package com.yanxiu.test.cases;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import junit.framework.Assert;
+
 
 public class TestSiderbar extends BaseCase {
 
