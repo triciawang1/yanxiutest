@@ -14,7 +14,7 @@ public class HotpotPage extends PageBase {
 		// TODO Auto-generated constructor stub
 	}
 
-	@iOSFindBy(xpath="//UIAStaticText[contains(@name,'热点')]")
+	@iOSFindBy(uiAutomator=".navigationBars()[0].staticTexts().withPredicate(\"name == '热点'\")")
 	private MobileElement pageTitle;
 	
 	public boolean isPageLoaded(){
