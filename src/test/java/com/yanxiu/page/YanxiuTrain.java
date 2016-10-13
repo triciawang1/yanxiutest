@@ -28,4 +28,7 @@ public class YanxiuTrain {
 	public PageBase mainPage(){
 		return new PageBase(driver);
 	}
+	public HotpotPage hotpotPage(){
+		return new HotpotPage(driver);
+	}
 }

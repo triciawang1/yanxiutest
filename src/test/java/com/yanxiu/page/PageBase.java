@@ -13,8 +13,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class PageBase {
 
-//	@iOSFindBy(tagName="返回")
-//	private MobileElement backButton;
+	@iOSFindBy(xpath="//*[contains(@name,'返回')]")
+	private MobileElement backButton;
 	
 	@AndroidFindBy(id="com.yanxiu.gphone.training.teacher:id/img_left")
 	@iOSFindBy(xpath="//UIAApplication[1]/UIAWindow[1]/UIANavigationBar[1]/UIAButton[1]")
@@ -28,7 +28,7 @@ public class PageBase {
 	}
 	
 	public void pressBackButton(){
-//		backButton.click();
+		backButton.click();
 	}
 	
     public boolean isAvatorDisplayed(){
