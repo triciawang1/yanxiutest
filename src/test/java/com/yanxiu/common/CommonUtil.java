@@ -108,5 +108,9 @@ public class CommonUtil {
 		return devices;
 	}
 	
+	public static void clearAndroidData() throws IOException{
+		String clearCmd = "/Users/Admin/android-sdk-macosx/platform-tools/adb shell pm clear com.yanxiu.gphone.training.teacher";
+		execCmd(clearCmd);
+	}
 
 }

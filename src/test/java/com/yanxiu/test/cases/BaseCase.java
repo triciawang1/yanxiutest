@@ -61,7 +61,7 @@ public class BaseCase {
 				"com.yanxiu.yxtrain_android.activity.login.WelcomeActivity");
 		driver = new AndroidDriver<MobileElement>(new URL(
 				appiumServer), capabilities);
-		driver.resetApp();
+//		driver.resetApp();
 		driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
 		return (AndroidDriver<MobileElement>)driver;
 	}
@@ -86,7 +86,10 @@ public class BaseCase {
 	    }
 
 	@AfterMethod(alwaysRun=true)
-	public void tearDown() {
+	public void tearDown() throws IOException {
+		if(driver instanceof AndroidDriver){
+			CommonUtil.clearAndroidData();
+		}
 		driver.quit();
 		Server.stopServer();
 	}
