@@ -11,7 +11,7 @@ public class SiderbarPage extends PageBase{
 		// TODO Auto-generated constructor stub
 	}
 	
-	@AndroidFindBy(id="tv_hotpot")
+	@AndroidFindBy(id="tv_hotspot")
 	@iOSFindBy(xpath="//UIATableCell[contains(@name,'热点')]")
 	private MobileElement hotPot;
 	
