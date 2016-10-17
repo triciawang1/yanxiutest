@@ -58,7 +58,7 @@ public class BaseCase {
 		capabilities.setCapability("appPackage",
 				"com.yanxiu.gphone.training.teacher");
 		capabilities.setCapability("appActivity",
-				"com.yanxiu.yxtrain_android.activity.WelcomeActivity");
+				"com.yanxiu.yxtrain_android.activity.login.WelcomeActivity");
 		driver = new AndroidDriver<MobileElement>(new URL(
 				appiumServer), capabilities);
 		driver.resetApp();
