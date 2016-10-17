@@ -5,6 +5,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSFindBy;
 
 public class ResourcePage extends PageBase{
@@ -14,6 +15,7 @@ public class ResourcePage extends PageBase{
 		// TODO Auto-generated constructor stub
 	}
 
+	@AndroidFindBy(uiAutomator="new UiSelector().text('全部资源')")
 	@iOSFindBy(xpath="//UIAButton[contains(@name,'全部资源')]")
 	private MobileElement pageTitle;
 	
