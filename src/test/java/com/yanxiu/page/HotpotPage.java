@@ -14,7 +14,7 @@ public class HotpotPage extends PageBase {
 		super(driver);
 		// TODO Auto-generated constructor stub
 	}
-	@AndroidFindBy(uiAutomator="new UiSelector().text('热点')")
+	@AndroidFindBy(uiAutomator="new UiSelector().text(\"热点\")")
 	@iOSFindBy(uiAutomator=".navigationBars()[0].staticTexts().withPredicate(\"name == '热点'\")")
 	private MobileElement pageTitle;
 	

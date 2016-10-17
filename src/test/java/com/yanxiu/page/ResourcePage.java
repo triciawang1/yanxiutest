@@ -15,7 +15,7 @@ public class ResourcePage extends PageBase{
 		// TODO Auto-generated constructor stub
 	}
 
-	@AndroidFindBy(uiAutomator="new UiSelector().text('全部资源')")
+	@AndroidFindBy(uiAutomator="new UiSelector().text(\"全部资源\")")
 	@iOSFindBy(xpath="//UIAButton[contains(@name,'全部资源')]")
 	private MobileElement pageTitle;
 	

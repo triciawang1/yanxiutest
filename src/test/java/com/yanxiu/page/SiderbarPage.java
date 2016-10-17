@@ -15,7 +15,7 @@ public class SiderbarPage extends PageBase{
 	@iOSFindBy(xpath="//UIATableCell[contains(@name,'热点')]")
 	private MobileElement hotPot;
 	
-	@AndroidFindBy(uiAutomator="new UiSelector().text('资源')")
+	@AndroidFindBy(uiAutomator="new UiSelector().text(\"资源\")")
 	@iOSFindBy(xpath="//UIATableCell[contains(@name,'资源')]")
 	private MobileElement resource;
 	
