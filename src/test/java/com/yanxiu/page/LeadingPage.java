@@ -10,11 +10,11 @@ import org.openqa.selenium.WebElement;
 
 public class LeadingPage extends PageBase{
 	
-	@AndroidFindBy(id="android:id/vp_welcome")
+	@AndroidFindBy(id="vp_welcome")
 	@iOSFindBy(className="UIAScrollView")
 	private MobileElement scrollView;
 	
-	@AndroidFindBy(xpath="//android.widget.TextView[contains(@text,'��ʼ����')]")
+	@AndroidFindBy(xpath="//android.widget.TextView[contains(@text,'开始体验')]")
 	@iOSFindBy(className="UIAButton")
 	private MobileElement exButton;
 	
