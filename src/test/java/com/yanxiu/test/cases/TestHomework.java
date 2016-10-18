@@ -37,6 +37,7 @@ public class TestHomework extends BaseCase {
 //		ElementHelper.waitForElement(driver, By.id("com.yanxiu.gphone.training.teacher:id/tv_ilknow")).click();
 		app.homePage().tapTask();
 		app.homePage().enterHomeworkPage();
+		app.homeworkPage().tapKnownButton();
 		app.homeworkPage().tapAllHomeworkItem();
 		
 	}
