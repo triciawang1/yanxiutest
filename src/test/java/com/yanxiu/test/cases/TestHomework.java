@@ -35,6 +35,8 @@ public class TestHomework extends BaseCase {
 //		taskTab.click();
 //		ElementHelper.waitForElement(driver, By.xpath("//android.widget.TextView[contains(@text,'��ҵ')]")).click();
 //		ElementHelper.waitForElement(driver, By.id("com.yanxiu.gphone.training.teacher:id/tv_ilknow")).click();
+		app.homePage().tapTask();
+		app.homePage().enterHomeworkPage();
 		app.homeworkPage().tapAllHomeworkItem();
 		
 	}
