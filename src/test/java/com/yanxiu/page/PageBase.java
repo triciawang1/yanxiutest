@@ -18,9 +18,12 @@ public class PageBase {
 	@iOSFindBy(xpath="//UIAButton[contains(@name,'返回')]")
 	private MobileElement backButton;
 	
-	@AndroidFindBy(id="com.yanxiu.gphone.training.teacher:id/img_left")
+	@AndroidFindBy(id="img_left")
 	@iOSFindBy(xpath="//UIAApplication[1]/UIAWindow[1]/UIANavigationBar[1]/UIAButton[1]")
 	private MobileElement avatorImage;
+	
+	@AndroidFindBy(id="notice_try_again")
+	private MobileElement refreshButton;
 	
 	protected AppiumDriver<MobileElement> driver;
 	public PageBase(AppiumDriver<MobileElement> driver){
@@ -73,5 +76,10 @@ public class PageBase {
 
 		}
     }
+    
+    protected void refreshToTry(){
+    	refreshButton.click();
+    }
+    
 	
 }

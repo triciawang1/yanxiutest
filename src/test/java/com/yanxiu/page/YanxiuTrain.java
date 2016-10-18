@@ -34,4 +34,10 @@ public class YanxiuTrain {
 	public ResourcePage resourcePage(){
 		return new ResourcePage(driver);
 	}
+	public HomePage homePage(){
+		return new HomePage(driver);
+	}
+	public HomeworkPage homeworkPage(){
+		return new HomeworkPage(driver);
+	}
 }

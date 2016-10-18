@@ -18,7 +18,7 @@ public class TestHomework extends BaseCase {
 
 	@BeforeMethod
 	public void login(){
-//		LoginUtil.loginWithDefaultUser(driver);
+		app.loginPage().loginWithDefaultUser();
 	}
 	
 	@Test(groups = "BVT")
@@ -33,8 +33,9 @@ public class TestHomework extends BaseCase {
 //		}
 //		
 //		taskTab.click();
-//		ElementHelper.waitForElement(driver, By.xpath("//android.widget.TextView[contains(@text,'×÷Òµ')]")).click();
+//		ElementHelper.waitForElement(driver, By.xpath("//android.widget.TextView[contains(@text,'ï¿½ï¿½Òµ')]")).click();
 //		ElementHelper.waitForElement(driver, By.id("com.yanxiu.gphone.training.teacher:id/tv_ilknow")).click();
+		app.homeworkPage().tapAllHomeworkItem();
 		
 	}
 }
