@@ -13,6 +13,8 @@ public class YanxiuTrain {
 		this.driver = driver;
 	}
 	
+	
+	
 	public LoginPage loginPage(){
 		return new LoginPage(driver);
 	}

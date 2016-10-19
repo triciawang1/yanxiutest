@@ -4,6 +4,7 @@ import java.util.List;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.SwipeElementDirection;
 import io.appium.java_client.pagefactory.AndroidFindAll;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 
@@ -21,6 +22,9 @@ public class HomeworkPage extends PageBase{
 	@AndroidFindAll(@AndroidFindBy(id="rl_homework_item"))
 	private List<MobileElement> homeworkItems;
 	
+	@AndroidFindBy(id="rcv_homeworklist")
+	private MobileElement listView;
+	
 	public void tapKnownButton(){
 		knownButton.click();
 	}
@@ -29,6 +33,9 @@ public class HomeworkPage extends PageBase{
 		for(int i=0;i<homeworkItems.size();i++){
 			homeworkItems.get(i).click();
 	        pressBackButton();
+	        if(i%3==0){
+	        	listView.swipe(SwipeElementDirection.DOWN, 500);
+	        }
 		}
 	}
 }

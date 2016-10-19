@@ -39,6 +39,6 @@ public class TestHomework extends BaseCase {
 		app.homePage().enterHomeworkPage();
 		app.homeworkPage().tapKnownButton();
 		app.homeworkPage().tapAllHomeworkItem();
-		
+
 	}
 }
