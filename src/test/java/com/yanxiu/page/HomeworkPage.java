@@ -34,7 +34,7 @@ public class HomeworkPage extends PageBase{
 			homeworkItems.get(i).click();
 	        pressBackButton();
 	        if(i%3==0){
-	        	listView.swipe(SwipeElementDirection.UP,100,100, 500);
+	        	listView.swipe(SwipeElementDirection.UP,10,10, 500);
 	        }
 		}
 	}
