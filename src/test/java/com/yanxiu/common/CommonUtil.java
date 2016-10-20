@@ -88,14 +88,18 @@ public class CommonUtil {
 			if(lines[i].contains("device")){
 				lines[i]=lines[i].replaceAll("device","");
 				String deviceID = lines[i].trim();
-//				String deviceModel = execCmd("/Users/Admin/android-sdk-macosx/platform-tools/adb -s "+deviceID+" shell getprop ro.product.model").toString();
-//				String deviceBrand = execCmd("/Users/Admin/android-sdk-macosx/platform-tools/adb -s "+deviceID+" shell getprop ro.product.brand").toString();
-//				String osVersion = execCmd("/Users/Admin/android-sdk-macosx/platform-tools/adb -s "+deviceID+" shell getprop ro.build.version.release").toString();
-//				
-//				String deviceName = deviceModel +" "+deviceBrand;
 				devices.put("deviceID", deviceID);
-//				devices.put("deviceName", deviceName);
-//				devices.put("osVersion", osVersion);
+				if(CommonUtil.isMacOs()){
+				String deviceModel = execCmd("/Users/Admin/android-sdk-macosx/platform-tools/adb -s "+deviceID+" shell getprop ro.product.model").toString();
+				String deviceBrand = execCmd("/Users/Admin/android-sdk-macosx/platform-tools/adb -s "+deviceID+" shell getprop ro.product.brand").toString();
+				String osVersion = execCmd("/Users/Admin/android-sdk-macosx/platform-tools/adb -s "+deviceID+" shell getprop ro.build.version.release").toString();
+				
+				String deviceName = deviceModel +" "+deviceBrand;
+				
+				devices.put("deviceName", deviceName);
+				devices.put("osVersion", osVersion);
+				}
+				
 			}
 		}
 		
