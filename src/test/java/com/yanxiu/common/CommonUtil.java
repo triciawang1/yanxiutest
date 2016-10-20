@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 public class CommonUtil {
 	public static void execCmd(String[] cmd){
@@ -69,6 +70,9 @@ public class CommonUtil {
 	
 	public static Map<String,String> getAndroidDevices() throws IOException{
 		Map<String,String> devices = new HashMap<String,String>();
+		Properties prop = System.getProperties();
+		String os = prop.getProperty("os.name");
+		System.out.println(os);
 		String str = execCmd("/Users/Admin/android-sdk-macosx/platform-tools/adb devices").toString();
 		String[] lines = str.split("\n");
 		if(lines.length<=1){
