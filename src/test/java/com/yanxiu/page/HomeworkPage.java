@@ -30,11 +30,13 @@ public class HomeworkPage extends PageBase{
 	}
 	
 	public void tapAllHomeworkItem(){
+		System.out.println(homeworkItems.size()+"#############");
 		for(int i=0;i<homeworkItems.size();i++){
+			
 			homeworkItems.get(i).click();
 	        pressBackButton();
 	        if(i%3==0){
-	        	listView.swipe(SwipeElementDirection.UP,10,300, 500);
+	        	listView.swipe(SwipeElementDirection.UP,10,1000, 500);
 	        }
 		}
 	}

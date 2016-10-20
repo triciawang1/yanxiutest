@@ -15,71 +15,79 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class PageBase {
 
-	@iOSFindBy(xpath="//UIAButton[contains(@name,'返回')]")
+	@iOSFindBy(xpath = "//UIAButton[contains(@name,'返回')]")
 	private MobileElement backButton;
-	
-	@AndroidFindBy(id="img_left")
-	@iOSFindBy(xpath="//UIAApplication[1]/UIAWindow[1]/UIANavigationBar[1]/UIAButton[1]")
+
+	@AndroidFindBy(id = "img_left")
+	@iOSFindBy(xpath = "//UIAApplication[1]/UIAWindow[1]/UIANavigationBar[1]/UIAButton[1]")
 	private MobileElement avatorImage;
-	
-	@AndroidFindBy(id="notice_try_again")
+
+	@AndroidFindBy(id = "notice_try_again")
 	private MobileElement refreshButton;
-	
+
 	protected AppiumDriver<MobileElement> driver;
-	public PageBase(AppiumDriver<MobileElement> driver){
+
+	public PageBase(AppiumDriver<MobileElement> driver) {
 		this.driver = driver;
-		PageFactory.initElements(new AppiumFieldDecorator(driver),this);
-		
+		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+
 	}
-	
-	public void pressBackButton(){
-		if(driver  instanceof AndroidDriver){
+
+	public void pressBackButton() {
+		if (driver instanceof AndroidDriver) {
 			((AndroidDriver<MobileElement>) driver).pressKeyCode(AndroidKeyCode.BACK);
-		}else{
-		backButton.click();
+		} else {
+			backButton.click();
 		}
 	}
-	
-    public boolean isAvatorDisplayed(){
-    	return avatorImage.isDisplayed();
-    }
-    
-    public void waitForMainPageLoaded(){
-    	try {
-			new WebDriverWait(driver, 30).until(ExpectedConditions
-					.elementToBeClickable(avatorImage));
-		} catch (Exception e) {
 
-		}
-    }
-    
-    public void gotoSiderbar(){
-    	avatorImage.click();
-    }
-    
-    protected Boolean isPageLoaded(MobileElement pageTitle){
+	public boolean isAvatorDisplayed() {
+		return avatorImage.isDisplayed();
+	}
+
+	public void waitForMainPageLoaded() {
 		try {
-			new WebDriverWait(driver, 30).until(ExpectedConditions
-					.visibilityOf(pageTitle));
+			new WebDriverWait(driver, 30).until(ExpectedConditions.elementToBeClickable(avatorImage));
 		} catch (Exception e) {
 
 		}
-		
+	}
+
+	public void gotoSiderbar() {
+		avatorImage.click();
+	}
+
+	protected Boolean isPageLoaded(MobileElement pageTitle) {
+		try {
+			new WebDriverWait(driver, 30).until(ExpectedConditions.visibilityOf(pageTitle));
+		} catch (Exception e) {
+
+		}
+
 		return pageTitle.isDisplayed();
 	}
-    
-    protected void waitForElementVisible(MobileElement element){
+
+	protected void waitForElementVisible(MobileElement element) {
 		try {
-			new WebDriverWait(driver, 30).until(ExpectedConditions
-					.visibilityOf(element));
+			new WebDriverWait(driver, 30).until(ExpectedConditions.visibilityOf(element));
 		} catch (Exception e) {
 
 		}
-    }
-    
-    protected void refreshToTry(){
-    	refreshButton.click();
-    }
-    
-	
+	}
+
+	protected boolean isRefreshButtonShown() {
+		try {
+			return refreshButton.isDisplayed();
+		} catch (Exception e) {
+			return false;
+		}
+
+	}
+
+	protected void refreshToTry() {
+		if (isRefreshButtonShown()) {
+			refreshButton.click();
+		}
+	}
+
 }

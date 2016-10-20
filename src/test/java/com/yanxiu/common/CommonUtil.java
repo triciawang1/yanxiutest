@@ -70,10 +70,15 @@ public class CommonUtil {
 	
 	public static Map<String,String> getAndroidDevices() throws IOException{
 		Map<String,String> devices = new HashMap<String,String>();
-		Properties prop = System.getProperties();
-		String os = prop.getProperty("os.name");
-		System.out.println(os);
-		String str = execCmd("/Users/Admin/android-sdk-macosx/platform-tools/adb devices").toString();
+//		Properties prop = System.getProperties();
+//		String os = prop.getProperty("os.name");
+//		System.out.println(os);
+		String str="";
+		if(isMacOs()){
+		 str= execCmd("/Users/Admin/android-sdk-macosx/platform-tools/adb devices").toString();
+		}else{
+			str=execCmd("adb devices").toString();
+		}
 		String[] lines = str.split("\n");
 		if(lines.length<=1){
 			System.out.println("no android device connected");
@@ -83,14 +88,14 @@ public class CommonUtil {
 			if(lines[i].contains("device")){
 				lines[i]=lines[i].replaceAll("device","");
 				String deviceID = lines[i].trim();
-				String deviceModel = execCmd("/Users/Admin/android-sdk-macosx/platform-tools/adb -s "+deviceID+" shell getprop ro.product.model").toString();
-				String deviceBrand = execCmd("/Users/Admin/android-sdk-macosx/platform-tools/adb -s "+deviceID+" shell getprop ro.product.brand").toString();
-				String osVersion = execCmd("/Users/Admin/android-sdk-macosx/platform-tools/adb -s "+deviceID+" shell getprop ro.build.version.release").toString();
-				
-				String deviceName = deviceModel +" "+deviceBrand;
+//				String deviceModel = execCmd("/Users/Admin/android-sdk-macosx/platform-tools/adb -s "+deviceID+" shell getprop ro.product.model").toString();
+//				String deviceBrand = execCmd("/Users/Admin/android-sdk-macosx/platform-tools/adb -s "+deviceID+" shell getprop ro.product.brand").toString();
+//				String osVersion = execCmd("/Users/Admin/android-sdk-macosx/platform-tools/adb -s "+deviceID+" shell getprop ro.build.version.release").toString();
+//				
+//				String deviceName = deviceModel +" "+deviceBrand;
 				devices.put("deviceID", deviceID);
-				devices.put("deviceName", deviceName);
-				devices.put("osVersion", osVersion);
+//				devices.put("deviceName", deviceName);
+//				devices.put("osVersion", osVersion);
 			}
 		}
 		
@@ -113,8 +118,26 @@ public class CommonUtil {
 	}
 	
 	public static void clearAndroidData() throws IOException{
-		String clearCmd = "/Users/Admin/android-sdk-macosx/platform-tools/adb shell pm clear com.yanxiu.gphone.training.teacher";
+		String clearCmd="";
+		if(CommonUtil.isMacOs()){
+		clearCmd = "/Users/Admin/android-sdk-macosx/platform-tools/adb shell pm clear com.yanxiu.gphone.training.teacher";
+		}
+		else{
+			clearCmd ="adb shell pm clear com.yanxiu.gphone.training.teacher";
+		}
 		execCmd(clearCmd);
+	}
+	
+	public static boolean isMacOs(){
+		
+		Properties prop = System.getProperties();
+		String os = prop.getProperty("os.name");
+		System.out.println(os);
+		if(os.equals("Mac OS X")){
+			return true;
+		}
+		
+		return false;
 	}
 
 }

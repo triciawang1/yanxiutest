@@ -38,7 +38,9 @@ public class LoginPage extends PageBase {
 		username_text.sendKeys(username);
 		password_text.sendKeys(password);
 		loginButton.click();
+		
 		waitForMainPageLoaded();
+		refreshToTry();
 	}
     
 

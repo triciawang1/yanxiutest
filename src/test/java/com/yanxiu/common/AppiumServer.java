@@ -16,11 +16,20 @@ public class AppiumServer {
 
 	public void startServer() {
 
-		CommandLine command = new CommandLine(
+		CommandLine command=null;
+		if(CommonUtil.isMacOs()){
+		command = new CommandLine(
 				"/Applications/Appium.app/Contents/Resources/node/bin/node");
 		command.addArgument(
 				"/Applications/Appium.app/Contents/Resources/node_modules/appium/build/lib/main.js",
 				false);
+		}else{
+			command = new CommandLine(
+					"D:/Program Files (x86)/Appium/node.exe");
+			command.addArgument(
+					"D:/Program Files (x86)/Appium/node_modules/appium/bin/Appium.js",
+					false);
+		}
 		command.addArgument("--address", false);
 		command.addArgument("127.0.0.1");
 		command.addArgument("--port", false);
@@ -41,7 +50,14 @@ public class AppiumServer {
 	}
 
 	public void stopServer() {
-		String[] command = { "/usr/bin/killall", "-KILL", "node" };
+		String[] command=null;
+		if(CommonUtil.isMacOs()){
+			command = new String[]{ "/usr/bin/killall", "-KILL", "node" };
+		}
+		else{
+			command = new String[]{"cmd","/c","taskkill","/F","/IM","node.exe"};
+		}
+		
 		try {
 			Runtime.getRuntime().exec(command);
 			System.out.println("Appium server stopped.");
