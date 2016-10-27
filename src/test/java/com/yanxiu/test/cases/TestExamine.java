@@ -12,7 +12,9 @@ public class TestExamine extends BaseCase{
 		app.loginPage().loginWithDefaultUser();
 		app.examinPage().checkScoreDetai();
 		Assert.assertTrue(app.examinPage().isScoreDetailPageLoaded());
+		Assert.assertTrue(app.examinPage().currentActivityIsScoreDetailActivity());
 		app.examinPage().pressBackButton();
+		
 		
 	}
 }
