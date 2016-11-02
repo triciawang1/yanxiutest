@@ -5,10 +5,11 @@ package com.yanxiu.test.cases;
 import java.util.List;
 
 import io.appium.java_client.android.AndroidElement;
-import junit.framework.Assert;
+
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
