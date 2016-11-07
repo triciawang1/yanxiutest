@@ -10,7 +10,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import org.testng.log4testng.Logger;
+
+import com.yanxiu.test.cases.BaseCase;
+
 public class CommonUtil {
+	private static Logger log = Logger.getLogger(CommonUtil.class);
 	public static void execCmd(String[] cmd){
 		try {
 			
@@ -24,7 +29,7 @@ public class CommonUtil {
            
             while((line=br.readLine())!=null)    
              {    
-                 System.out.println(line);    
+                 System.out.println("%%%%%%%%%%%%%"+line);    
              }    
 		
 			
@@ -50,7 +55,7 @@ public class CommonUtil {
 			for(int i=0;i<str.length;i++){
 				commands.add(str[i]);
 			}
-			System.out.println(commands);
+			
 			builder = new ProcessBuilder(commands);
 //			
 		}
@@ -64,24 +69,27 @@ public class CommonUtil {
 //			System.out.println(line);
 			result.append(line+"\n");
 		}
-		System.out.println(result);
+		
 		return result;
 	}
 	
-	public static Map<String,String> getAndroidDevices() throws IOException{
+	public static Map<String,String> getAndroidDevices(Boolean isRemoteRun) throws IOException{
 		Map<String,String> devices = new HashMap<String,String>();
 //		Properties prop = System.getProperties();
 //		String os = prop.getProperty("os.name");
 //		System.out.println(os);
 		String str="";
-		if(isMacOs()){
+		if(isRemoteRun){
+			str =  RemoteRunCmd.execCmd("/Users/Admin/android-sdk-macosx/platform-tools/adb devices").toString();
+		}
+		else if(isMacOs()){
 		 str= execCmd("/Users/Admin/android-sdk-macosx/platform-tools/adb devices").toString();
 		}else{
 			str=execCmd("adb devices").toString();
 		}
 		String[] lines = str.split("\n");
 		if(lines.length<=1){
-			System.out.println("no android device connected");
+			log.info("no android device connected");
 			
 		}
 		for(int i=1;i<lines.length;i++){
@@ -102,22 +110,31 @@ public class CommonUtil {
 				
 			}
 		}
-		
+		log.info("android device is:"+devices);
 		return devices;
 	}
 	
-	public static Map<String,String> getIOSDevices() throws IOException{
+	public static Map<String,String> getIOSDevices(Boolean isRemoteRun) throws IOException{
 		Map<String,String> devices = new HashMap<String,String>();
-		String str = execCmd("idevice_id -l").toString();
+		String str;
+		if(isRemoteRun){
+			str = RemoteRunCmd.execCmd("/usr/local/bin/idevice_id -l").toString().trim();
+			log.info("remote run idevice_id -l result is:"+str);
+		}else if(CommonUtil.isMacOs()){
+	    str = execCmd("idevice_id -l").toString();
+		}else{
+			return devices;
+		}
 		String[] lines = str.split("\n");
-		if(lines.length<1){
-			System.out.println("no ios device connected");
+		log.info("legth is :"+lines.length+str.length());
+		if(lines.length<=1){
+			log.info("no ios device connected");
 			
 		}
 		for(int i=0;i<lines.length;i++){
 			devices.put("udid",lines[i]);
 		}
-		System.out.println(devices);
+		log.info("ios deviceid is:"+devices);
 		return devices;
 	}
 	
@@ -136,8 +153,20 @@ public class CommonUtil {
 		
 		Properties prop = System.getProperties();
 		String os = prop.getProperty("os.name");
-		System.out.println(os);
+		log.info("platform is:"+os);
 		if(os.equals("Mac OS X")){
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public static boolean isWindowsOS(){
+		
+		Properties prop = System.getProperties();
+		String os = prop.getProperty("os.name");
+		log.info("platform is:"+os);
+		if(os.contains("Windows")){
 			return true;
 		}
 		

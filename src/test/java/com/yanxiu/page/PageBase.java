@@ -59,7 +59,7 @@ public class PageBase {
 
 	protected Boolean isPageLoaded(MobileElement pageTitle) {
 		try {
-			new WebDriverWait(driver, 30).until(ExpectedConditions.visibilityOf(pageTitle));
+			new WebDriverWait(driver, 120).until(ExpectedConditions.visibilityOf(pageTitle));
 		} catch (Exception e) {
 
 		}

@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.log4testng.Logger;
 
 
 
@@ -14,9 +15,10 @@ import org.testng.annotations.Test;
 
 public class TestLogin extends BaseCase{
 
-
+	private Logger log = Logger.getLogger(TestLogin.class);
 	@Test(groups = "BVT")
-	public void testLogin() throws InterruptedException, IOException {				
+	public void testLogin() throws InterruptedException, IOException {	
+		log.info("test login with correct user account");
 		app.loginPage().login("XY02735506@yanxiu.com","123456");
 		Assert.assertTrue(app.loginPage().isAvatorDisplayed());
 //		WebElement avatorImage = ElementHelper.waitForElement(driver,By.id("com.yanxiu.gphone.training.teacher:id/img_left"));
