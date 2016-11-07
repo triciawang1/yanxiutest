@@ -59,6 +59,7 @@ public class BaseCase {
 		log.info("create an iosDriver");
 		driver = new IOSDriver<MobileElement>(new URL(appiumServer), capabilities);
 		// driver.resetApp();
+		log.info(driver+"driver now");
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return (IOSDriver<MobileElement>) driver;
 	}

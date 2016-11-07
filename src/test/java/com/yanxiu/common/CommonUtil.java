@@ -127,7 +127,7 @@ public class CommonUtil {
 		}
 		String[] lines = str.split("\n");
 		log.info("legth is :"+lines.length+str.length());
-		if(lines.length<=1){
+		if(lines.length<1){
 			log.info("no ios device connected");
 			
 		}
