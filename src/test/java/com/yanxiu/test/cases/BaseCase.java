@@ -79,17 +79,17 @@ public class BaseCase {
 
 	@BeforeSuite()
 	public void startAppiumServer() throws IOException {
-		Boolean isRemoteRun = isRemoteRun();
-		if (Server.isServerStarted(isRemoteRun)) {
-			Server.stopServer(isRemoteRun);
-
-		}
-		Server.startServer(isRemoteRun);
+//		Boolean isRemoteRun = isRemoteRun();
+//		if (Server.isServerStarted(isRemoteRun)) {
+//			Server.stopServer(isRemoteRun);
+//
+//		}
+//		Server.startServer(isRemoteRun);
 	}
 
 	@AfterSuite()
 	public void stopAppiumSever() {
-		Server.stopServer(isRemoteRun());
+//		Server.stopServer(isRemoteRun());
 	}
 
 	@BeforeMethod(alwaysRun = true)
