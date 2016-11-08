@@ -13,27 +13,23 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * 
- * @author RightQA
- *
- */
 public class AppiumServer {
 	private Logger log = Logger.getLogger(AppiumServer.class);
 	private Boolean isServerStarted = false;
-	private static final int SLEEP_TIME_MS = 50;
-	private static long TIMEOUT = 20000;
-	
+	private static final int SLEEP_TIME_MS = 500;
+	private static long TIMEOUT = 10000;
+	private final int RETRY = 3;
+
 	public void startServer(Boolean isRemoteRun) {
 
 		CommandLine command = null;
 		if (CommonUtil.isMacOs() || isRemoteRun) {
-//			command = new CommandLine("/Applications/Appium.app/Contents/Resources/node/bin/node");
-//			command.addArgument("/Applications/Appium.app/Contents/Resources/node_modules/appium/build/lib/main.js",
-//					false);
+			// command = new
+			// CommandLine("/Applications/Appium.app/Contents/Resources/node/bin/node");
+			// command.addArgument("/Applications/Appium.app/Contents/Resources/node_modules/appium/build/lib/main.js",
+			// false);
 			command = new CommandLine("/usr/local/bin/node");
-			command.addArgument("/usr/local/lib//node_modules/appium/build/lib/main.js",
-					false);
+			command.addArgument("/usr/local/lib//node_modules/appium/build/lib/main.js", false);
 		} else if (CommonUtil.isWindowsOS() && !isRemoteRun) {
 			command = new CommandLine("D:/Program Files (x86)/Appium/node.exe");
 			command.addArgument("D:/Program Files (x86)/Appium/node_modules/appium/bin/Appium.js", false);
@@ -49,31 +45,47 @@ public class AppiumServer {
 		try {
 
 			if (!isRemoteRun) {
-				log.info("------------------------");				
+				log.info("------------------------");
 				log.info("start Appium server.");
 				log.info("------------------------");
-				
+
 				CollectingLogOutputStream out = new CollectingLogOutputStream();
 				PumpStreamHandler psh = new PumpStreamHandler(out);
 				executor.setStreamHandler(psh);
-				executor.execute(command, resultHandler);
-  
-				List<String> str = out.getLines();
-                long until = System.currentTimeMillis() + TIMEOUT;
-                while (!str.contains("Welcome to Appium") && (System.currentTimeMillis() < until)) {
-                	Thread.sleep(SLEEP_TIME_MS);
-                	str = out.getLines();
-                }
-               
-                for(int i=0;i<str.size();i++){
-                	log.info(str.get(i));
-                }
-                log.info("------------------------------");
-                log.info("server is started successfully");
-                log.info("------------------------------");
-                
+				int i = 0;
+				while (!isServerStarted && i < RETRY) {
+					log.info("try to start server:" + i + " time");
+					executor.execute(command, resultHandler);
 
-                
+					List<String> str = out.getLines();
+					long until = System.currentTimeMillis() + TIMEOUT;
+					String welcomeMsg = "";
+					do {
+//						log.info(str);
+						if (str.size() > 0) {
+							welcomeMsg = str.get(0);
+							log.info("welcomeMsg:" + welcomeMsg);
+						}
+
+					} while (!welcomeMsg.contains("Welcome to Appium") && (System.currentTimeMillis() < until));
+					if (welcomeMsg.contains("Welcome to Appium")) {
+						isServerStarted = true;
+					}
+					i++;
+				}
+				// while (!str.contains("Welcome to Appium") &&
+				// (System.currentTimeMillis() < until)) {
+				// Thread.sleep(SLEEP_TIME_MS);
+				// log.info("appium message:"+str.get(0));
+				// str = out.getLines();
+				// }
+				//
+				// for(int i=0;i<str.size();i++){
+				// log.info(str.get(i));
+				// }
+				log.info("------------------------------");
+				log.info("server is started successfully");
+				log.info("------------------------------");
 
 			} else {
 				log.info("prepare to start server from remote");
@@ -107,26 +119,27 @@ public class AppiumServer {
 			str = RemoteRunCmd.execCmd("lsof -i tcp:4723").toString();
 			log.info(str);
 			String[] lines = str.split("\n");
-			if (str.length() > 0  && lines.length >= 1 && str.contains("LISTEN")){
+			if (str.length() > 0 && lines.length >= 1 && str.contains("LISTEN")) {
 				isServerStarted = true;
 				log.info("server is started from remote server");
 				return true;
 			}
 		}
 		if (!CommonUtil.isMacOs()) {
-//			str = CommonUtil.execCmd("tasklist |findstr node.exe").toString().trim();
+			// str = CommonUtil.execCmd("tasklist |findstr
+			// node.exe").toString().trim();
 			str = CommonUtil.execCmd("netstat -aon|findstr \"4723\"").toString().trim();
 			log.info("check whether server is started");
 			String[] lines = str.split("\n");
-			
-			if (str.length() > 0 && lines.length >= 1 && str.contains("LISTENING")){
+
+			if (str.length() > 0 && lines.length >= 1 && str.contains("LISTENING")) {
 				isServerStarted = true;
 				return true;
 			}
 		} else {
 			str = CommonUtil.execCmd("lsof -i tcp:4723").toString().trim();
 			String[] lines = str.split("\n");
-			if (lines.length >= 1 && lines.length >= 1 && str.contains("LISTEN")){
+			if (lines.length >= 1 && lines.length >= 1 && str.contains("LISTEN")) {
 				isServerStarted = true;
 				return true;
 			}
@@ -155,13 +168,15 @@ public class AppiumServer {
 	}
 }
 
-
 class CollectingLogOutputStream extends LogOutputStream {
-    private final List<String> lines = new LinkedList<String>();
-    @Override protected void processLine(String line, int level) {
-        lines.add(line);
-    }   
-    public List<String> getLines() {
-        return lines;
-    }
+	private final List<String> lines = new LinkedList<String>();
+
+	@Override
+	protected void processLine(String line, int level) {
+		lines.add(line);
+	}
+
+	public List<String> getLines() {
+		return lines;
+	}
 }
