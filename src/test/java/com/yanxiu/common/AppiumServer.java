@@ -73,6 +73,8 @@ public class AppiumServer {
                 log.info("------------------------------");
                 
 
+                
+
 			} else {
 				log.info("prepare to start server from remote");
 
