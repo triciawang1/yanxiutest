@@ -17,7 +17,7 @@ public class AppiumServer {
 	private Logger log = Logger.getLogger(AppiumServer.class);
 	private Boolean isServerStarted = false;
 	private static final int SLEEP_TIME_MS = 500;
-	private static long TIMEOUT = 10000;
+	private static long TIMEOUT = 20000;
 	private final int RETRY = 3;
 
 	public void startServer(Boolean isRemoteRun) {
@@ -38,6 +38,8 @@ public class AppiumServer {
 		command.addArgument("127.0.0.1");
 		command.addArgument("--port", false);
 		command.addArgument("4723");
+		command.addArgument("--webhook");
+		command.addArgument("localhost:9876");
 		// command.addArgument("--full-reset", false);
 		DefaultExecuteResultHandler resultHandler = new DefaultExecuteResultHandler();
 		DefaultExecutor executor = new DefaultExecutor();
@@ -55,13 +57,17 @@ public class AppiumServer {
 				int i = 0;
 				while (!isServerStarted && i < RETRY) {
 					log.info("try to start server:" + i + " time");
+//					if (isServerStarted(isRemoteRun)) {
+//						stopServer(isRemoteRun);
+//
+//					}
 					executor.execute(command, resultHandler);
 
 					List<String> str = out.getLines();
 					long until = System.currentTimeMillis() + TIMEOUT;
 					String welcomeMsg = "";
 					do {
-//						log.info(str);
+						// log.info(str);
 						if (str.size() > 0) {
 							welcomeMsg = str.get(0);
 							log.info("welcomeMsg:" + welcomeMsg);
@@ -83,10 +89,35 @@ public class AppiumServer {
 				// for(int i=0;i<str.size();i++){
 				// log.info(str.get(i));
 				// }
-				log.info("------------------------------");
-				log.info("server is started successfully");
-				log.info("------------------------------");
-
+				if (isServerStarted == true) {
+					log.info("------------------------------");
+					log.info("server is started successfully");
+					log.info("------------------------------");
+				} else {
+					log.info("----------------------------------------");
+					log.info("server is not started, will not run case");
+					log.info("----------------------------------------");
+					System.exit(0);
+				}
+//				Thread t = new Thread(){
+//					public void run(){
+//						while(true){
+//							log.info("server started:"+isServerStarted);
+//							log.info(resultHandler.hasResult());
+//						log.info(out.getLines());
+//						try {
+//							Thread.sleep(5000);
+//						} catch (InterruptedException e) {
+//							// TODO Auto-generated catch block
+//							e.printStackTrace();
+//						}
+//						}
+//						
+//					}
+//				};
+//				t.start();
+				log.info("check whether server is still alive:"+isServerStarted(isRemoteRun));
+			
 			} else {
 				log.info("prepare to start server from remote");
 
@@ -162,6 +193,7 @@ public class AppiumServer {
 		try {
 			Runtime.getRuntime().exec(command);
 			log.info("Appium server stopped.");
+			isServerStarted =  false;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

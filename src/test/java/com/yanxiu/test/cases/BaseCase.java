@@ -29,6 +29,7 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.log4testng.Logger;
 
 import com.yanxiu.common.AppiumServer;
+import com.yanxiu.common.AppiumServerLog;
 import com.yanxiu.common.CommonUtil;
 import com.yanxiu.common.ElementHelper;
 import com.yanxiu.page.ExaminePage;
@@ -64,14 +65,16 @@ public class BaseCase {
 		return (IOSDriver<MobileElement>) driver;
 	}
 
-	protected AndroidDriver<MobileElement> getAndroidDriver(String deviceName) throws MalformedURLException {
+	protected AndroidDriver<MobileElement> getAndroidDriver(String deviceName) throws InterruptedException, IOException {
 		capabilities.setCapability("platformName", "Android");
 		
 		capabilities.setCapability("deviceName", deviceName);
 		capabilities.setCapability("unicodeKeyboard", "True");
 		capabilities.setCapability("appPackage", "com.yanxiu.gphone.training.teacher");
 		capabilities.setCapability("appActivity", "com.yanxiu.yxtrain_android.activity.login.WelcomeActivity");
+		log.info("check whether server is still alive:"+Server.isServerStarted(false));
 		driver = new AndroidDriver<MobileElement>(new URL(appiumServer), capabilities);
+		
 		// driver.resetApp();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return (AndroidDriver<MobileElement>) driver;
@@ -85,6 +88,8 @@ public class BaseCase {
 
 		}
 		Server.startServer(isRemoteRun);
+		AppiumServerLog serverLogThread = AppiumServerLog.getServer();
+		serverLogThread.start();
 	}
 
 	@AfterSuite()
