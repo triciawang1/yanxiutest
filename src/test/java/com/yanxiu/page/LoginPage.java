@@ -35,6 +35,7 @@ public class LoginPage extends PageBase {
 	}
 
 	public void login(String username, String password) {
+		waitForElementVisible(username_text);
 		username_text.sendKeys(username);
 		password_text.sendKeys(password);
 		loginButton.click();

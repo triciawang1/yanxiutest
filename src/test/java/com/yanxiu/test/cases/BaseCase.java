@@ -28,6 +28,11 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.log4testng.Logger;
 
+import com.github.dreamhead.moco.HttpServer;
+import com.github.dreamhead.moco.Runner;
+
+import  static com.github.dreamhead.moco.Runner.runner;
+import static com.github.dreamhead.moco.Moco.httpServer;
 import com.yanxiu.common.AppiumServer;
 import com.yanxiu.common.AppiumServerLog;
 import com.yanxiu.common.CommonUtil;
@@ -46,6 +51,8 @@ public class BaseCase {
 	protected String appiumServer = "http://127.0.0.1:4723/wd/hub";
 	protected IOSDriver<MobileElement> iosDriver = null;
 	protected AppiumServer Server = new AppiumServer();
+	protected Runner runner;
+	protected HttpServer server;
 
 	protected IOSDriver<MobileElement> getIOSDriver(String udid) throws MalformedURLException {
 		capabilities.setCapability(CapabilityType.BROWSER_NAME, "iOS");
@@ -72,7 +79,7 @@ public class BaseCase {
 		capabilities.setCapability("unicodeKeyboard", "True");
 		capabilities.setCapability("appPackage", "com.yanxiu.gphone.training.teacher");
 		capabilities.setCapability("appActivity", "com.yanxiu.yxtrain_android.activity.login.WelcomeActivity");
-		log.info("check whether server is still alive:"+Server.isServerStarted(false));
+	
 		driver = new AndroidDriver<MobileElement>(new URL(appiumServer), capabilities);
 		
 		// driver.resetApp();
@@ -80,7 +87,6 @@ public class BaseCase {
 		return (AndroidDriver<MobileElement>) driver;
 	}
 
-	@BeforeSuite()
 	public void startAppiumServer() throws IOException {
 		Boolean isRemoteRun = isRemoteRun();
 		if (Server.isServerStarted(isRemoteRun)) {
@@ -88,18 +94,38 @@ public class BaseCase {
 
 		}
 		Server.startServer(isRemoteRun);
-		AppiumServerLog serverLogThread = AppiumServerLog.getServer();
-		serverLogThread.start();
+		
+	
 	}
 
 	@AfterSuite()
 	public void stopAppiumSever() {
 		Server.stopServer(isRemoteRun());
 	}
+	
+	@BeforeSuite()
+	public void prepairEnv() throws IOException, InterruptedException{
+		startAppiumServer();
+		AppiumServerLog serverLogThread = AppiumServerLog.getServer();
+		serverLogThread.start();
+		startMocoServer();
+	}
 
+	public void startMocoServer() throws InterruptedException{
+		server = httpServer(80);
+		
+		runner = runner(server);
+		log.info("start moco server");
+		runner.start();
+		
+	}
+	public void stopMocoServer(){
+//		runner.stop();
+	}
+	
 	@BeforeMethod(alwaysRun = true)
 	public void setUp() throws InterruptedException, IOException {
-
+		log.info("before method");
 		Boolean isRemoteRun = isRemoteRun();
 		Map<String, String> devices_android = CommonUtil.getAndroidDevices(isRemoteRun);
 		Map<String, String> devices_ios = CommonUtil.getIOSDevices(isRemoteRun);
@@ -115,6 +141,7 @@ public class BaseCase {
 			log.info("no device is connected, please plug in a device");
 			System.exit(0);
 		}
+		setConnection();
 		app = new YanxiuTrain(driver);
 		app.leadingPage().skipLeadingPage();
 	}
@@ -128,15 +155,16 @@ public class BaseCase {
 		
 	}
 
-	@BeforeClass
-	public void setConnection() {
+	
+	public void setConnection() throws InterruptedException {
+		
 		if (driver instanceof AndroidDriver) {
-			log.info("set wifi connection for android device");
-			AndroidDriver<MobileElement> a_driver = (AndroidDriver<MobileElement>) driver;
-			Connection con = a_driver.getConnection();
-			if (con != Connection.WIFI) {
+			AndroidDriver<MobileElement> a_driver = ((AndroidDriver<MobileElement>) driver);
+			Connection conn = a_driver.getConnection();
+			if(conn!=Connection.WIFI && conn!=Connection.ALL){
+				log.info("set wifi connection for Android");
 				a_driver.setConnection(Connection.WIFI);
-			}
+			}			
 		}
 	}
 

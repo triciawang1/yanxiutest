@@ -24,10 +24,12 @@ public class ExaminePage extends PageBase {
 	}
 	
 	public void checkScoreDetai(){
+		waitForElementVisible(summaryPart);
 		summaryPart.click();
 	}
 	
 	public boolean isScoreDetailPageLoaded(){
+		waitForElementVisible(detailPageTitle);
 		return detailPageTitle.getText().equals("成绩详情");
 	}
 	public boolean currentActivityIsScoreDetailActivity(){

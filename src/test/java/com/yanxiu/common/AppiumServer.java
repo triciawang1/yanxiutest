@@ -99,24 +99,8 @@ public class AppiumServer {
 					log.info("----------------------------------------");
 					System.exit(0);
 				}
-//				Thread t = new Thread(){
-//					public void run(){
-//						while(true){
-//							log.info("server started:"+isServerStarted);
-//							log.info(resultHandler.hasResult());
-//						log.info(out.getLines());
-//						try {
-//							Thread.sleep(5000);
-//						} catch (InterruptedException e) {
-//							// TODO Auto-generated catch block
-//							e.printStackTrace();
-//						}
-//						}
-//						
-//					}
-//				};
-//				t.start();
-				log.info("check whether server is still alive:"+isServerStarted(isRemoteRun));
+
+				
 			
 			} else {
 				log.info("prepare to start server from remote");

@@ -126,7 +126,7 @@ public class CommonUtil {
 			return devices;
 		}
 		String[] lines = str.split("\n");
-		log.info("legth is :"+lines.length+str.length());
+
 		if(lines.length<1){
 			log.info("no ios device connected");
 			
@@ -153,7 +153,7 @@ public class CommonUtil {
 		
 		Properties prop = System.getProperties();
 		String os = prop.getProperty("os.name");
-		log.info("platform is:"+os);
+//		log.info("platform is:"+os);
 		if(os.equals("Mac OS X")){
 			return true;
 		}
@@ -165,7 +165,7 @@ public class CommonUtil {
 		
 		Properties prop = System.getProperties();
 		String os = prop.getProperty("os.name");
-		log.info("platform is:"+os);
+//		log.info("platform is:"+os);
 		if(os.contains("Windows")){
 			return true;
 		}

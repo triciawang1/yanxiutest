@@ -72,8 +72,8 @@ public class HomeworkPage extends PageBase {
 			}
 			listView.swipe(SwipeElementDirection.UP, 10, 600, 500);
 			PageFactory.initElements(new AppiumFieldDecorator(driver), this);
-			System.out.println("##########" + lastHomeworkName);
-			System.out.println("##########" + homeworkNames.get(homeworkNames.size() - 1).getText());
+//			System.out.println("##########" + lastHomeworkName);
+//			System.out.println("##########" + homeworkNames.get(homeworkNames.size() - 1).getText());
 
 		} while (!lastHomeworkName.equals(homeworkNames.get(homeworkNames.size() - 1).getText()));
 	}
