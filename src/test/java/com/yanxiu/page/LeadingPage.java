@@ -22,13 +22,18 @@ public class LeadingPage extends PageBase{
 		super(driver);
 	}
 	
+	
+	
+	
 	public void skipLeadingPage(){
 		waitForElementVisible(scrollView);
 		for(int i=0;i<2;i++){
 			
 			scrollView.swipe(SwipeElementDirection.LEFT, 100, 100, 500);
 		}
-		exButton.click();
+		clickElementAfterElementDisplayed(exButton
+				
+				);
 	}
 
 }

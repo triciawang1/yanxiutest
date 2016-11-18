@@ -89,5 +89,9 @@ public class PageBase {
 			refreshButton.click();
 		}
 	}
-
+	public void clickElementAfterElementDisplayed(MobileElement element){
+		waitForElementVisible(element);
+		element.click();
+		
+	}
 }

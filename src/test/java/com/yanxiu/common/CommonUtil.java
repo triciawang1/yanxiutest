@@ -1,6 +1,8 @@
 package com.yanxiu.common;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -10,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import org.json.JSONObject;
 import org.testng.log4testng.Logger;
 
 import com.yanxiu.test.cases.BaseCase;
@@ -173,4 +176,30 @@ public class CommonUtil {
 		return false;
 	}
 
+	public static JSONObject getJSONObjectFromFile(String fileName) {
+		
+		String configFilePath = CommonUtil.class.getClassLoader().getResource("").getPath();
+		StringBuffer stringBuffer = new StringBuffer();
+		String line = null;
+		try {
+
+
+			BufferedReader br = new BufferedReader(
+					new InputStreamReader(new FileInputStream(configFilePath + fileName), "UTF-8"));
+			while ((line = br.readLine()) != null) {
+				stringBuffer.append(line);
+			}
+			br.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		
+		JSONObject jsonObject = new JSONObject(stringBuffer.toString());
+		return jsonObject;
+	}
+	
+	
 }

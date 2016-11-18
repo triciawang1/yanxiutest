@@ -13,120 +13,47 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
-public class AppiumServer {
+public class AppiumServer extends AbstractServer {
+
 	private Logger log = Logger.getLogger(AppiumServer.class);
-	private Boolean isServerStarted = false;
-	private static final int SLEEP_TIME_MS = 500;
-	private static long TIMEOUT = 20000;
-	private final int RETRY = 3;
 
-	public void startServer(Boolean isRemoteRun) {
+	private static String serverName = "Appium Server";
+	private static String successfullMsg = "Welcome to Appium";
+	private static String executor;
+	private static String jsFile;
+	
 
-		CommandLine command = null;
-		if (CommonUtil.isMacOs() || isRemoteRun) {
-			// command = new
-			// CommandLine("/Applications/Appium.app/Contents/Resources/node/bin/node");
-			// command.addArgument("/Applications/Appium.app/Contents/Resources/node_modules/appium/build/lib/main.js",
-			// false);
-			command = new CommandLine("/usr/local/bin/node");
-			command.addArgument("/usr/local/lib//node_modules/appium/build/lib/main.js", false);
-		} else if (CommonUtil.isWindowsOS() && !isRemoteRun) {
-			command = new CommandLine("D:/Program Files (x86)/Appium/node.exe");
-			command.addArgument("D:/Program Files (x86)/Appium/node_modules/appium/bin/Appium.js", false);
-		}
-		command.addArgument("--address", false);
-		command.addArgument("127.0.0.1");
-		command.addArgument("--port", false);
-		command.addArgument("4723");
-		command.addArgument("--webhook");
-		command.addArgument("localhost:9876");
-		// command.addArgument("--full-reset", false);
-		DefaultExecuteResultHandler resultHandler = new DefaultExecuteResultHandler();
-		DefaultExecutor executor = new DefaultExecutor();
-		executor.setExitValue(1);
-		try {
-
-			if (!isRemoteRun) {
-				log.info("------------------------");
-				log.info("start Appium server.");
-				log.info("------------------------");
-
-				CollectingLogOutputStream out = new CollectingLogOutputStream();
-				PumpStreamHandler psh = new PumpStreamHandler(out);
-				executor.setStreamHandler(psh);
-				int i = 0;
-				while (!isServerStarted && i < RETRY) {
-					log.info("try to start server:" + i + " time");
-//					if (isServerStarted(isRemoteRun)) {
-//						stopServer(isRemoteRun);
-//
-//					}
-					executor.execute(command, resultHandler);
-
-					List<String> str = out.getLines();
-					long until = System.currentTimeMillis() + TIMEOUT;
-					String welcomeMsg = "";
-					do {
-						// log.info(str);
-						if (str.size() > 0) {
-							welcomeMsg = str.get(0);
-							log.info("welcomeMsg:" + welcomeMsg);
-						}
-
-					} while (!welcomeMsg.contains("Welcome to Appium") && (System.currentTimeMillis() < until));
-					if (welcomeMsg.contains("Welcome to Appium")) {
-						isServerStarted = true;
-					}
-					i++;
-				}
-				// while (!str.contains("Welcome to Appium") &&
-				// (System.currentTimeMillis() < until)) {
-				// Thread.sleep(SLEEP_TIME_MS);
-				// log.info("appium message:"+str.get(0));
-				// str = out.getLines();
-				// }
-				//
-				// for(int i=0;i<str.size();i++){
-				// log.info(str.get(i));
-				// }
-				if (isServerStarted == true) {
-					log.info("------------------------------");
-					log.info("server is started successfully");
-					log.info("------------------------------");
-				} else {
-					log.info("----------------------------------------");
-					log.info("server is not started, will not run case");
-					log.info("----------------------------------------");
-					System.exit(0);
-				}
-
-				
-			
-			} else {
-				log.info("prepare to start server from remote");
-
-				Thread thread = new Thread() {
-					public void run() {
-						RemoteRunCmd.execCmd(
-								"/usr/local/bin/node  /usr/local/lib//node_modules/appium/build/lib/main.js  --address  127.0.0.1  --port  4723");
-					}
-
-				};
-
-				thread.start();
-				Thread.sleep(8000);
-
-			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
-			log.info("appium started IOException");
-		} catch (InterruptedException e) {
-			log.info("appium started InterruptedException");
-			e.printStackTrace();
+	static {
+		if (CommonUtil.isMacOs()) {
+			executor = "/usr/local/bin/node";
+			jsFile = "/usr/local/lib//node_modules/appium/build/lib/main.js";
+		} else if (CommonUtil.isWindowsOS()) {
+			executor = "D:/Program Files (x86)/Appium/node.exe";
+			jsFile = "D:/Program Files (x86)/Appium/node_modules/appium/bin/Appium.js";
 		}
 	}
 
+	public AppiumServer() {
+		super(serverName, executor, successfullMsg, jsFile, "--address", "127.0.0.1", "--port", "4723", "--webhook", "localhost:9876" );
+
+	}
+	
+	public void startServerRemotely() throws InterruptedException{
+		log.info("prepare to start server from remote");
+
+		Thread thread = new Thread() {
+			public void run() {
+				RemoteRunCmd.execCmd(
+						"/usr/local/bin/node  /usr/local/lib//node_modules/appium/build/lib/main.js  --address  127.0.0.1  --port  4723");
+			}
+
+		};
+
+		thread.start();
+		Thread.sleep(8000);
+	}
+
+	
 	public boolean isServerStarted(Boolean isRemoteRun) throws IOException {
 		String str;
 		if (isRemoteRun) {
@@ -177,22 +104,10 @@ public class AppiumServer {
 		try {
 			Runtime.getRuntime().exec(command);
 			log.info("Appium server stopped.");
-			isServerStarted =  false;
+			isServerStarted = false;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 }
 
-class CollectingLogOutputStream extends LogOutputStream {
-	private final List<String> lines = new LinkedList<String>();
-
-	@Override
-	protected void processLine(String line, int level) {
-		lines.add(line);
-	}
-
-	public List<String> getLines() {
-		return lines;
-	}
-}

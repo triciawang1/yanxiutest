@@ -18,6 +18,9 @@ public class ExaminePage extends PageBase {
 	@AndroidFindBy(id="tv_title")
 	private MobileElement detailPageTitle;
 	
+	private MobileElement tv_total_score;
+	
+	
 	public ExaminePage(AppiumDriver<MobileElement> driver) {
 		super(driver);
 		// TODO Auto-generated constructor stub
@@ -43,5 +46,9 @@ public class ExaminePage extends PageBase {
 	}
 	
 
+	public String getTotalScore(){
+		waitForElementVisible(tv_total_score);
+		return tv_total_score.getText();
+	}
 	
 }

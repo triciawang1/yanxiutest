@@ -2,21 +2,49 @@ package com.yanxiu.test.cases;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.log4testng.Logger;
+
+import com.yanxiu.common.CommonUtil;
+import com.yanxiu.test.TestngRetry;
+
 import static com.github.dreamhead.moco.Moco.*;
+
+import java.io.UnsupportedEncodingException;
 
 
 
 public class TestExamine extends BaseCase{
 
-	@Test(groups="BVT")
-	public void testScoreDetail(){
-		server.request(by(uri("/examine"))).response("{\"BaseBeanCreateTime\":1479109252901,\"code\":\"0\",\"debugDesc\":\"[debug_token:  http-nio-45303-exec-19-1479109252457-1_184_45303 ] 返回数据成功 backen code[0]\",\"desc\":\"返回数据成功\",\"body\":{\"BaseBeanCreateTime\":1479109252900,\"totalfficial\":\"100\",\"totalscore\":\"55.9\",\"bounstotal\":\"137\",\"pofficial\":\"90\",\"punofficial\":\"10\",\"userGetScore\":\"35.9\",\"bounsscore\":\"10.0\",\"bounsdailylimit\":\"40\",\"isContainsTeacher\":true,\"level\":1,\"w\":4,\"checkway\":1,\"uRank\":\"99.77%\",\"bounsdaily\":0,\"userName\":\"李四\",\"ptotalscore\":\"100\",\"isPass\":0,\"bounsVo\":{\"publishBlog\":\"0\",\"publishHomework\":\"0\",\"uploadRes\":\"0\",\"publishWenda\":\"0\",\"timeCourse\":\"0\",\"mark\":\"0\",\"comment\":\"0\",\"followUser\":\"0\",\"joinAnswering\":\"0\",\"joinActive\":\"36\",\"commentEd\":\"1\",\"tuiyouEdHomework\":\"100\",\"tuiyouEdResource\":\"0\",\"downloadEdRes\":\"0\",\"bouns1\":\"0\",\"bouns2\":\"36\",\"bouns3\":\"101\",\"bounstotal\":\"137\",\"bounsscore\":\"10.0\"},\"leadingVoList\":[{\"id\":2816,\"name\":\"内容1\",\"isfinish\":0,\"userscore\":\"30.5\",\"totalscore\":\"38.0\",\"enddate\":\"2016-08-01\",\"toolExamineVoList\":[{\"toolid\":216,\"name\":\"小组作业\",\"finishnum\":0,\"totalnum\":1,\"userscore\":\"0.0\",\"totalscore\":\"5.0\",\"isneedmark\":0},{\"toolid\":201,\"name\":\"课程\",\"finishnum\":55,\"totalnum\":100,\"userscore\":\"5.5\",\"totalscore\":\"10.0\",\"isneedmark\":0},{\"toolid\":203,\"name\":\"作业\",\"finishnum\":6,\"totalnum\":2,\"userscore\":\"15.0\",\"totalscore\":\"10.0\",\"isneedmark\":0},{\"toolid\":219,\"name\":\"互评作业\",\"finishnum\":0,\"totalnum\":3,\"userscore\":\"0.0\",\"totalscore\":\"3.0\",\"isneedmark\":0},{\"toolid\":202,\"name\":\"活动\",\"finishnum\":17,\"totalnum\":2,\"userscore\":\"10.0\",\"totalscore\":\"10.0\",\"isneedmark\":0}]},{\"id\":2817,\"name\":\"内容2\",\"isfinish\":0,\"userscore\":\"0.4\",\"totalscore\":\"30.0\",\"enddate\":\"2016-08-15\",\"toolExamineVoList\":[{\"toolid\":201,\"name\":\"课程\",\"finishnum\":4,\"totalnum\":100,\"userscore\":\"0.4\",\"totalscore\":\"10.0\",\"isneedmark\":0},{\"toolid\":203,\"name\":\"作业\",\"finishnum\":23,\"totalnum\":2,\"userscore\":\"0.0\",\"totalscore\":\"10.0\",\"isneedmark\":0},{\"toolid\":202,\"name\":\"活动\",\"finishnum\":7,\"totalnum\":2,\"userscore\":\"0.0\",\"totalscore\":\"10.0\",\"isneedmark\":0}]},{\"id\":3635,\"name\":\"内容3\",\"isfinish\":0,\"userscore\":\"0.0\",\"totalscore\":\"30.0\",\"enddate\":\"2016-10-25\",\"toolExamineVoList\":[{\"toolid\":201,\"name\":\"课程\",\"finishnum\":0,\"totalnum\":100,\"userscore\":\"0.0\",\"totalscore\":\"10.0\",\"isneedmark\":0},{\"toolid\":203,\"name\":\"作业\",\"finishnum\":0,\"totalnum\":2,\"userscore\":\"0.0\",\"totalscore\":\"10.0\",\"isneedmark\":0},{\"toolid\":202,\"name\":\"活动\",\"finishnum\":0,\"totalnum\":2,\"userscore\":\"0.0\",\"totalscore\":\"10.0\",\"isneedmark\":0}]},{\"id\":3636,\"name\":\"内容4\",\"isfinish\":1,\"userscore\":\"0.0\",\"totalscore\":\"0.0\",\"enddate\":\"2016-10-25\",\"toolExamineVoList\":[{\"toolid\":201,\"name\":\"课程\",\"finishnum\":0,\"totalnum\":0,\"userscore\":\"0.0\",\"totalscore\":\"0.0\",\"isneedmark\":0},{\"toolid\":203,\"name\":\"作业\",\"finishnum\":0,\"totalnum\":0,\"userscore\":\"0.0\",\"totalscore\":\"0.0\",\"isneedmark\":0},{\"toolid\":202,\"name\":\"活动\",\"finishnum\":0,\"totalnum\":0,\"userscore\":\"0.0\",\"totalscore\":\"0.0\",\"isneedmark\":0}]}],\"bounsVoList\":[{\"id\":3038,\"name\":\"线下实践\",\"isfinish\":0,\"userscore\":\"0.0\",\"totalscore\":\"5.0\",\"enddate\":\"2016-10-07\",\"toolid\":206,\"finishnum\":0,\"totalnum\":100,\"isneedmark\":0},{\"id\":3040,\"name\":\"再写篇作业\",\"isfinish\":0,\"userscore\":\"0.0\",\"totalscore\":\"30.0\",\"enddate\":\"2016-10-08\",\"toolid\":205,\"finishnum\":0,\"totalnum\":0,\"isneedmark\":0},{\"id\":3591,\"name\":\"写篇作业\",\"isfinish\":0,\"userscore\":\"0.0\",\"totalscore\":\"40.0\",\"enddate\":\"2016-11-30\",\"toolid\":205,\"finishnum\":0,\"totalnum\":1,\"isneedmark\":0},{\"id\":315,\"name\":\"选修课程\",\"isfinish\":0,\"userscore\":\"0.33\",\"totalscore\":\"5.0\",\"enddate\":\"\",\"toolid\":215,\"finishnum\":2,\"totalnum\":30,\"isneedmark\":0},{\"id\":317,\"name\":\"本地课程\",\"isfinish\":0,\"userscore\":\"1.0\",\"totalscore\":\"10.0\",\"enddate\":\"\",\"toolid\":217,\"finishnum\":3,\"totalnum\":30,\"isneedmark\":0},{\"id\":318,\"name\":\"线下活动\",\"isfinish\":0,\"userscore\":\"0.0\",\"totalscore\":\"4.0\",\"enddate\":\"\",\"toolid\":218,\"finishnum\":0,\"totalnum\":2,\"isneedmark\":0},{\"id\":320,\"name\":\"作业质量\",\"isfinish\":0,\"userscore\":\"0.0\",\"totalscore\":\"10.0\",\"enddate\":\"\",\"toolid\":220,\"finishnum\":3,\"totalnum\":3,\"isneedmark\":0}]}}");
+	private Logger log = Logger.getLogger(TestExamine.class);
+//	@Test(groups="BVT",retryAnalyzer=TestngRetry.class)
+	@Test(groups="BVT",retryAnalyzer=TestngRetry.class)
+	public void testScoreDetail() throws UnsupportedEncodingException, InterruptedException{
+	
+//		String jsonFile = "examine.json";
+//		String body = CommonUtil.getJSONObjectFromFile(jsonFile);
+//        log.info(body);
+//		server.request(by(uri("/examine"))).response(body);
+		
 		app.loginPage().loginWithDefaultUser();
 		app.examinPage().checkScoreDetai();
 		Assert.assertTrue(app.examinPage().isScoreDetailPageLoaded());
 		Assert.assertTrue(app.examinPage().currentActivityIsScoreDetailActivity());
 		app.examinPage().pressBackButton();
 		
+		
+	}
+	
+//	@Test(groups="BVT",retryAnalyzer=TestngRetry.class)
+	@Test(groups="BVT")
+	public void testScoreSummary() throws UnsupportedEncodingException, InterruptedException{
+		String jsonFile = "examine.json";
+		String body = CommonUtil.getJSONObjectFromFile(jsonFile).toString();
+		String newBody = new String(body.getBytes(),"UTF-8");
+        log.info(body);
+		server.request(by(uri("/examine"))).response(body);
+		app.loginPage().loginWithDefaultUser();
+		
+		Assert.assertEquals(app.examinPage().getTotalScore(), "42.23");
 		
 	}
 }

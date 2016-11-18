@@ -17,6 +17,7 @@ import java.net.URL;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.exec.ExecuteException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.CapabilityType;
@@ -31,8 +32,10 @@ import org.testng.log4testng.Logger;
 import com.github.dreamhead.moco.HttpServer;
 import com.github.dreamhead.moco.Runner;
 
-import  static com.github.dreamhead.moco.Runner.runner;
+import static com.github.dreamhead.moco.Runner.runner;
 import static com.github.dreamhead.moco.Moco.httpServer;
+
+import com.yanxiu.common.AnyProxy;
 import com.yanxiu.common.AppiumServer;
 import com.yanxiu.common.AppiumServerLog;
 import com.yanxiu.common.CommonUtil;
@@ -46,13 +49,14 @@ public class BaseCase {
 	protected DesiredCapabilities capabilities = new DesiredCapabilities();
 
 	protected AppiumDriver<MobileElement> driver;
-//	protected String appiumServer = "http://192.168.7.141:4723/wd/hub";
+	// protected String appiumServer = "http://192.168.7.141:4723/wd/hub";
 	protected YanxiuTrain app;
 	protected String appiumServer = "http://127.0.0.1:4723/wd/hub";
 	protected IOSDriver<MobileElement> iosDriver = null;
 	protected AppiumServer Server = new AppiumServer();
 	protected Runner runner;
 	protected HttpServer server;
+	protected AnyProxy proxy = new AnyProxy();
 
 	protected IOSDriver<MobileElement> getIOSDriver(String udid) throws MalformedURLException {
 		capabilities.setCapability(CapabilityType.BROWSER_NAME, "iOS");
@@ -67,69 +71,79 @@ public class BaseCase {
 		log.info("create an iosDriver");
 		driver = new IOSDriver<MobileElement>(new URL(appiumServer), capabilities);
 		// driver.resetApp();
-		log.info(driver+"driver now");
+		log.info(driver + "driver now");
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return (IOSDriver<MobileElement>) driver;
 	}
 
-	protected AndroidDriver<MobileElement> getAndroidDriver(String deviceName) throws InterruptedException, IOException {
+	protected AndroidDriver<MobileElement> getAndroidDriver(String deviceName)
+			throws InterruptedException, IOException {
 		capabilities.setCapability("platformName", "Android");
-		
+
 		capabilities.setCapability("deviceName", deviceName);
 		capabilities.setCapability("unicodeKeyboard", "True");
 		capabilities.setCapability("appPackage", "com.yanxiu.gphone.training.teacher");
 		capabilities.setCapability("appActivity", "com.yanxiu.yxtrain_android.activity.login.WelcomeActivity");
-	
+
 		driver = new AndroidDriver<MobileElement>(new URL(appiumServer), capabilities);
-		
+
 		// driver.resetApp();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return (AndroidDriver<MobileElement>) driver;
 	}
 
-	public void startAppiumServer() throws IOException {
+	public void startAppiumServer() throws IOException, InterruptedException {
 		Boolean isRemoteRun = isRemoteRun();
 		if (Server.isServerStarted(isRemoteRun)) {
 			Server.stopServer(isRemoteRun);
 
 		}
-		Server.startServer(isRemoteRun);
-		
-	
+		if (isRemoteRun) {
+			Server.startServerRemotely();
+		} else {
+			Server.startServer();
+		}
+
+	}
+
+	public void startProxy() throws ExecuteException, IOException {
+
+		proxy.startServer();
 	}
 
 	@AfterSuite()
 	public void stopAppiumSever() {
 		Server.stopServer(isRemoteRun());
 	}
-	
+
 	@BeforeSuite()
-	public void prepairEnv() throws IOException, InterruptedException{
+	public void prepairEnv() throws IOException, InterruptedException {
 		startAppiumServer();
-		AppiumServerLog serverLogThread = AppiumServerLog.getServer();
-		serverLogThread.start();
+		startProxy();
+		// AppiumServerLog serverLogThread = AppiumServerLog.getServer();
+		// serverLogThread.start();
 		startMocoServer();
 	}
 
-	public void startMocoServer() throws InterruptedException{
+	public void startMocoServer() throws InterruptedException {
 		server = httpServer(80);
-		
+
 		runner = runner(server);
 		log.info("start moco server");
 		runner.start();
-		
+
 	}
-	public void stopMocoServer(){
-//		runner.stop();
+
+	public void stopMocoServer() {
+		// runner.stop();
 	}
-	
+
 	@BeforeMethod(alwaysRun = true)
 	public void setUp() throws InterruptedException, IOException {
 		log.info("before method");
 		Boolean isRemoteRun = isRemoteRun();
 		Map<String, String> devices_android = CommonUtil.getAndroidDevices(isRemoteRun);
 		Map<String, String> devices_ios = CommonUtil.getIOSDevices(isRemoteRun);
-
 
 		if (!devices_android.isEmpty()) {
 
@@ -148,23 +162,23 @@ public class BaseCase {
 
 	@AfterMethod(alwaysRun = true)
 	public void tearDown() throws IOException {
+		log.info("After method");
 		if (driver instanceof AndroidDriver) {
 			CommonUtil.clearAndroidData();
 		}
 		driver.quit();
-		
+
 	}
 
-	
 	public void setConnection() throws InterruptedException {
-		
+
 		if (driver instanceof AndroidDriver) {
 			AndroidDriver<MobileElement> a_driver = ((AndroidDriver<MobileElement>) driver);
 			Connection conn = a_driver.getConnection();
-			if(conn!=Connection.WIFI && conn!=Connection.ALL){
+			if (conn != Connection.WIFI && conn != Connection.ALL) {
 				log.info("set wifi connection for Android");
 				a_driver.setConnection(Connection.WIFI);
-			}			
+			}
 		}
 	}
 
@@ -173,4 +187,5 @@ public class BaseCase {
 			return false;
 		return true;
 	}
+
 }
