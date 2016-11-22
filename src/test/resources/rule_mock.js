@@ -63,7 +63,7 @@ module.exports = {
 
 				        if(req.replaceLocalFile==3){
             request = require('request-json');
-            var client = request.createClient('http://127.0.0.1');
+            var client = request.createClient('http://127.0.0.1:8789');
               client.get('/examine', function(err, res, body)  //触发mock，到moco中获取mock响应数据
                 {
                     console.log('the resp is ------------------------->',res.statusCode,res.headers,body);
