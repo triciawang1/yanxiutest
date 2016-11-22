@@ -19,7 +19,7 @@ public class RetryListener extends TestListenerAdapter implements IAnnotationTra
 	private Logger log = Logger.getLogger(RetryListener.class);
 	@Override
 	public void transform(ITestAnnotation annotation, Class testClass, Constructor testConstructor, Method testMethod) {
-		log.info("!!!!!!!!!!!!");
+	
 		IRetryAnalyzer retry = annotation.getRetryAnalyzer();
 		if (retry == null) {
 			annotation.setRetryAnalyzer(TestngRetry.class);
@@ -29,7 +29,7 @@ public class RetryListener extends TestListenerAdapter implements IAnnotationTra
 
 	@Override
 	public void onFinish(ITestContext iTestContext) {
-		log.info("@@@@@@@@@@@@@@@@@@@");
+
 //		Iterator<ITestResult> listOfFailedTests = iTestContext.getFailedTests().getAllResults().iterator();
 //		while (listOfFailedTests.hasNext()) {
 //			ITestResult failedTest = listOfFailedTests.next();
@@ -51,13 +51,11 @@ public class RetryListener extends TestListenerAdapter implements IAnnotationTra
 		  IResultMap passCases = test.getPassedTests();
 		  IResultMap returnValue = test.getSkippedTests();
 		  IResultMap failedCases = test.getFailedTests();
-		  log.info("#########3"+returnValue);
-		  log.info("########"+passCases);
-		  log.info("#######"+test.getFailedTests());
+
 		  for (ITestResult resultToCheck : failedCases.getAllResults()) {
 		 
 		  for (ITestResult result : returnValue.getAllResults()) {
-			  System.out.println("AAAAAAAAAAA"+result.getMethod()+"BBBBBBBbbbb"+resultToCheck.getMethod());
+			 
 		    if (result.getMethod().equals(resultToCheck.getMethod())) {
 		
 		        returnValue.removeResult(result.getMethod());

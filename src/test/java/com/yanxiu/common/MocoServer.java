@@ -14,10 +14,11 @@ public class MocoServer extends AbstractServer {
 	private Logger log = Logger.getLogger(this.getClass());
 	protected Runner runner;
 	protected HttpServer mocoServer;
+	private static int port = 8789;
 	
 	@Override
 	public void startServer(){
-		mocoServer = httpServer(80);
+		mocoServer = httpServer(port);
 
 		runner = runner(mocoServer);
 		log.info("start Moco Server");
