@@ -21,12 +21,25 @@ public abstract class AbstractServer {
 	private static final int TIMEOUT = 30000;
 	private CommandLine startCommand;
 	private String successfullMsg;
-
-	public AbstractServer(String serverName, String executor, String successfullMsg, String... commandArgs) {
+    
+	private static String executor;
+	
+	static {
+		if (CommonUtil.isMacOs()) {
+			executor = "/usr/local/bin/node";			
+		} else if (CommonUtil.isWindowsOS()) {
+			executor = "D:/Program Files/nodejs/node.exe";			
+		}
+	}
+	
+	public AbstractServer(String serverName,String successfullMsg, String... commandArgs) {
 		this.serverName = serverName;
 		startCommand = new CommandLine(executor);
 		startCommand.addArguments(commandArgs);
 		this.successfullMsg = successfullMsg;
+	}
+	public AbstractServer(){
+		
 	}
 
 	public void startServer() {
@@ -48,6 +61,7 @@ public abstract class AbstractServer {
 			log.info("try to start " + serverName + " " + i + " time");
 
 			try {
+				
 				executor.execute(startCommand, resultHandler);
 			} catch (ExecuteException e) {
 				// TODO Auto-generated catch block
@@ -60,6 +74,7 @@ public abstract class AbstractServer {
 			List<String> str = out.getLines();
 			String welcomeMsg = "";
 			for (String s : str) {
+				log.info(s);
 				if (s.contains(successfullMsg)) {
 					welcomeMsg = s;
 					log.info("welcomeMsg:" + welcomeMsg);
@@ -80,9 +95,9 @@ public abstract class AbstractServer {
 		}
 
 		if (isServerStarted == true) {
-			log.info("------------------------------");
+			log.info("--------------------------------------");
 			log.info(serverName+" is started successfully");
-			log.info("------------------------------");
+			log.info("--------------------------------------");
 		} else {
 			log.info("----------------------------------------");
 			log.info(serverName + " is not started, will not run case");

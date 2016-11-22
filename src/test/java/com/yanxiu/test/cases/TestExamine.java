@@ -38,10 +38,9 @@ public class TestExamine extends BaseCase{
 	@Test(groups="BVT")
 	public void testScoreSummary() throws UnsupportedEncodingException, InterruptedException{
 		String jsonFile = "examine.json";
-		String body = CommonUtil.getJSONObjectFromFile(jsonFile).toString();
-		String newBody = new String(body.getBytes(),"UTF-8");
-        log.info(body);
-		server.request(by(uri("/examine"))).response(body);
+		String requestUri = "/examine";
+		mocoServer.response(jsonFile, requestUri);
+		
 		app.loginPage().loginWithDefaultUser();
 		
 		Assert.assertEquals(app.examinPage().getTotalScore(), "42.23");

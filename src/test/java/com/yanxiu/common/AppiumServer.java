@@ -19,22 +19,23 @@ public class AppiumServer extends AbstractServer {
 
 	private static String serverName = "Appium Server";
 	private static String successfullMsg = "Welcome to Appium";
-	private static String executor;
+	
 	private static String jsFile;
 	
 
 	static {
 		if (CommonUtil.isMacOs()) {
-			executor = "/usr/local/bin/node";
+//			executor = "/usr/local/bin/node";
 			jsFile = "/usr/local/lib//node_modules/appium/build/lib/main.js";
 		} else if (CommonUtil.isWindowsOS()) {
-			executor = "D:/Program Files (x86)/Appium/node.exe";
+//			executor = "D:/Program Files (x86)/Appium/node.exe";
+//			executor = "D:/Program Files/nodejs/node.exe";
 			jsFile = "D:/Program Files (x86)/Appium/node_modules/appium/bin/Appium.js";
 		}
 	}
 
 	public AppiumServer() {
-		super(serverName, executor, successfullMsg, jsFile, "--address", "127.0.0.1", "--port", "4723", "--webhook", "localhost:9876" );
+		super(serverName, successfullMsg, jsFile, "--address", "127.0.0.1", "--port", "4723", "--webhook", "localhost:9876" );
 
 	}
 	

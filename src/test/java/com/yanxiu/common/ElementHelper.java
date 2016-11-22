@@ -3,6 +3,7 @@ package com.yanxiu.common;
 import java.util.List;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 
@@ -25,10 +26,9 @@ public class ElementHelper {
 //	    return e;
 //	}
 	
-	public static void clearEditBoxText(AppiumDriver<WebElement> driver){
-		AndroidDriver a_driver = (AndroidDriver)driver;
-	    a_driver.pressKeyCode(29,4096);
-	    a_driver.pressKeyCode(112);
+	public static void clearEditBoxText(AndroidDriver<MobileElement> driver){		
+	    driver.pressKeyCode(29,4096);
+	    driver.pressKeyCode(112);
 	}
 	
 	public static List<WebElement> findsByClass(AppiumDriver<WebElement> driver,String classname){

@@ -4,6 +4,7 @@ import java.util.List;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
@@ -13,6 +14,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.yanxiu.common.ElementHelper;
 
 public class LoginPage extends PageBase {
 	
@@ -35,9 +38,11 @@ public class LoginPage extends PageBase {
 	}
 
 	public void login(String username, String password) {
-		waitForElementVisible(username_text);
+		waitForElementVisible(username_text);		
 		username_text.sendKeys(username);
-		password_text.sendKeys(password);
+		password_text.click();
+		ElementHelper.clearEditBoxText((AndroidDriver<MobileElement>)driver);
+		password_text.sendKeys(password);		
 		loginButton.click();
 		
 		waitForMainPageLoaded();
@@ -51,7 +56,7 @@ public class LoginPage extends PageBase {
     }
 	
     public void loginWithDefaultUser(){
-    	login("XY02735506@yanxiu.com","123456");
+    	login("XY00273922@yanxiu.com","123456");
     }
     
  

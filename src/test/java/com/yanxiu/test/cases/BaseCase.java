@@ -33,13 +33,16 @@ import com.github.dreamhead.moco.HttpServer;
 import com.github.dreamhead.moco.Runner;
 
 import static com.github.dreamhead.moco.Runner.runner;
+import static com.github.dreamhead.moco.Moco.by;
 import static com.github.dreamhead.moco.Moco.httpServer;
+import static com.github.dreamhead.moco.Moco.uri;
 
 import com.yanxiu.common.AnyProxy;
 import com.yanxiu.common.AppiumServer;
 import com.yanxiu.common.AppiumServerLog;
 import com.yanxiu.common.CommonUtil;
 import com.yanxiu.common.ElementHelper;
+import com.yanxiu.common.MocoServer;
 import com.yanxiu.page.ExaminePage;
 import com.yanxiu.page.YanxiuTrain;
 
@@ -57,6 +60,7 @@ public class BaseCase {
 	protected Runner runner;
 	protected HttpServer server;
 	protected AnyProxy proxy = new AnyProxy();
+	protected MocoServer mocoServer = new MocoServer();
 
 	protected IOSDriver<MobileElement> getIOSDriver(String udid) throws MalformedURLException {
 		capabilities.setCapability(CapabilityType.BROWSER_NAME, "iOS");
@@ -123,19 +127,15 @@ public class BaseCase {
 		// AppiumServerLog serverLogThread = AppiumServerLog.getServer();
 		// serverLogThread.start();
 		startMocoServer();
+
 	}
 
 	public void startMocoServer() throws InterruptedException {
-		server = httpServer(80);
-
-		runner = runner(server);
-		log.info("start moco server");
-		runner.start();
-
+		mocoServer.startServer();
 	}
 
 	public void stopMocoServer() {
-		// runner.stop();
+		mocoServer.stopServer();
 	}
 
 	@BeforeMethod(alwaysRun = true)
