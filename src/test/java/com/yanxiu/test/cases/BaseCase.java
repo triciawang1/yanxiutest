@@ -123,7 +123,7 @@ public class BaseCase {
 	@BeforeSuite()
 	public void prepairEnv() throws IOException, InterruptedException {
 		startAppiumServer();
-		startProxy();
+//		startProxy();
 		// AppiumServerLog serverLogThread = AppiumServerLog.getServer();
 		// serverLogThread.start();
 		startMocoServer();
@@ -156,6 +156,14 @@ public class BaseCase {
 			System.exit(0);
 		}
 		setConnection();
+		mocoServer.response("login.json", "/login.json");
+		mocoServer.response("initialize.json", "/initialize");
+		mocoServer.response("getEditUserInfo.json", "/getEditUserInfo");
+		mocoServer.response("trainlist.json", "/trainlist");
+		mocoServer.response("noticeList.json", "/noticeList");
+		mocoServer.response("briefList.json", "/briefList");
+		mocoServer.response("taskList.json", "/taskList");
+		
 		app = new YanxiuTrain(driver);
 		app.leadingPage().skipLeadingPage();
 	}

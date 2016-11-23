@@ -1,0 +1,79 @@
+{
+  "BaseBeanCreateTime": 1479808326093,
+  "code": "0",
+  "debugDesc": "[debug_token:  http-nio-45901-exec-3-1479808326083-12_7_45901 ] 返回数据成功 backen code[0]",
+  "desc": "返回数据成功",
+  "body": {
+    "total": "4",
+    "trains": [
+      {
+        "BaseBeanCreateTime": 1479808326093,
+        "pid": "1798",
+        "name": "移动测试项目2016平台",
+        "pic": "http://p.yanxiu.com/plogo/8/1798.png",
+        "w": "4",
+        "status": "1"
+      },
+      {
+        "BaseBeanCreateTime": 1479808326093,
+        "pid": "1789",
+        "name": "1789",
+        "pic": "http://p.yanxiu.com/plogo/9/1789.png",
+        "w": "3",
+        "status": "1"
+      },
+      {
+        "BaseBeanCreateTime": 1479808326093,
+        "pid": "548",
+        "name": "123研修项目测试(2015)——“测试”",
+        "pic": "http://p.yanxiu.com/plogo/8/548.png",
+        "w": "2",
+        "status": "1"
+      },
+      {
+        "BaseBeanCreateTime": 1479808326093,
+        "pid": "830",
+        "name": "2014年南通市中小学教师暑期全员远程培训（体验）",
+        "pic": "http://p.yanxiu.com/plogo/0/830.png",
+        "w": "2",
+        "status": "0"
+      }
+    ],
+    "trained": [
+      {
+        "BaseBeanCreateTime": 1479808326093,
+        "pid": "830",
+        "name": "2014年南通市中小学教师暑期全员远程培训（体验）",
+        "pic": "http://p.yanxiu.com/plogo/0/830.png",
+        "w": "2",
+        "status": "0"
+      }
+    ],
+    "training": [
+      {
+        "BaseBeanCreateTime": 1479808326093,
+        "pid": "1798",
+        "name": "移动测试项目2016平台",
+        "pic": "http://p.yanxiu.com/plogo/8/1798.png",
+        "w": "4",
+        "status": "1"
+      },
+      {
+        "BaseBeanCreateTime": 1479808326093,
+        "pid": "1789",
+        "name": "1789",
+        "pic": "http://p.yanxiu.com/plogo/9/1789.png",
+        "w": "3",
+        "status": "1"
+      },
+      {
+        "BaseBeanCreateTime": 1479808326093,
+        "pid": "548",
+        "name": "123研修项目测试(2015)——“测试”",
+        "pic": "http://p.yanxiu.com/plogo/8/548.png",
+        "w": "2",
+        "status": "1"
+      }
+    ]
+  }
+}

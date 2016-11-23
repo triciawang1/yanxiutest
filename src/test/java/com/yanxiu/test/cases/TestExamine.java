@@ -40,6 +40,7 @@ public class TestExamine extends BaseCase{
 		String jsonFile = "examine.json";
 		String requestUri = "/examine";
 		mocoServer.response(jsonFile, requestUri);
+
 		
 		app.loginPage().loginWithDefaultUser();
 		
