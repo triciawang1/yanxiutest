@@ -201,5 +201,21 @@ public class CommonUtil {
 		return jsonObject;
 	}
 	
+	public static Boolean isAndroidDevicePluggin() throws IOException{
+		
+		return getAndroidDevices(false).isEmpty()?false:true;
+		
+	}
+	
+	public static void reinstallApk() throws IOException{
+		
+		if(isMacOs()){
+			String uninstallCmd = "/Users/Admin/android-sdk-macosx/platform-tools/adb uninstall com.yanxiu.gphone.training.teacher";
+			String installCmd = "/Users/Admin/android-sdk-macosx/platform-tools/adb install /Users/admin/.jenkins/jobs/BuildAndroidApkForLiang/lastSuccessful/archive/app/build/outputs/apk/app-yanxiu_com-release.apk";
+			execCmd(uninstallCmd);
+			execCmd(installCmd);
+		}
+	}
+	
 	
 }

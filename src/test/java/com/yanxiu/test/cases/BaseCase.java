@@ -127,7 +127,9 @@ public class BaseCase {
 		// AppiumServerLog serverLogThread = AppiumServerLog.getServer();
 		// serverLogThread.start();
 		startMocoServer();
-
+		if(CommonUtil.isAndroidDevicePluggin()){
+			CommonUtil.reinstallApk();
+		}
 
 	}
 
