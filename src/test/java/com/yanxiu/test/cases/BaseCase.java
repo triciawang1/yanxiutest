@@ -68,7 +68,7 @@ public class BaseCase {
 		capabilities.setCapability("deviceName", "iPhone 4s");
 		capabilities.setCapability("platformVersion", "10.0");
 		capabilities.setCapability("fullReset", true);
-		capabilities.setCapability("app", "/Users/admin/Downloads/app.ipa");
+		capabilities.setCapability("app", "/Users/admin/.jenkins/jobs/BuildIOSIpa/lastSuccessful/archive/TrainApp/build/app.ipa");
 
 		capabilities.setCapability("udid", udid);
 		capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.IOS_XCUI_TEST);
@@ -123,10 +123,11 @@ public class BaseCase {
 	@BeforeSuite()
 	public void prepairEnv() throws IOException, InterruptedException {
 		startAppiumServer();
-//		startProxy();
+		startProxy();
 		// AppiumServerLog serverLogThread = AppiumServerLog.getServer();
 		// serverLogThread.start();
 		startMocoServer();
+
 
 	}
 
@@ -156,16 +157,23 @@ public class BaseCase {
 			System.exit(0);
 		}
 		setConnection();
+		
+		mockStartupData();
+		
+		
+		app = new YanxiuTrain(driver);
+		app.leadingPage().skipLeadingPage();
+	}
+	
+	private void mockStartupData(){
 		mocoServer.response("login.json", "/login.json");
 		mocoServer.response("initialize.json", "/initialize");
 		mocoServer.response("getEditUserInfo.json", "/getEditUserInfo");
+		
 		mocoServer.response("trainlist.json", "/trainlist");
 		mocoServer.response("noticeList.json", "/noticeList");
 		mocoServer.response("briefList.json", "/briefList");
 		mocoServer.response("taskList.json", "/taskList");
-		
-		app = new YanxiuTrain(driver);
-		app.leadingPage().skipLeadingPage();
 	}
 
 	@AfterMethod(alwaysRun = true)

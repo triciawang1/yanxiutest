@@ -34,7 +34,9 @@ public class MocoServer extends AbstractServer {
 	
 	public void response(String jsonFile,String requestUri){
 		String body = CommonUtil.getJSONObjectFromFile(jsonFile).toString();	
-        log.info(body);
-		mocoServer.request(by(uri(requestUri))).response(body);
+        log.info(jsonFile+":"+body);
+        mocoServer.request(by(uri(requestUri))).response(with(text(body)),header("content-type", "application/json; charset=UTF-8"));
+//		mocoServer.request(by(uri(requestUri))).response(body);
+
 	}
 }

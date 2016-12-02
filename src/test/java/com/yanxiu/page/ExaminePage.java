@@ -19,6 +19,7 @@ public class ExaminePage extends PageBase {
 	private MobileElement detailPageTitle;
 	
 	private MobileElement tv_total_score;
+	private MobileElement tv_total_bounds;
 	
 	
 	public ExaminePage(AppiumDriver<MobileElement> driver) {
@@ -49,6 +50,11 @@ public class ExaminePage extends PageBase {
 	public String getTotalScore(){
 		waitForElementVisible(tv_total_score);
 		return tv_total_score.getText();
+	}
+	
+	public String getTotalBounds(){
+		waitForElementVisible(tv_total_bounds);
+		return tv_total_bounds.getText();
 	}
 	
 }

@@ -45,6 +45,7 @@ public class TestExamine extends BaseCase{
 		app.loginPage().loginWithDefaultUser();
 		
 		Assert.assertEquals(app.examinPage().getTotalScore(), "42.23");
+		Assert.assertEquals(app.examinPage().getTotalBounds(), "137");
 		
 	}
 }

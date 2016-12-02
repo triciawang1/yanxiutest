@@ -6,7 +6,8 @@ module.exports = {
     
     //mark if use local response
     shouldUseLocalResponse : function(req,reqBody){
-var uris=new Array(/initialize/,/login.json/,/getEditUserInfo/,/trainlist/,/examine/,/noticeList/,/briefList/,/taskList/);
+//var uris=new Array(/initialize/,/login.json/,/getEditUserInfo/,/trainlist/,/examine/,/noticeList/,/briefList/,/taskList/);
+var uris=new Array(/login.json/,/getEditUserInfo/,/trainlist/,/examine/,/noticeList/,/briefList/,/taskList/);
 for(var i = 0, l = uris.length; i < l; i++) 
 		{
  if(uris[i].test(req.url)){
@@ -25,8 +26,8 @@ for(var i = 0, l = uris.length; i < l; i++)
 		request = require('request-json');
         var client = request.createClient('http://127.0.0.1:8789');
 		
-var uris=new Array("/initialize","/login.json","/getEditUserInfo","/trainlist","/examine","/noticeList","/briefList","/taskList");
-
+//var uris=new Array("/initialize","/login.json","/getEditUserInfo","/trainlist","/examine","/noticeList","/briefList","/taskList");
+var uris=new Array("/login.json","/getEditUserInfo","/trainlist","/examine","/noticeList","/briefList","/taskList");
 
         client.get(uris[req.replaceLocalFile], function(err, res, body)  //触发mock，到moco中获取mock响应数据
                 {
