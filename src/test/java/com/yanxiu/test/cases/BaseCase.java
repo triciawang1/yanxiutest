@@ -43,6 +43,7 @@ import com.yanxiu.common.AppiumServerLog;
 import com.yanxiu.common.CommonUtil;
 import com.yanxiu.common.ElementHelper;
 import com.yanxiu.common.MocoServer;
+import com.yanxiu.common.WifiProxy;
 import com.yanxiu.page.ExaminePage;
 import com.yanxiu.page.YanxiuTrain;
 
@@ -61,6 +62,7 @@ public class BaseCase {
 	protected HttpServer server;
 	protected AnyProxy proxy = new AnyProxy();
 	protected MocoServer mocoServer = new MocoServer();
+
 
 	protected IOSDriver<MobileElement> getIOSDriver(String udid) throws MalformedURLException {
 		capabilities.setCapability(CapabilityType.BROWSER_NAME, "iOS");
@@ -116,12 +118,14 @@ public class BaseCase {
 	}
 
 	@AfterSuite()
-	public void stopAppiumSever() {
+	public void stopAppiumSever() throws IOException {
 		Server.stopServer(isRemoteRun());
+//		WifiProxy.clearWifiProxy();
 	}
 
 	@BeforeSuite()
 	public void prepairEnv() throws IOException, InterruptedException {
+		WifiProxy.setWifiProxy();
 		startAppiumServer();
 		startProxy();
 		// AppiumServerLog serverLogThread = AppiumServerLog.getServer();
