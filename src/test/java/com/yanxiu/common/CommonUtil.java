@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +20,7 @@ import com.yanxiu.test.cases.BaseCase;
 
 public class CommonUtil {
 	private static Logger log = Logger.getLogger(CommonUtil.class);
+	private static String resourceFilePath = CommonUtil.class.getClassLoader().getResource("").getPath();
 	public static void execCmd(String[] cmd){
 		try {
 			
@@ -185,7 +187,7 @@ public class CommonUtil {
 
 
 			BufferedReader br = new BufferedReader(
-					new InputStreamReader(new FileInputStream(configFilePath + fileName), "UTF-8"));
+					new InputStreamReader(new FileInputStream(resourceFilePath + fileName), "UTF-8"));
 			while ((line = br.readLine()) != null) {
 				stringBuffer.append(line);
 			}
@@ -216,6 +218,29 @@ public class CommonUtil {
 			execCmd(installCmd);
 		}
 	}
+	public static void installProxySetterApk() throws IOException, URISyntaxException{
+		log.info("check whether proxy setter apk is installed");
+		String cmd = "shell am start -n tk.elevenk.proxysetter/.MainActivity";
+		StringBuilder cmdResult = AdbHelper.execADBCmd(cmd);
+		log.info("adb cmd result:"+cmdResult.toString());
+		if(cmdResult.toString().contains("does not exist")){
+			log.info("proxy setter apk is not installed, install it now");
+			String installCmd = "install "+ resourceFilePath +"proxy-setter-release-0.1.3.apk";
+			log.info(installCmd);
+			log.info(AdbHelper.execADBCmd(installCmd).toString());
+		}
+	}
 	
+	private static class AdbHelper{
+		
+
+		public static StringBuilder execADBCmd(String cmd) throws IOException{
+			if(isMacOs()){
+				return execCmd("/Users/Admin/android-sdk-macosx/platform-tools/adb "+cmd);
+			}else{
+				return execCmd("adb "+cmd);
+			}
+		}
+	}
 	
 }
