@@ -13,6 +13,7 @@ import io.appium.java_client.remote.MobileCapabilityType;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -63,14 +64,14 @@ public class BaseCase {
 	protected AnyProxy proxy = new AnyProxy();
 	protected MocoServer mocoServer = new MocoServer();
 
-
 	protected IOSDriver<MobileElement> getIOSDriver(String udid) throws MalformedURLException {
 		capabilities.setCapability(CapabilityType.BROWSER_NAME, "iOS");
 		capabilities.setCapability("platformName", "Mac");
 		capabilities.setCapability("deviceName", "iPhone 4s");
 		capabilities.setCapability("platformVersion", "10.0");
 		capabilities.setCapability("fullReset", true);
-		capabilities.setCapability("app", "/Users/admin/.jenkins/jobs/BuildIOSIpa/lastSuccessful/archive/TrainApp/build/app.ipa");
+		capabilities.setCapability("app",
+				"/Users/admin/.jenkins/jobs/BuildIOSIpa/lastSuccessful/archive/TrainApp/build/app.ipa");
 
 		capabilities.setCapability("udid", udid);
 		capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.IOS_XCUI_TEST);
@@ -88,6 +89,7 @@ public class BaseCase {
 
 		capabilities.setCapability("deviceName", deviceName);
 		capabilities.setCapability("unicodeKeyboard", "True");
+		capabilities.setCapability("resetKeyboard", "True");
 		capabilities.setCapability("appPackage", "com.yanxiu.gphone.training.teacher");
 		capabilities.setCapability("appActivity", "com.yanxiu.yxtrain_android.activity.login.WelcomeActivity");
 
@@ -124,14 +126,16 @@ public class BaseCase {
 	}
 
 	@BeforeSuite()
-	public void prepairEnv() throws IOException, InterruptedException {
+	public void prepairEnv() throws IOException, InterruptedException, URISyntaxException {
+		
+        CommonUtil.installProxySetterApk();
 		WifiProxy.setWifiProxy();
 		startAppiumServer();
 		startProxy();
-		// AppiumServerLog serverLogThread = AppiumServerLog.getServer();
-		// serverLogThread.start();
+		 AppiumServerLog serverLogThread = AppiumServerLog.getServer();
+		 serverLogThread.start();
 		startMocoServer();
-		if(CommonUtil.isAndroidDevicePluggin()){
+		if (CommonUtil.isAndroidDevicePluggin()) {
 			CommonUtil.reinstallApk();
 		}
 
@@ -163,19 +167,18 @@ public class BaseCase {
 			System.exit(0);
 		}
 		setConnection();
-		
+
 		mockStartupData();
-		
-		
+
 		app = new YanxiuTrain(driver);
 		app.leadingPage().skipLeadingPage();
 	}
-	
-	private void mockStartupData(){
+
+	private void mockStartupData() {
 		mocoServer.response("login.json", "/login.json");
 		mocoServer.response("initialize.json", "/initialize");
 		mocoServer.response("getEditUserInfo.json", "/getEditUserInfo");
-		
+
 		mocoServer.response("trainlist.json", "/trainlist");
 		mocoServer.response("noticeList.json", "/noticeList");
 		mocoServer.response("briefList.json", "/briefList");
@@ -209,5 +212,7 @@ public class BaseCase {
 			return false;
 		return true;
 	}
+	
+
 
 }
