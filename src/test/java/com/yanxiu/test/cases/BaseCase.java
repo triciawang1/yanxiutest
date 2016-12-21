@@ -19,7 +19,9 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.exec.ExecuteException;
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -138,6 +140,7 @@ public class BaseCase {
 		if (CommonUtil.isAndroidDevicePluggin()) {
 			CommonUtil.reinstallApk();
 		}
+	
 
 	}
 
@@ -213,6 +216,22 @@ public class BaseCase {
 		return true;
 	}
 	
-
+	protected void takeScreenShot(String screenshotFileName) throws IOException{
+		String baseDirPath = System.getProperty("user.dir");
+		String actualDir = "actual";
+		
+		File baseDir = new File(baseDirPath,actualDir);
+		
+		if(!baseDir.exists()){
+			baseDir.mkdirs();
+		}
+		for(File file:baseDir.listFiles()){
+			file.delete();
+		}
+		File screenshot = driver.getScreenshotAs(OutputType.FILE);
+		
+		FileUtils.copyFile(screenshot,
+		            new File(baseDir, screenshotFileName));
+	}
 
 }
