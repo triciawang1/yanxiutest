@@ -132,8 +132,8 @@ public class BaseCase {
 		WifiProxy.setWifiProxy();
 		startAppiumServer();
 		startProxy();
-		 AppiumServerLog serverLogThread = AppiumServerLog.getServer();
-		 serverLogThread.start();
+//		 AppiumServerLog serverLogThread = AppiumServerLog.getServer();
+//		 serverLogThread.start();
 		startMocoServer();
 		if (CommonUtil.isAndroidDevicePluggin()) {
 			CommonUtil.reinstallApk();
