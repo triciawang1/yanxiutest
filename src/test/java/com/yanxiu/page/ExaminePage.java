@@ -4,6 +4,7 @@ import org.testng.log4testng.Logger;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.SwipeElementDirection;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSFindBy;
@@ -20,6 +21,8 @@ public class ExaminePage extends PageBase {
 	
 	private MobileElement tv_total_score;
 	private MobileElement tv_total_bounds;
+	
+	private MobileElement expandableListView;
 	
 	
 	public ExaminePage(AppiumDriver<MobileElement> driver) {
@@ -55,6 +58,10 @@ public class ExaminePage extends PageBase {
 	public String getTotalBounds(){
 		waitForElementVisible(tv_total_bounds);
 		return tv_total_bounds.getText();
+	}
+	
+	public void scrollUpSummaryPage(){
+		expandableListView.swipe(SwipeElementDirection.UP, 100, 100, 500);
 	}
 	
 }

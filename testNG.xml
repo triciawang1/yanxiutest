@@ -13,5 +13,6 @@
   </test> <!-- Default test -->
       <listeners>
         <listener class-name="com.yanxiu.test.RetryListener" /> 
+		<listener class-name="com.yanxiu.test.TestMethodCapture" />
     </listeners>
 </suite> <!-- Default suite -->

@@ -49,6 +49,7 @@ import com.yanxiu.common.MocoServer;
 import com.yanxiu.common.WifiProxy;
 import com.yanxiu.page.ExaminePage;
 import com.yanxiu.page.YanxiuTrain;
+import com.yanxiu.test.TestMethodCapture;
 
 public class BaseCase {
 
@@ -65,6 +66,8 @@ public class BaseCase {
 	protected HttpServer server;
 	protected AnyProxy proxy = new AnyProxy();
 	protected MocoServer mocoServer = new MocoServer();
+	private File baseDir;
+
 
 	protected IOSDriver<MobileElement> getIOSDriver(String udid) throws MalformedURLException {
 		capabilities.setCapability(CapabilityType.BROWSER_NAME, "iOS");
@@ -141,7 +144,25 @@ public class BaseCase {
 			CommonUtil.reinstallApk();
 		}
 	
+		screenShotPrepare();
 
+	}
+	
+	public void screenShotPrepare(){
+		String baseDirPath = System.getProperty("user.dir");
+		String actualDir = "actual";
+		
+
+		
+		baseDir = new File(baseDirPath,actualDir);
+		
+		if(!baseDir.exists()){
+			baseDir.mkdirs();
+			
+		}
+		for(File file:baseDir.listFiles()){
+			file.delete();
+		}
 	}
 
 	public void startMocoServer() throws InterruptedException {
@@ -217,17 +238,7 @@ public class BaseCase {
 	}
 	
 	protected void takeScreenShot(String screenshotFileName) throws IOException{
-		String baseDirPath = System.getProperty("user.dir");
-		String actualDir = "actual";
 		
-		File baseDir = new File(baseDirPath,actualDir);
-		
-		if(!baseDir.exists()){
-			baseDir.mkdirs();
-		}
-		for(File file:baseDir.listFiles()){
-			file.delete();
-		}
 		File screenshot = driver.getScreenshotAs(OutputType.FILE);
 		
 		FileUtils.copyFile(screenshot,
