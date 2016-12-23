@@ -6,14 +6,26 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.testng.log4testng.Logger;
 
-
+import com.yanxiu.common.ScreenshotUtil;
 import com.yanxiu.test.TestMethodCapture;
 import com.yanxiu.test.TestngRetry;
 
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.android.AndroidDriver;
+import ru.yandex.qatools.ashot.AShot;
+import ru.yandex.qatools.ashot.Screenshot;
+import ru.yandex.qatools.ashot.comparison.ImageDiff;
+import ru.yandex.qatools.ashot.comparison.ImageDiffer;
+import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Method;
+
+import javax.imageio.ImageIO;
 
 
 @Listeners(value=TestMethodCapture.class)
@@ -51,11 +63,38 @@ public class TestExamine extends BaseCase{
 		Assert.assertEquals(app.examinPage().getTotalScore(), "42.23");
 		Assert.assertEquals(app.examinPage().getTotalBounds(), "137");
 		
+////		TouchAction tAction = new TouchAction(driver);
+//		takeScreenShot(TestMethodCapture.getMethodName().concat(".png"));
+//		app.examinPage().scrollUpSummaryPage();
+////		((AndroidDriver<MobileElement>) driver).pressKeyCode(92);
+////		driver.swipe(10,1870,10,360,1000);
+////		tAction.press(120,360).moveTo(1060,1610).release().perform();
+//		takeScreenShot(TestMethodCapture.getMethodName().concat("1.png"));
+////		((AndroidDriver<MobileElement>) driver).pressKeyCode(92);
+//		app.examinPage().scrollUpSummaryPage();
+////		driver.swipe(10,1870,10,360,1000);
+////		tAction.press(20,360).moveTo(1060,1610).release().perform();
+//		takeScreenShot(TestMethodCapture.getMethodName().concat("2.png"));
+		takeScreenShot(TestMethodCapture.getMethodName().concat("0.png"));
+	
+		int statusBarHeight = app.homePage().getStatusBarHeight();
+		log.info("statusBarHeight:"+statusBarHeight);
+		int height = driver.manage().window().getSize().height;
+		int width = driver.manage().window().getSize().width;
+		Assert.assertFalse(ScreenshotUtil.hasDiff(TestMethodCapture.getMethodName().concat("0.png"), statusBarHeight, height, width));
 		
-		takeScreenShot(TestMethodCapture.getMethodName().concat(".png"));
-		app.examinPage().scrollUpSummaryPage();
-		takeScreenShot(TestMethodCapture.getMethodName().concat("1.png"));
+		for(int i=1;i<4;i++){
+			app.examinPage().scrollUpSummaryPage();
+			String fileName = TestMethodCapture.getMethodName().concat(i+".png");
+			takeScreenShot(fileName);
+			Assert.assertFalse(ScreenshotUtil.hasDiff(fileName, statusBarHeight, height, width));
+		}
 		
+
+		
+	}
+	
+	public void testCollapseStage(){
 		
 	}
 }

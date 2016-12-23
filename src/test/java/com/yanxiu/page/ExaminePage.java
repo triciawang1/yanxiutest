@@ -1,5 +1,7 @@
 package com.yanxiu.page;
 
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.log4testng.Logger;
 
 import io.appium.java_client.AppiumDriver;
@@ -7,6 +9,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.SwipeElementDirection;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
 
 public class ExaminePage extends PageBase {
@@ -60,8 +63,14 @@ public class ExaminePage extends PageBase {
 		return tv_total_bounds.getText();
 	}
 	
-	public void scrollUpSummaryPage(){
-		expandableListView.swipe(SwipeElementDirection.UP, 100, 100, 500);
+	public void scrollUpSummaryPage() throws InterruptedException{
+		Dimension size = driver.manage().window().getSize();
+		log.info("size:"+size.height+" "+size.width);
+		expandableListView.swipe(SwipeElementDirection.UP, 150, 150, 2000);
+		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+		Thread.sleep(2000);
+		
+		
 	}
 	
 }
