@@ -131,7 +131,9 @@ public class BaseCase {
 
 	@BeforeSuite()
 	public void prepairEnv() throws IOException, InterruptedException, URISyntaxException {
-
+		if (CommonUtil.isAndroidDevicePluggin()) {
+			CommonUtil.reinstallApk();
+		}
 		CommonUtil.installProxySetterApk();
 		WifiProxy.setWifiProxy();
 		startAppiumServer();
@@ -139,9 +141,7 @@ public class BaseCase {
 		// AppiumServerLog serverLogThread = AppiumServerLog.getServer();
 		// serverLogThread.start();
 		startMocoServer();
-		if (CommonUtil.isAndroidDevicePluggin()) {
-			CommonUtil.reinstallApk();
-		}
+
 
 		screenShotPrepare();
 
