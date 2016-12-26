@@ -23,6 +23,7 @@ public class ScreenshotUtil {
 	
 	public static boolean hasDiff(String fileName,Rectangle container) throws IOException{
 		File actualImage = new File(actualDir,fileName);
+		System.out.println("actualImage:"+actualImage.toString());
 		File expectedImage = new File(expectedDir,fileName);
 		Screenshot actualScreenshot = new Screenshot(getSubImage(actualImage,container));
 		Screenshot expectedScreenshot = new Screenshot(getSubImage(expectedImage,container));
