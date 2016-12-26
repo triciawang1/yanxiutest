@@ -2,6 +2,9 @@ package com.yanxiu.page;
 
 import java.util.List;
 
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Rectangle;
+
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindAll;
@@ -13,8 +16,9 @@ public class HomePage extends PageBase{
 		super(driver);
 		// TODO Auto-generated constructor stub
 	}
-	@AndroidFindAll(@AndroidFindBy(className="android.view.View"))
-	private List<MobileElement> statusBar;
+
+	
+	private MobileElement container;
 	
 	@AndroidFindBy(id="tv_tab_exam")
 	private MobileElement tabExamine;
@@ -38,7 +42,8 @@ public class HomePage extends PageBase{
 		homeWorkItem.click();
 	}
 	
-	public int getStatusBarHeight(){
-		return statusBar.get(1).getSize().height;
+
+	public Rectangle getContainer(){
+		return container.getRect();
 	}
 }

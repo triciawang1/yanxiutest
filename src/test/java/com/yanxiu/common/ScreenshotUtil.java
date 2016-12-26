@@ -6,6 +6,9 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Rectangle;
+
 import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
 import ru.yandex.qatools.ashot.comparison.ImageDiffer;
@@ -18,11 +21,11 @@ public class ScreenshotUtil {
 	private static final File failedDir = new File(baseDir,"fail");
 	
 	
-	public static boolean hasDiff(String fileName,int statusBarHeight,int height,int width) throws IOException{
+	public static boolean hasDiff(String fileName,Rectangle container) throws IOException{
 		File actualImage = new File(actualDir,fileName);
 		File expectedImage = new File(expectedDir,fileName);
-		Screenshot actualScreenshot = new Screenshot(getSubImage(actualImage,statusBarHeight,height,width));
-		Screenshot expectedScreenshot = new Screenshot(getSubImage(expectedImage,statusBarHeight,height,width));
+		Screenshot actualScreenshot = new Screenshot(getSubImage(actualImage,container));
+		Screenshot expectedScreenshot = new Screenshot(getSubImage(expectedImage,container));
 		ImageDiff diff = new ImageDiffer().makeDiff(actualScreenshot, expectedScreenshot);
 		if(diff.hasDiff()){
 			BufferedImage diffImage = diff.getMarkedImage();
@@ -33,7 +36,7 @@ public class ScreenshotUtil {
 		return false;
 	}
 	
-	private static BufferedImage getSubImage(File image,int statusBarHeight,int height,int width) throws IOException{
-		return ImageIO.read(image).getSubimage(0, statusBarHeight, width, height-statusBarHeight);
+	private static BufferedImage getSubImage(File image,Rectangle container) throws IOException{
+		return ImageIO.read(image).getSubimage(container.x, container.y, container.width, container.width);
 	}
 }

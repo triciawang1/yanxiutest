@@ -77,17 +77,15 @@ public class TestExamine extends BaseCase{
 //		takeScreenShot(TestMethodCapture.getMethodName().concat("2.png"));
 		takeScreenShot(TestMethodCapture.getMethodName().concat("0.png"));
 	
-		int statusBarHeight = app.homePage().getStatusBarHeight();
-		log.info("statusBarHeight:"+statusBarHeight);
-		int height = driver.manage().window().getSize().height;
-		int width = driver.manage().window().getSize().width;
-		Assert.assertFalse(ScreenshotUtil.hasDiff(TestMethodCapture.getMethodName().concat("0.png"), statusBarHeight, height, width));
+
+
+		Assert.assertFalse(ScreenshotUtil.hasDiff(TestMethodCapture.getMethodName().concat("0.png"), app.homePage().getContainer()));
 		
 		for(int i=1;i<4;i++){
 			app.examinPage().scrollUpSummaryPage();
 			String fileName = TestMethodCapture.getMethodName().concat(i+".png");
 			takeScreenShot(fileName);
-			Assert.assertFalse(ScreenshotUtil.hasDiff(fileName, statusBarHeight, height, width));
+			Assert.assertFalse(ScreenshotUtil.hasDiff(fileName, app.homePage().getContainer()));
 		}
 		
 
