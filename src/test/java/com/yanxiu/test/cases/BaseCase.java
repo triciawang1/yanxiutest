@@ -153,8 +153,7 @@ public class BaseCase {
 		String actualDir = "actual";
 
 		log.info("current directory is:"+baseDirPath);
-		log.info("another way to get dir:"+new File("").getAbsolutePath());
-		log.info("third way to get dir:"+new File("").getCanonicalPath());
+
 		baseDir = new File(baseDirPath, actualDir);
 
 		if (!baseDir.exists()) {
