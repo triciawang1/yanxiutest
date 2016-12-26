@@ -17,9 +17,17 @@ public class ScreenshotUtil {
 
 	private static final String baseDir = System.getProperty("user.dir");
 	private static final File actualDir = new File(baseDir,"actual");
-	private static final File expectedDir = new File(baseDir,"expected");
+	private static final File expectedDir;
 	private static final File failedDir = new File(baseDir,"fail");
 	
+	static{
+		if(CommonUtil.isMacOs()){
+			expectedDir = new File(new File(baseDir).getParentFile(),"expected");
+			System.out.println("expected dir is:"+expectedDir);
+		}else{
+		expectedDir = new File(baseDir,"expected");
+		}
+	}
 	
 	public static boolean hasDiff(String fileName,Rectangle container) throws IOException{
 		File actualImage = new File(actualDir,fileName);
