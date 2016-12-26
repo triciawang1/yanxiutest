@@ -212,6 +212,7 @@ public class CommonUtil {
 	public static void reinstallApk() throws IOException {
 
 		if (isMacOs()) {
+			log.info("reinstall apk");
 			String uninstallCmd = "/Users/Admin/android-sdk-macosx/platform-tools/adb uninstall com.yanxiu.gphone.training.teacher";
 			String installCmd = "/Users/Admin/android-sdk-macosx/platform-tools/adb install /Users/admin/.jenkins/jobs/BuildAndroidApkForLiang/lastSuccessful/archive/app/build/outputs/apk/app-yanxiu_com-release.apk";
 			execCmd(uninstallCmd);
