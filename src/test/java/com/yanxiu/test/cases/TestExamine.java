@@ -67,7 +67,7 @@ public class TestExamine extends BaseCase {
 			Thread.sleep(2000);
 			String fileName = TestMethodCapture.getMethodName().concat(i + ".png");
 			takeScreenShot(fileName);
-//			Assert.assertFalse(ScreenshotUtil.hasDiff(fileName, app.homePage().getContainer()));
+			Assert.assertFalse(ScreenshotUtil.hasDiff(fileName, app.homePage().getContainer()));
 			
 		}
 
