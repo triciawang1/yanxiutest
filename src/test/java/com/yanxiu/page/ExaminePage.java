@@ -25,7 +25,7 @@ public class ExaminePage extends PageBase {
 	private MobileElement tv_total_score;
 	private MobileElement tv_total_bounds;
 	
-	private MobileElement expandableListView;
+
 	
 	
 	public ExaminePage(AppiumDriver<MobileElement> driver) {
@@ -63,14 +63,6 @@ public class ExaminePage extends PageBase {
 		return tv_total_bounds.getText();
 	}
 	
-	public void scrollUpSummaryPage() throws InterruptedException{
-		Dimension size = driver.manage().window().getSize();
-		log.info("size:"+size.height+" "+size.width);
-		expandableListView.swipe(SwipeElementDirection.UP, 150, 150, 2000);
-		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
-		Thread.sleep(2000);
-		
-		
-	}
+	
 	
 }

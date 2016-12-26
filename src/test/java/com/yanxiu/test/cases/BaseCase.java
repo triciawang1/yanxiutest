@@ -68,7 +68,6 @@ public class BaseCase {
 	protected MocoServer mocoServer = new MocoServer();
 	private File baseDir;
 
-
 	protected IOSDriver<MobileElement> getIOSDriver(String udid) throws MalformedURLException {
 		capabilities.setCapability(CapabilityType.BROWSER_NAME, "iOS");
 		capabilities.setCapability("platformName", "Mac");
@@ -132,35 +131,44 @@ public class BaseCase {
 
 	@BeforeSuite()
 	public void prepairEnv() throws IOException, InterruptedException, URISyntaxException {
-		
-        CommonUtil.installProxySetterApk();
+
+		CommonUtil.installProxySetterApk();
 		WifiProxy.setWifiProxy();
 		startAppiumServer();
 		startProxy();
-		 AppiumServerLog serverLogThread = AppiumServerLog.getServer();
-		 serverLogThread.start();
+		// AppiumServerLog serverLogThread = AppiumServerLog.getServer();
+		// serverLogThread.start();
 		startMocoServer();
 		if (CommonUtil.isAndroidDevicePluggin()) {
 			CommonUtil.reinstallApk();
 		}
-	
+
 		screenShotPrepare();
 
 	}
+
 	
-	public void screenShotPrepare(){
+	public void screenShotPrepare() {
 		String baseDirPath = System.getProperty("user.dir");
 		String actualDir = "actual";
-		
 
-		
-		baseDir = new File(baseDirPath,actualDir);
-		
-		if(!baseDir.exists()){
+		baseDir = new File(baseDirPath, actualDir);
+
+		if (!baseDir.exists()) {
 			baseDir.mkdirs();
-			
+
 		}
-		for(File file:baseDir.listFiles()){
+		for (File file : baseDir.listFiles()) {
+			file.delete();
+		}
+		
+		String failDir = "fail";
+		File failDirPath = new File(baseDirPath, failDir);
+		if (!failDirPath.exists()) {
+			failDirPath.mkdirs();
+
+		}
+		for (File file : failDirPath.listFiles()) {
 			file.delete();
 		}
 	}
@@ -236,13 +244,17 @@ public class BaseCase {
 			return false;
 		return true;
 	}
-	
-	protected void takeScreenShot(String screenshotFileName) throws IOException{
-		
+
+	protected void takeScreenShot(String screenshotFileName) throws IOException {
+
 		File screenshot = driver.getScreenshotAs(OutputType.FILE);
-		
-		FileUtils.copyFile(screenshot,
-		            new File(baseDir, screenshotFileName));
+
+		FileUtils.copyFile(screenshot, new File(baseDir, screenshotFileName));
 	}
 
+	protected void pageDown() {
+		if (driver instanceof AndroidDriver) {
+			((AndroidDriver<MobileElement>) driver).pressKeyCode(93);
+		}
+	}
 }

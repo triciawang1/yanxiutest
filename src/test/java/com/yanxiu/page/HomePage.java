@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Rectangle;
+import org.openqa.selenium.interactions.internal.Coordinates;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -44,6 +45,7 @@ public class HomePage extends PageBase{
 	
 
 	public Rectangle getContainer(){
-		return container.getRect();
+
+		return new Rectangle(container.getLocation(),container.getSize());
 	}
 }
