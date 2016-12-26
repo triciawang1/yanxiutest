@@ -152,10 +152,13 @@ public class BaseCase {
 		String baseDirPath = System.getProperty("user.dir");
 		String actualDir = "actual";
 
+		log.info("current directory is:"+baseDirPath);
 		baseDir = new File(baseDirPath, actualDir);
 
 		if (!baseDir.exists()) {
+			log.info("actual file folder does not exist, create one");
 			baseDir.mkdirs();
+			
 
 		}
 		for (File file : baseDir.listFiles()) {
