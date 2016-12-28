@@ -32,9 +32,9 @@ import javax.imageio.ImageIO;
 public class TestExamine extends BaseCase {
 
 	private Logger log = Logger.getLogger(TestExamine.class);
-	
+
 	@BeforeMethod
-	public void setUpExamine(){
+	public void setUpExamine() {
 		String jsonFile = "examine.json";
 		String requestUri = "/examine";
 		mocoServer.response(jsonFile, requestUri);
@@ -52,25 +52,28 @@ public class TestExamine extends BaseCase {
 		// log.info(body);
 		// server.request(by(uri("/examine"))).response(body);
 
-		
 		app.examinPage().checkScoreDetai();
 		Assert.assertTrue(app.examinPage().isScoreDetailPageLoaded());
 		Assert.assertTrue(app.examinPage().currentActivityIsScoreDetailActivity());
-		for (int i = 0; i < 4; i++) {
-			String fileName = TestMethodCapture.getMethodName().concat(i + ".png");
-			takeScreenShot(fileName);
-		app.examinPage().ScrollDownPage();
 
-		Thread.sleep(2000);
+		Assert.assertEquals(app.examinPage().getTotalScore(), "42.23");
+		Assert.assertEquals(app.examinPage().getbingerScore(), "32.23");
+		Assert.assertEquals(app.examinPage().getextraScore(), "10.0");
+		for (int i = 0; i < 3; i++) {
+
+			app.examinPage().ScrollDownPage();
+
 		}
-		
+		Thread.sleep(2000);
+		String fileName = TestMethodCapture.getMethodName().concat(".png");
+		takeScreenShot(fileName);
+		Assert.assertFalse(ScreenshotUtil.hasDiff(fileName));
 
 	}
 
 	// @Test(groups="BVT",retryAnalyzer=TestngRetry.class)
 	@Test(groups = "BVT")
 	public void testScoreSummary() throws InterruptedException, IOException {
-		
 
 		Assert.assertEquals(app.examinPage().getTotalScore(), "42.23");
 		Assert.assertEquals(app.examinPage().getTotalBounds(), "137");
@@ -80,8 +83,8 @@ public class TestExamine extends BaseCase {
 			Thread.sleep(2000);
 			String fileName = TestMethodCapture.getMethodName().concat(i + ".png");
 			takeScreenShot(fileName);
-			Assert.assertFalse(ScreenshotUtil.hasDiff(fileName));
-			
+//			Assert.assertFalse(ScreenshotUtil.hasDiff(fileName));
+
 		}
 
 	}

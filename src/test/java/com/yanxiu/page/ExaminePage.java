@@ -24,7 +24,8 @@ public class ExaminePage extends PageBase {
 	
 	private MobileElement tv_total_score;
 	private MobileElement tv_total_bounds;
-	
+	private MobileElement tv_binger_score;
+	private MobileElement tv_extra_score;
 
 	private MobileElement scrollView;
 	
@@ -66,6 +67,14 @@ public class ExaminePage extends PageBase {
 	
 	public void ScrollDownPage(){
 		scrollView.swipe(SwipeElementDirection.UP, 100, 100, 500);
+	}
+	
+	public String getbingerScore(){
+		return tv_binger_score.getText();
+	}
+	
+	public String getextraScore(){
+		return tv_extra_score.getText();
 	}
 	
 	
