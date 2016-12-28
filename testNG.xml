@@ -9,6 +9,7 @@
       <methods>
         <include name="testScoreSummary" />
 		 <include name="testScoreDetail" />
+		  <include name="testCollapseStage" />
       </methods>
      </class>
         </classes>

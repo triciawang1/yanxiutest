@@ -66,8 +66,8 @@ public class TestExamine extends BaseCase {
 		}
 		Thread.sleep(2000);
 		String fileName = TestMethodCapture.getMethodName().concat(".png");
-		takeScreenShot(fileName);
-		Assert.assertFalse(ScreenshotUtil.hasDiff(fileName));
+		takeScreenShotAndAssert(fileName);
+		
 
 	}
 
@@ -80,16 +80,30 @@ public class TestExamine extends BaseCase {
 
 		for (int i = 0; i < 4; i++) {
 			pageDown();
-			Thread.sleep(2000);
+			
 			String fileName = TestMethodCapture.getMethodName().concat(i + ".png");
-			takeScreenShot(fileName);
-			Assert.assertFalse(ScreenshotUtil.hasDiff(fileName));
+			takeScreenShotAndAssert(fileName);
+		
 
 		}
 
 	}
 
-	public void testCollapseStage() {
-
+	@Test
+	public void testCollapseStage() throws IOException, InterruptedException {
+		pageDown();
+		String fileName;
+		
+		app.examinPage().tapToCollapseOrExpande();
+		
+		fileName = TestMethodCapture.getMethodName().concat("1.png");
+		takeScreenShotAndAssert(fileName);
+		
+		app.examinPage().tapToCollapseOrExpande();
+	
+		fileName = TestMethodCapture.getMethodName().concat("0.png");
+		takeScreenShotAndAssert(fileName);
+		
+		
 	}
 }

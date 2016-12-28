@@ -29,6 +29,7 @@ import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
@@ -50,6 +51,7 @@ import com.yanxiu.common.AppiumServerLog;
 import com.yanxiu.common.CommonUtil;
 import com.yanxiu.common.ElementHelper;
 import com.yanxiu.common.MocoServer;
+import com.yanxiu.common.ScreenshotUtil;
 import com.yanxiu.common.WifiProxy;
 import com.yanxiu.page.ExaminePage;
 import com.yanxiu.page.YanxiuTrain;
@@ -254,7 +256,7 @@ public class BaseCase {
 		return true;
 	}
 
-	protected void takeScreenShot(String screenshotFileName) throws IOException {
+	protected void takeScreenShotAndAssert(String screenshotFileName) throws IOException {
 
 		File screenshot = driver.getScreenshotAs(OutputType.FILE);
 		
@@ -266,11 +268,16 @@ public class BaseCase {
 		
 		BufferedImage subImage = ImageIO.read(localScreenshot).getSubimage(container.x, container.y, container.width,container.height);
 	    ImageIO.write(subImage, "png", localScreenshot);
+	    
+	    Assert.assertFalse(ScreenshotUtil.hasDiff(screenshotFileName));
 	}
 
-	protected void pageDown() {
+	protected void pageDown() throws InterruptedException {
 		if (driver instanceof AndroidDriver) {
 			((AndroidDriver<MobileElement>) driver).pressKeyCode(93);
 		}
+		Thread.sleep(2000);
 	}
+	
+	
 }

@@ -29,6 +29,7 @@ public class ExaminePage extends PageBase {
 
 	private MobileElement scrollView;
 	
+	private MobileElement iv_indicator;
 	
 	public ExaminePage(AppiumDriver<MobileElement> driver) {
 		super(driver);
@@ -77,5 +78,9 @@ public class ExaminePage extends PageBase {
 		return tv_extra_score.getText();
 	}
 	
+	public void tapToCollapseOrExpande() throws InterruptedException{
+		iv_indicator.click();
+		Thread.sleep(2000);
+	}
 	
 }
