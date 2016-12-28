@@ -106,4 +106,16 @@ public class TestExamine extends BaseCase {
 		
 		
 	}
+	
+	@Test
+	public void testTapHomeworkItem() throws IOException, InterruptedException{
+		app.examinPage().getGroupHomework().click();
+		app.homeworkPage().tapKnownButton();
+		takeScreenShotAndAssert(TestMethodCapture.getMethodName().concat(".png"));
+		app.homePage().pressBackButton();
+		
+		app.examinPage().getHomework().click();
+		Thread.sleep(2000);
+		takeScreenShotAndAssert(TestMethodCapture.getMethodName().concat(".png"));
+	}
 }
