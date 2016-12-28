@@ -10,6 +10,7 @@ import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.AutomationName;
 import io.appium.java_client.remote.MobileCapabilityType;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -18,10 +19,13 @@ import java.net.URL;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import javax.imageio.ImageIO;
+
 import org.apache.commons.exec.ExecuteException;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
+import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -67,6 +71,7 @@ public class BaseCase {
 	protected AnyProxy proxy = new AnyProxy();
 	protected MocoServer mocoServer = new MocoServer();
 	private File baseDir;
+	protected Rectangle container;
 
 	protected IOSDriver<MobileElement> getIOSDriver(String udid) throws MalformedURLException {
 		capabilities.setCapability(CapabilityType.BROWSER_NAME, "iOS");
@@ -252,8 +257,15 @@ public class BaseCase {
 	protected void takeScreenShot(String screenshotFileName) throws IOException {
 
 		File screenshot = driver.getScreenshotAs(OutputType.FILE);
+		
+		File localScreenshot = new File(baseDir, screenshotFileName);
 
-		FileUtils.copyFile(screenshot, new File(baseDir, screenshotFileName));
+		FileUtils.copyFile(screenshot, localScreenshot);
+		
+		
+		
+		BufferedImage subImage = ImageIO.read(localScreenshot).getSubimage(container.x, container.y, container.width,container.height);
+	    ImageIO.write(subImage, "png", localScreenshot);
 	}
 
 	protected void pageDown() {

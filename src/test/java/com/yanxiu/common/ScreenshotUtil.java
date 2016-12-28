@@ -29,12 +29,12 @@ public class ScreenshotUtil {
 		}
 	}
 	
-	public static boolean hasDiff(String fileName,Rectangle container) throws IOException{
+	public static boolean hasDiff(String fileName) throws IOException{
 		File actualImage = new File(actualDir,fileName);
 		System.out.println("actualImage:"+actualImage.toString());
 		File expectedImage = new File(expectedDir,fileName);
-		Screenshot actualScreenshot = new Screenshot(getSubImage(actualImage,container));
-		Screenshot expectedScreenshot = new Screenshot(getSubImage(expectedImage,container));
+		Screenshot actualScreenshot = new Screenshot(ImageIO.read(actualImage));
+		Screenshot expectedScreenshot = new Screenshot(ImageIO.read(expectedImage));
 		ImageDiff diff = new ImageDiffer().makeDiff(actualScreenshot, expectedScreenshot);
 		if(diff.hasDiff()){
 			BufferedImage diffImage = diff.getMarkedImage();
@@ -45,7 +45,5 @@ public class ScreenshotUtil {
 		return false;
 	}
 	
-	private static BufferedImage getSubImage(File image,Rectangle container) throws IOException{
-		return ImageIO.read(image).getSubimage(container.x, container.y, container.width, container.width);
-	}
+
 }

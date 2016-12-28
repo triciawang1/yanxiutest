@@ -3,6 +3,7 @@ package com.yanxiu.test.cases;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.testng.log4testng.Logger;
@@ -11,7 +12,6 @@ import com.yanxiu.common.ScreenshotUtil;
 import com.yanxiu.test.TestMethodCapture;
 import com.yanxiu.test.TestngRetry;
 
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import ru.yandex.qatools.ashot.AShot;
@@ -32,32 +32,45 @@ import javax.imageio.ImageIO;
 public class TestExamine extends BaseCase {
 
 	private Logger log = Logger.getLogger(TestExamine.class);
+	
+	@BeforeMethod
+	public void setUpExamine(){
+		String jsonFile = "examine.json";
+		String requestUri = "/examine";
+		mocoServer.response(jsonFile, requestUri);
+
+		app.loginPage().loginWithDefaultUser();
+		container = app.homePage().getContainer();
+	}
 
 	// @Test(groups="BVT",retryAnalyzer=TestngRetry.class)
 	@Test(groups = "BVT", retryAnalyzer = TestngRetry.class)
-	public void testScoreDetail() throws UnsupportedEncodingException, InterruptedException {
+	public void testScoreDetail() throws InterruptedException, IOException {
 
 		// String jsonFile = "examine.json";
 		// String body = CommonUtil.getJSONObjectFromFile(jsonFile);
 		// log.info(body);
 		// server.request(by(uri("/examine"))).response(body);
 
-		app.loginPage().loginWithDefaultUser();
+		
 		app.examinPage().checkScoreDetai();
 		Assert.assertTrue(app.examinPage().isScoreDetailPageLoaded());
 		Assert.assertTrue(app.examinPage().currentActivityIsScoreDetailActivity());
-		app.examinPage().pressBackButton();
+		for (int i = 0; i < 4; i++) {
+			String fileName = TestMethodCapture.getMethodName().concat(i + ".png");
+			takeScreenShot(fileName);
+		app.examinPage().ScrollDownPage();
+
+		Thread.sleep(2000);
+		}
+		
 
 	}
 
 	// @Test(groups="BVT",retryAnalyzer=TestngRetry.class)
 	@Test(groups = "BVT")
 	public void testScoreSummary() throws InterruptedException, IOException {
-		String jsonFile = "examine.json";
-		String requestUri = "/examine";
-		mocoServer.response(jsonFile, requestUri);
-
-		app.loginPage().loginWithDefaultUser();
+		
 
 		Assert.assertEquals(app.examinPage().getTotalScore(), "42.23");
 		Assert.assertEquals(app.examinPage().getTotalBounds(), "137");
@@ -67,7 +80,7 @@ public class TestExamine extends BaseCase {
 			Thread.sleep(2000);
 			String fileName = TestMethodCapture.getMethodName().concat(i + ".png");
 			takeScreenShot(fileName);
-			Assert.assertFalse(ScreenshotUtil.hasDiff(fileName, app.homePage().getContainer()));
+			Assert.assertFalse(ScreenshotUtil.hasDiff(fileName));
 			
 		}
 

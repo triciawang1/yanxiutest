@@ -26,6 +26,7 @@ public class ExaminePage extends PageBase {
 	private MobileElement tv_total_bounds;
 	
 
+	private MobileElement scrollView;
 	
 	
 	public ExaminePage(AppiumDriver<MobileElement> driver) {
@@ -63,6 +64,9 @@ public class ExaminePage extends PageBase {
 		return tv_total_bounds.getText();
 	}
 	
+	public void ScrollDownPage(){
+		scrollView.swipe(SwipeElementDirection.UP, 100, 100, 500);
+	}
 	
 	
 }
