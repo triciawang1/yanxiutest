@@ -5,8 +5,10 @@
 <classes>
 
             <class name="com.yanxiu.test.cases.TestExamine" >
+			
       <methods>
         <include name="testScoreSummary" />
+		 <include name="testScoreDetail" />
       </methods>
      </class>
         </classes>
