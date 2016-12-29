@@ -126,6 +126,10 @@ public class TestExamine extends BaseCase {
 	
 	@Test
 	public void testTapCourseItem() throws IOException{
+		
+		String jsonFile = "myCourseList.json";
+		String requestUri = "/myCourseList";
+		mocoServer.response(jsonFile, requestUri);
 		app.examinPage().getCourse().click();
 		takeScreenShotAndAssert(TestMethodCapture.getMethodName().concat(".png"));
 	}
