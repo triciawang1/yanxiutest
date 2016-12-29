@@ -109,6 +109,11 @@ public class TestExamine extends BaseCase {
 	
 	@Test
 	public void testTapHomeworkItem() throws IOException, InterruptedException{
+		String jsonFile = "homeworkList.json";
+		String requestUri = "/homeworkList";
+		mocoServer.response(jsonFile, requestUri);
+		
+		
 		app.examinPage().getGroupHomework().click();
 		app.homeworkPage().tapKnownButton();
 		takeScreenShotAndAssert(TestMethodCapture.getMethodName().concat(".png"));
@@ -116,6 +121,12 @@ public class TestExamine extends BaseCase {
 		
 		app.examinPage().getHomework().click();
 		Thread.sleep(2000);
+		takeScreenShotAndAssert(TestMethodCapture.getMethodName().concat(".png"));
+	}
+	
+	@Test
+	public void testTapCourseItem() throws IOException{
+		app.examinPage().getCourse().click();
 		takeScreenShotAndAssert(TestMethodCapture.getMethodName().concat(".png"));
 	}
 }

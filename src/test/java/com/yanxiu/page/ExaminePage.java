@@ -45,6 +45,13 @@ public class ExaminePage extends PageBase {
 	@AndroidFindBy(xpath = "//android.widget.TextView[contains(@text,'作业')]")
 	private MobileElement homework;
 	
+	@AndroidFindBy(xpath = "//android.widget.TextView[contains(@text,'课程')]")
+	private MobileElement course;
+	
+	public MobileElement getCourse() {
+		return course;
+	}
+
 	public ExaminePage(AppiumDriver<MobileElement> driver) {
 		super(driver);
 		// TODO Auto-generated constructor stub
