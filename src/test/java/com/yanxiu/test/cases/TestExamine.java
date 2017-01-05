@@ -34,12 +34,13 @@ public class TestExamine extends BaseCase {
 	private Logger log = Logger.getLogger(TestExamine.class);
 
 	@BeforeMethod
-	public void setUpExamine() {
+	public void setUpExamine() throws UnsupportedEncodingException {
 		String jsonFile = "examine.json";
 		String requestUri = "/examine";
 		mocoServer.response(jsonFile, requestUri);
 
 		app.loginPage().loginWithDefaultUser();
+
 		container = app.homePage().getContainer();
 	}
 
@@ -125,12 +126,14 @@ public class TestExamine extends BaseCase {
 	}
 	
 	@Test
-	public void testTapCourseItem() throws IOException{
+	public void testTapCourseItem() throws IOException, InterruptedException{
 		
 		String jsonFile = "myCourseList.json";
 		String requestUri = "/myCourseList";
-		mocoServer.response(jsonFile, requestUri);
+		mocoServer.responseWithPlainText(jsonFile, requestUri);
+		
 		app.examinPage().getCourse().click();
+		Thread.sleep(4000);
 		takeScreenShotAndAssert(TestMethodCapture.getMethodName().concat(".png"));
 	}
 }

@@ -48,4 +48,6 @@ public class HomePage extends PageBase{
 
 		return new Rectangle(container.getLocation(),container.getSize());
 	}
+	
+
 }

@@ -13,6 +13,7 @@ import io.appium.java_client.remote.MobileCapabilityType;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -217,7 +218,7 @@ public class BaseCase {
 		app.leadingPage().skipLeadingPage();
 	}
 
-	private void mockStartupData() {
+	private void mockStartupData() throws UnsupportedEncodingException {
 		mocoServer.response("login.json", "/login.json");
 		mocoServer.response("initialize.json", "/initialize");
 		mocoServer.response("getEditUserInfo.json", "/getEditUserInfo");

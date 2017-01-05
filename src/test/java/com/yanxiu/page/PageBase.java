@@ -94,4 +94,14 @@ public class PageBase {
 		element.click();
 		
 	}
+	
+	private MobileElement iv_know;
+	
+	public void tapIKnow(){
+		try{
+		iv_know.click();
+		}catch(Exception e){
+			
+		}
+	}
 }

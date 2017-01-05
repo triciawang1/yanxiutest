@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,8 +15,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import org.json.JSONObject;
+
 import org.testng.log4testng.Logger;
+
+import com.alibaba.fastjson.JSONObject;
 
 public class CommonUtil {
 	private static Logger log = Logger.getLogger(CommonUtil.class);
@@ -180,9 +183,9 @@ public class CommonUtil {
 		return false;
 	}
 
-	public static JSONObject getJSONObjectFromFile(String fileName) {
+	public static JSONObject getJSONObjectFromFile(String fileName)  {
 
-		String configFilePath = CommonUtil.class.getClassLoader().getResource("").getPath();
+//		String configFilePath = CommonUtil.class.getClassLoader().getResource("").getPath();
 		StringBuffer stringBuffer = new StringBuffer();
 		String line = null;
 		try {
@@ -199,7 +202,15 @@ public class CommonUtil {
 			e.printStackTrace();
 		}
 
-		JSONObject jsonObject = new JSONObject(stringBuffer.toString());
+	    String temp="";
+		try {
+			temp = new String(stringBuffer.toString().getBytes("UTF-8"),"UTF-8");
+			log.info("wwww"+temp);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		JSONObject jsonObject = JSONObject.parseObject(stringBuffer.toString());
 		return jsonObject;
 	}
 

@@ -2,6 +2,8 @@ package com.yanxiu.common;
 
 import static com.github.dreamhead.moco.Runner.runner;
 
+import java.io.UnsupportedEncodingException;
+
 import org.testng.log4testng.Logger;
 
 import com.github.dreamhead.moco.HttpServer;
@@ -32,11 +34,18 @@ public class MocoServer extends AbstractServer {
 	
 
 	
-	public void response(String jsonFile,String requestUri){
+	public void response(String jsonFile,String requestUri) throws UnsupportedEncodingException{
 		String body = CommonUtil.getJSONObjectFromFile(jsonFile).toString();	
-//        log.info(jsonFile+":"+body);
+		String temp = new String(body.getBytes("ISO-8859-1"),"UTF-8");
+        log.info(jsonFile+":"+temp);
         mocoServer.request(by(uri(requestUri))).response(with(text(body)),header("content-type", "application/json; charset=UTF-8"));
 //		mocoServer.request(by(uri(requestUri))).response(body);
 
+	}
+	
+	public void responseWithPlainText(String jsonFile,String requestUri) throws UnsupportedEncodingException{
+		String body = CommonUtil.getJSONObjectFromFile(jsonFile).toString();	
+        log.info(jsonFile+":"+body);
+        mocoServer.request(by(uri(requestUri))).response(with(text(body)),header("content-type", " text/plain;charset=UTF-8"));
 	}
 }

@@ -46,6 +46,7 @@ public class LoginPage extends PageBase {
 		loginButton.click();
 		
 		waitForMainPageLoaded();
+		tapIKnow();
 		refreshToTry();
 	}
     
