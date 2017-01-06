@@ -11,7 +11,7 @@
 		 <include name="testScoreDetail" />
 		  <include name="testCollapseStage" />
 		  <include name="testTapHomeworkItem" />
-		  
+		  <include name="testTapCourseItem" />
       </methods>
      </class>
         </classes>
