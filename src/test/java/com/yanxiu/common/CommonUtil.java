@@ -202,14 +202,6 @@ public class CommonUtil {
 			e.printStackTrace();
 		}
 
-	    String temp="";
-		try {
-			temp = new String(stringBuffer.toString().getBytes("UTF-8"),"UTF-8");
-			log.info("wwww"+temp);
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		JSONObject jsonObject = JSONObject.parseObject(stringBuffer.toString());
 		return jsonObject;
 	}

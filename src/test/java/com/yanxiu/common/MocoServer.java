@@ -36,8 +36,7 @@ public class MocoServer extends AbstractServer {
 	
 	public void response(String jsonFile,String requestUri) throws UnsupportedEncodingException{
 		String body = CommonUtil.getJSONObjectFromFile(jsonFile).toString();	
-		String temp = new String(body.getBytes("ISO-8859-1"),"UTF-8");
-        log.info(jsonFile+":"+temp);
+
         mocoServer.request(by(uri(requestUri))).response(with(text(body)),header("content-type", "application/json; charset=UTF-8"));
 //		mocoServer.request(by(uri(requestUri))).response(body);
 

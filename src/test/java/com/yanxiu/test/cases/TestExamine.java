@@ -52,7 +52,7 @@ public class TestExamine extends BaseCase {
 		// String body = CommonUtil.getJSONObjectFromFile(jsonFile);
 		// log.info(body);
 		// server.request(by(uri("/examine"))).response(body);
-
+        log.info("start to run test case:"+TestMethodCapture.getMethodName());
 		app.examinPage().checkScoreDetai();
 		Assert.assertTrue(app.examinPage().isScoreDetailPageLoaded());
 		Assert.assertTrue(app.examinPage().currentActivityIsScoreDetailActivity());
@@ -75,7 +75,7 @@ public class TestExamine extends BaseCase {
 	// @Test(groups="BVT",retryAnalyzer=TestngRetry.class)
 	@Test(groups = "BVT")
 	public void testScoreSummary() throws InterruptedException, IOException {
-
+		log.info("start to run test case:"+TestMethodCapture.getMethodName());
 		Assert.assertEquals(app.examinPage().getTotalScore(), "42.23");
 		Assert.assertEquals(app.examinPage().getTotalBounds(), "137");
 
