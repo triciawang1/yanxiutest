@@ -219,14 +219,14 @@ public class BaseCase {
 	}
 
 	private void mockStartupData() throws UnsupportedEncodingException {
-		mocoServer.response("login.json", "/login.json");
+//		mocoServer.response("login.json", "/login.json");
 		mocoServer.response("initialize.json", "/initialize");
-		mocoServer.response("getEditUserInfo.json", "/getEditUserInfo");
+//		mocoServer.response("getEditUserInfo.json", "/getEditUserInfo");
 
-		mocoServer.response("trainlist.json", "/trainlist");
+//		mocoServer.response("trainlist.json", "/trainlist");
 		mocoServer.response("noticeList.json", "/noticeList");
 		mocoServer.response("briefList.json", "/briefList");
-		mocoServer.response("taskList.json", "/taskList");
+//		mocoServer.response("taskList.json", "/taskList");
 	}
 
 	@AfterMethod(alwaysRun = true)

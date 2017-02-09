@@ -49,5 +49,13 @@ public class HomePage extends PageBase{
 		return new Rectangle(container.getLocation(),container.getSize());
 	}
 	
+	private MobileElement tv_title;
+	@AndroidFindBy(uiAutomator="new UiSelector().text(\"安徽合肥\")")
+	private MobileElement projectName;
+	
+	public void switchTo15(){
+		tv_title.click();
+		projectName.click();
+	}
 
 }

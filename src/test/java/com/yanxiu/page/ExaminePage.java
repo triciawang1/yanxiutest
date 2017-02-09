@@ -28,6 +28,7 @@ public class ExaminePage extends PageBase {
 	private MobileElement tv_extra_score;
 
 	private MobileElement scrollView;
+	private MobileElement recyclerView;
 	
 	private MobileElement iv_indicator;
 	
@@ -89,6 +90,10 @@ public class ExaminePage extends PageBase {
 	
 	public void ScrollDownPage(){
 		scrollView.swipe(SwipeElementDirection.UP, 100, 100, 500);
+	}
+	
+	public void scrollDownPageForBJProject(){
+		recyclerView.swipe(SwipeElementDirection.UP, 100, 100, 500);
 	}
 	
 	public String getbingerScore(){

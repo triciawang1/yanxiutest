@@ -35,6 +35,10 @@ public class TestExamine extends BaseCase {
 
 	@BeforeMethod
 	public void setUpExamine() throws UnsupportedEncodingException {
+		mocoServer.response("login.json", "/login.json");
+		mocoServer.response("getEditUserInfo.json", "/getEditUserInfo");
+		mocoServer.response("trainlist.json", "/trainlist");
+		mocoServer.response("taskList.json", "/taskList");
 		String jsonFile = "examine.json";
 		String requestUri = "/examine";
 		mocoServer.response(jsonFile, requestUri);
@@ -136,4 +140,6 @@ public class TestExamine extends BaseCase {
 		Thread.sleep(4000);
 		takeScreenShotAndAssert(TestMethodCapture.getMethodName().concat(".png"));
 	}
+	
+
 }

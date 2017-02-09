@@ -61,7 +61,9 @@ public class LoginPage extends PageBase {
 //    	login("test2016@yanxiu.com","123456");
     }
     
- 
+    public void loginWithBeijingAccount(){
+    	login("xy03019240@yanxiu.com","123456");
+    }
 	
 	
 

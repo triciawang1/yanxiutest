@@ -47,4 +47,10 @@ public class MocoServer extends AbstractServer {
         log.info(jsonFile+":"+body);
         mocoServer.request(by(uri(requestUri))).response(with(text(body)),header("content-type", " text/plain;charset=UTF-8"));
 	}
+	
+	public void responseWithTransferEncoding(String jsonFile,String requestUri){
+		String body = CommonUtil.getJSONObjectFromFile(jsonFile).toString();	
+
+        mocoServer.request(by(uri(requestUri))).response(with(text(body)),header("content-type", "application/json; charset=UTF-8"),header("transfer-encoding", "chunked"));
+	}
 }
