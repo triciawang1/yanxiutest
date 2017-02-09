@@ -148,7 +148,7 @@ public class BaseCase {
 		startProxy();
 		// AppiumServerLog serverLogThread = AppiumServerLog.getServer();
 		// serverLogThread.start();
-		startMocoServer();
+		
 
 
 		screenShotPrepare();
@@ -211,7 +211,7 @@ public class BaseCase {
 			System.exit(0);
 		}
 		setConnection();
-
+		startMocoServer();
 		mockStartupData();
 
 		app = new YanxiuTrain(driver);
@@ -219,7 +219,7 @@ public class BaseCase {
 	}
 
 	private void mockStartupData() throws UnsupportedEncodingException {
-		mocoServer = new MocoServer();
+		
 //		mocoServer.response("login.json", "/login.json");
 		mocoServer.response("initialize.json", "/initialize");
 //		mocoServer.response("getEditUserInfo.json", "/getEditUserInfo");
@@ -237,7 +237,7 @@ public class BaseCase {
 			CommonUtil.clearAndroidData();
 		}
 		driver.quit();
-
+		stopMocoServer();
 	}
 
 	public void setConnection() throws InterruptedException {
