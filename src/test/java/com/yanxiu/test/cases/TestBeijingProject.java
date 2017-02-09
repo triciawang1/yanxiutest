@@ -36,4 +36,23 @@ public class TestBeijingProject extends BaseCase{
 
 		}
 	}
+	
+	@Test
+	public void testTapBJCourse() throws IOException, InterruptedException{
+		String jsonFile = "courselist.json";
+		String requestUri = "/courselist";
+		mocoServer.response(jsonFile, requestUri);
+		
+		for(int i=0;i<5;i++){
+			if(i==4){
+				app.examinPage().scrollDownPageForBJProject();
+			}
+			app.bjexaminePage().tapCourse(i);
+			String fileName = TestMethodCapture.getMethodName().concat(i + ".png");
+			takeScreenShotAndAssert(fileName);
+			app.coursePage().pressBackButton();
+		}
+		app.examinPage().scrollDownPageForBJProject();
+
+	}
 }

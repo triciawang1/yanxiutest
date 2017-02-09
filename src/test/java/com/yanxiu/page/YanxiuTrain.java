@@ -42,4 +42,10 @@ public class YanxiuTrain {
 	public HomeworkPage homeworkPage(){
 		return new HomeworkPage(driver);
 	}
+	public BJExaminePage bjexaminePage(){
+		return new BJExaminePage(driver);
+	}
+	public CoursePage coursePage(){
+		return new CoursePage(driver);
+	}
 }
