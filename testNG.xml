@@ -14,6 +14,8 @@
 		  <include name="testTapCourseItem" />
       </methods>
      </class>
+	  <class name="com.yanxiu.test.cases.TestBeijingProject" >
+	  </class>
         </classes>
   </test> <!-- Default test -->
       <listeners>
