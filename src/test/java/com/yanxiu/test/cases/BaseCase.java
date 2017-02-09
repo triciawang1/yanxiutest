@@ -72,7 +72,7 @@ public class BaseCase {
 	protected Runner runner;
 	protected HttpServer server;
 	protected AnyProxy proxy = new AnyProxy();
-	protected static MocoServer mocoServer = new MocoServer();
+	protected MocoServer mocoServer = new MocoServer();
 	private File baseDir;
 	protected Rectangle container;
 
@@ -219,6 +219,9 @@ public class BaseCase {
 	}
 
 	private void mockStartupData() throws UnsupportedEncodingException {
+		if(mocoServer==null){
+			mocoServer = new MocoServer();
+		}
 //		mocoServer.response("login.json", "/login.json");
 		mocoServer.response("initialize.json", "/initialize");
 //		mocoServer.response("getEditUserInfo.json", "/getEditUserInfo");
