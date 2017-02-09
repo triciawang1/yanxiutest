@@ -219,9 +219,7 @@ public class BaseCase {
 	}
 
 	private void mockStartupData() throws UnsupportedEncodingException {
-		if(mocoServer==null){
-			mocoServer = new MocoServer();
-		}
+		mocoServer = new MocoServer();
 //		mocoServer.response("login.json", "/login.json");
 		mocoServer.response("initialize.json", "/initialize");
 //		mocoServer.response("getEditUserInfo.json", "/getEditUserInfo");
