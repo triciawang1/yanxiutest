@@ -73,7 +73,7 @@ public class BaseCase {
 	protected HttpServer server;
 	protected AnyProxy proxy = new AnyProxy();
 	protected MocoServer mocoServer = new MocoServer();
-	private File baseDir;
+	private static File baseDir;
 	protected Rectangle container;
 
 	protected IOSDriver<MobileElement> getIOSDriver(String udid) throws MalformedURLException {
