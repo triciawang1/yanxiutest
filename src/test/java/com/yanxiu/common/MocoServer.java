@@ -32,6 +32,10 @@ public class MocoServer extends AbstractServer {
 		runner.stop();
 	}
 	
+	public MocoServer(){
+		System.out.println("initiallize moco server!!!!!!!!!!!");
+	}
+	
 
 	
 	public void response(String jsonFile,String requestUri) throws UnsupportedEncodingException{

@@ -72,7 +72,7 @@ public class BaseCase {
 	protected Runner runner;
 	protected HttpServer server;
 	protected AnyProxy proxy = new AnyProxy();
-	protected MocoServer mocoServer = new MocoServer();
+	protected static MocoServer mocoServer = new MocoServer();
 	private File baseDir;
 	protected Rectangle container;
 
