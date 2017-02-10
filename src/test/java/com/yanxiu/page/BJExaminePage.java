@@ -31,14 +31,16 @@ public class BJExaminePage extends PageBase{
 
 	
 	
-	public void tapActivities(){
+	public void tapActivities() throws InterruptedException{
 		waitForElementVisible(activities);
 		activities.click();
+		Thread.sleep(4000);
 	}
 	
-	public void tapHomework(){
+	public void tapHomework() throws InterruptedException{
 		waitForElementVisible(homework);
 		homework.click();
+		Thread.sleep(4000);
 	}
 	
 	public void tapCourse(int index) throws InterruptedException{

@@ -1,3 +1,6 @@
+
+var urls = new Array("login.json","getEditUserInfo","trainlist","examine","noticeList","briefList","taskList","homeworkList","myCourseList","checkedMobileUser","courselist","actives","condition")
+
 module.exports = {
 
     summary:function(){
@@ -7,17 +10,23 @@ module.exports = {
     //mark if use local response
     shouldUseLocalResponse : function(req,reqBody){
 //var uris=new Array(/initialize/,/login.json/,/getEditUserInfo/,/trainlist/,/examine/,/noticeList/,/briefList/,/taskList/);
-var uris=new Array(/login.json/,/getEditUserInfo/,/trainlist/,/examine/,/noticeList/,/briefList/,/taskList/,/homeworkList/,/myCourseList/,/checkedMobileUser/,/courselist/);
-for(var i = 0, l = uris.length; i < l; i++) 
+//var uris=new Array(/login.json/,/getEditUserInfo/,/trainlist/,/examine/,/noticeList/,/briefList/,/taskList/,/homeworkList/,/myCourseList/,/checkedMobileUser/,/courselist/);
+
+for(var i = 0, l = urls.length; i < l; i++) 
 		{
- if(uris[i].test(req.url)){
-	 console.log(uris[i])
-            req.replaceLocalFile = i;
+			var urlPattern = new RegExp(urls[i]);
+ if(urlPattern.test(req.url)){
+	 console.log("use local response for "+urls[i])
+         req.replaceLocalFile = i;
             return true;
         }
 }
 
-    
+//    if(/actives/.test(req.url)){
+	//	console.log("use logcal data for actives/");
+		//req.replaceLocalFile = true;
+		//return true;
+	//}
 
             return false;
     },
@@ -27,16 +36,19 @@ for(var i = 0, l = uris.length; i < l; i++)
         var client = request.createClient('http://127.0.0.1:8789');
 		
 //var uris=new Array("/initialize","/login.json","/getEditUserInfo","/trainlist","/examine","/noticeList","/briefList","/taskList");
-var uris=new Array("/login.json","/getEditUserInfo","/trainlist","/examine","/noticeList","/briefList","/taskList","/homeworkList","/myCourseList","/checkedMobileUser","/courselist");
+//var uris=new Array("/login.json","/getEditUserInfo","/trainlist","/examine","/noticeList","/briefList","/taskList","/homeworkList","/myCourseList","/checkedMobileUser","courselist");
 
-        client.get(uris[req.replaceLocalFile], function(err, res, body)  //触发mock，到moco中获取mock响应数据
+        client.get(urls[req.replaceLocalFile], function(err, res, body)  //触发mock，到moco中获取mock响应数据
                 {
-                    console.log('the resp is ------------------------->',res.statusCode,res.headers,body);
+                   console.log('the resp is ------------------------->',res.statusCode,res.headers,body);
                     var newDataStr=JSON.stringify(body);
                     callback(res.statusCode,res.headers,newDataStr); //mock数据返回给客户端
                 }
             );
-
+			//console.log(fs.readFileSync(LOCAL_JSON).toString());
+//if(req.replaceLocalFile){
+	//callback(200,{"content-type":"application/json;charset=UTF-8"},fs.readFileSync(LOCAL_JSON).toString())
+//}
 
     }
 };

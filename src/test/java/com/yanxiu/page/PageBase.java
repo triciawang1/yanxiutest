@@ -2,6 +2,7 @@ package com.yanxiu.page;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.SwipeElementDirection;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidKeyCode;
 import io.appium.java_client.pagefactory.AndroidFindBy;
@@ -40,6 +41,8 @@ public class PageBase {
 			backButton.click();
 		}
 	}
+	
+
 
 	public boolean isAvatorDisplayed() {
 		return avatorImage.isDisplayed();

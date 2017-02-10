@@ -55,4 +55,17 @@ public class TestBeijingProject extends BaseCase{
 		app.examinPage().scrollDownPageForBJProject();
 
 	}
+	
+	@Test
+	public void testTapBJActives() throws IOException, InterruptedException{
+		String jsonFile = "bjactives.json";
+		String requestUri = "/actives";
+		mocoServer.response(jsonFile, requestUri);
+		mocoServer.response("condition.json", "/condition");
+		
+		app.examinPage().scrollDownPageForBJProject();
+		app.bjexaminePage().tapActivities();
+		String fileName = TestMethodCapture.getMethodName().concat(".png");
+		takeScreenShotAndAssert(fileName);
+	}
 }
