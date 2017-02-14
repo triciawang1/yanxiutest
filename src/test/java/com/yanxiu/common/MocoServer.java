@@ -12,14 +12,14 @@ import com.github.dreamhead.moco.Runner;
 
 import static com.github.dreamhead.moco.Moco.*;
 
-public class MocoServer extends AbstractServer {
-	private Logger log = Logger.getLogger(this.getClass());
-	protected Runner runner;
-	protected HttpServer mocoServer;
+public class MocoServer  {
+	private static Logger log = Logger.getLogger(MocoServer.class);
+	private static Runner runner;
+	private static HttpServer mocoServer;
 	private static int port = 8789;
 	
-	@Override
-	public void startServer(){
+	
+	public static void startServer(){
 		mocoServer = httpServer(port);
 
 		runner = runner(mocoServer);
@@ -27,18 +27,16 @@ public class MocoServer extends AbstractServer {
 		runner.start();
 	}
 	
-	@Override
-	public void stopServer(){
-		runner.stop();
-	}
 	
-	public MocoServer(){
-		System.out.println("initiallize moco server!!!!!!!!!!!");
+	public static void stopServer(){
+		runner.stop();
 	}
 	
 
 	
-	public void response(String jsonFile,String requestUri) throws UnsupportedEncodingException{
+
+	
+	public static void response(String jsonFile,String requestUri) throws UnsupportedEncodingException{
 		String body = CommonUtil.getJSONObjectFromFile(jsonFile).toString();	
 
         mocoServer.request(by(uri(requestUri))).response(with(text(body)),header("content-type", "application/json; charset=UTF-8"));
@@ -46,7 +44,7 @@ public class MocoServer extends AbstractServer {
 
 	}
 	
-	public void responseWithPlainText(String jsonFile,String requestUri) throws UnsupportedEncodingException{
+	public static void responseWithPlainText(String jsonFile,String requestUri) throws UnsupportedEncodingException{
 		String body = CommonUtil.getJSONObjectFromFile(jsonFile).toString();	
         log.info(jsonFile+":"+body);
         mocoServer.request(by(uri(requestUri))).response(with(text(body)),header("content-type", " text/plain;charset=UTF-8"));

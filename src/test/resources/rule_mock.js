@@ -1,5 +1,5 @@
 
-var urls = new Array("login.json","getEditUserInfo","trainlist","examine","noticeList","briefList","taskList","homeworkList","myCourseList","checkedMobileUser","courselist","actives","condition")
+var urls = new Array("login.json","getEditUserInfo","trainlist","examine","noticeList","briefList","taskList","homeworkList","myCourseList","checkedMobileUser","courselist","actives","condition","homeworkInfo")
 
 module.exports = {
 

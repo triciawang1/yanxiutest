@@ -8,6 +8,7 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.testng.log4testng.Logger;
 
+import com.yanxiu.common.MocoServer;
 import com.yanxiu.common.ScreenshotUtil;
 import com.yanxiu.test.TestMethodCapture;
 import com.yanxiu.test.TestngRetry;
@@ -35,13 +36,13 @@ public class TestExamine extends BaseCase {
 
 	@BeforeMethod
 	public void setUpExamine() throws UnsupportedEncodingException {
-		mocoServer.response("login.json", "/login.json");
-		mocoServer.response("getEditUserInfo.json", "/getEditUserInfo");
-		mocoServer.response("trainlist.json", "/trainlist");
-		mocoServer.response("taskList.json", "/taskList");
+		MocoServer.response("login.json", "/login.json");
+		MocoServer.response("getEditUserInfo.json", "/getEditUserInfo");
+		MocoServer.response("trainlist.json", "/trainlist");
+		MocoServer.response("taskList.json", "/taskList");
 		String jsonFile = "examine.json";
 		String requestUri = "/examine";
-		mocoServer.response(jsonFile, requestUri);
+		MocoServer.response(jsonFile, requestUri);
 
 		app.loginPage().loginWithDefaultUser();
 
@@ -116,7 +117,7 @@ public class TestExamine extends BaseCase {
 	public void testTapHomeworkItem() throws IOException, InterruptedException{
 		String jsonFile = "homeworkList.json";
 		String requestUri = "/homeworkList";
-		mocoServer.response(jsonFile, requestUri);
+		MocoServer.response(jsonFile, requestUri);
 		
 		
 		app.examinPage().getGroupHomework().click();
@@ -134,7 +135,7 @@ public class TestExamine extends BaseCase {
 		
 		String jsonFile = "myCourseList.json";
 		String requestUri = "/myCourseList";
-		mocoServer.responseWithPlainText(jsonFile, requestUri);
+		MocoServer.responseWithPlainText(jsonFile, requestUri);
 		
 		app.examinPage().getCourse().click();
 		Thread.sleep(4000);

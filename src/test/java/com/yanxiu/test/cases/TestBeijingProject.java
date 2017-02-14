@@ -7,21 +7,25 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import com.yanxiu.common.MocoServer;
+import com.yanxiu.test.MocoServerConfig;
+import com.yanxiu.test.MocoServerConfigListener;
 import com.yanxiu.test.TestMethodCapture;
 
-@Listeners(value = TestMethodCapture.class)
+//@Listeners(value = TestMethodCapture.class)
+@Listeners({TestMethodCapture.class,MocoServerConfigListener.class})
 public class TestBeijingProject extends BaseCase{
 
 	@BeforeMethod
 	public void setUpBJProject() throws UnsupportedEncodingException{
-		mocoServer.response("bjgetEditUserInfo.json", "/getEditUserInfo");
-		mocoServer.response("bjlogin.json", "/login.json");
-		mocoServer.response("bjtrainlist.json", "/trainlist");
-		mocoServer.response("checkedMobileUser.json", "/checkedMobileUser");
-		mocoServer.response("bjtaskList.json", "/taskList");
+		MocoServer.response("bjgetEditUserInfo.json", "/getEditUserInfo");
+		MocoServer.response("bjlogin.json", "/login.json");
+		MocoServer.response("bjtrainlist.json", "/trainlist");
+		MocoServer.response("checkedMobileUser.json", "/checkedMobileUser");
+		MocoServer.response("bjtaskList.json", "/taskList");
 		String jsonFile = "bjexamine.json";
 		String requestUri = "/examine";
-		mocoServer.response(jsonFile, requestUri);
+		MocoServer.response(jsonFile, requestUri);
 		app.loginPage().loginWithBeijingAccount();
 		container = app.homePage().getContainer();
 	}
@@ -41,7 +45,7 @@ public class TestBeijingProject extends BaseCase{
 	public void testTapBJCourse() throws IOException, InterruptedException{
 		String jsonFile = "courselist.json";
 		String requestUri = "/courselist";
-		mocoServer.response(jsonFile, requestUri);
+		MocoServer.response(jsonFile, requestUri);
 		
 		for(int i=0;i<5;i++){
 			if(i==4){
@@ -60,12 +64,25 @@ public class TestBeijingProject extends BaseCase{
 	public void testTapBJActives() throws IOException, InterruptedException{
 		String jsonFile = "bjactives.json";
 		String requestUri = "/actives";
-		mocoServer.response(jsonFile, requestUri);
-		mocoServer.response("condition.json", "/condition");
+		MocoServer.response(jsonFile, requestUri);
+		MocoServer.response("condition.json", "/condition");
 		
 		app.examinPage().scrollDownPageForBJProject();
 		app.bjexaminePage().tapActivities();
 		String fileName = TestMethodCapture.getMethodName().concat(".png");
 		takeScreenShotAndAssert(fileName);
+	}
+	
+	@Test
+	@MocoServerConfig(responseJsonFile="homeworkInfo.json",requestUri="/homeworkInfo")
+	public void testTapHomework() throws InterruptedException, IOException{
+		System.out.println("case:"+TestMethodCapture.getMethodName());
+		app.examinPage().scrollDownPageForBJProject();
+		
+		app.bjexaminePage().tapHomework();
+		app.homeworkPage().tapKnownButton();
+		String fileName = TestMethodCapture.getMethodName().concat(".png");
+		takeScreenShotAndAssert(fileName);
+	
 	}
 }

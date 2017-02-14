@@ -72,7 +72,7 @@ public class BaseCase {
 	protected Runner runner;
 	protected HttpServer server;
 	protected AnyProxy proxy = new AnyProxy();
-	protected MocoServer mocoServer = new MocoServer();
+//	protected MocoServer mocoServer = new MocoServer();
 	private static File baseDir;
 	protected Rectangle container;
 
@@ -186,11 +186,11 @@ public class BaseCase {
 	}
 
 	public void startMocoServer() throws InterruptedException {
-		mocoServer.startServer();
+		MocoServer.startServer();
 	}
 
 	public void stopMocoServer() {
-		mocoServer.stopServer();
+		MocoServer.stopServer();
 	}
 
 	@BeforeMethod(alwaysRun = true)
@@ -221,14 +221,16 @@ public class BaseCase {
 	private void mockStartupData() throws UnsupportedEncodingException {
 		
 //		mocoServer.response("login.json", "/login.json");
-		mocoServer.response("initialize.json", "/initialize");
+		MocoServer.response("initialize.json", "/initialize");
 //		mocoServer.response("getEditUserInfo.json", "/getEditUserInfo");
 
 //		mocoServer.response("trainlist.json", "/trainlist");
-		mocoServer.response("noticeList.json", "/noticeList");
-		mocoServer.response("briefList.json", "/briefList");
+		MocoServer.response("noticeList.json", "/noticeList");
+		MocoServer.response("briefList.json", "/briefList");
 //		mocoServer.response("taskList.json", "/taskList");
 	}
+	
+	
 
 	@AfterMethod(alwaysRun = true)
 	public void tearDown() throws IOException {
