@@ -254,23 +254,21 @@ public class BaseCase {
 		return true;
 	}
 
-	public void takeScreenShotAndAssert(String screenshotFileName) {
+	public void takeScreenShotAndAssert(String screenshotFileName) throws IOException {
 
 		log.info("start to take screenshot:" + screenshotFileName);
 		File screenshot = driver.getScreenshotAs(OutputType.FILE);
 
 		File localScreenshot = new File(baseDir, screenshotFileName);
-		try {
-			FileUtils.copyFile(screenshot, localScreenshot);
 
-			BufferedImage subImage = ImageIO.read(localScreenshot).getSubimage(container.x, container.y,
-					container.width, container.height);
-			ImageIO.write(subImage, "png", localScreenshot);
+		FileUtils.copyFile(screenshot, localScreenshot);
 
-			Assert.assertFalse(ScreenshotUtil.hasDiff(screenshotFileName));
-		} catch (IOException e) {
-            Assert.assertFalse(true);
-		}
+		BufferedImage subImage = ImageIO.read(localScreenshot).getSubimage(container.x, container.y, container.width,
+				container.height);
+		ImageIO.write(subImage, "png", localScreenshot);
+
+		Assert.assertFalse(ScreenshotUtil.hasDiff(screenshotFileName));
+
 	}
 
 	protected void pageDown() throws InterruptedException {

@@ -6,6 +6,7 @@ import java.io.UnsupportedEncodingException;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+import org.testng.log4testng.Logger;
 
 import com.yanxiu.common.MocoServer;
 import com.yanxiu.test.MocoServerConfig;
@@ -16,9 +17,10 @@ import com.yanxiu.test.TestMethodCapture;
 //@Listeners(value = TestMethodCapture.class)
 @Listeners({TestMethodCapture.class,MocoServerConfigListener.class})
 public class TestBeijingProject extends BaseCase{
-
+	private Logger log = Logger.getLogger(TestBeijingProject.class);
 	@BeforeMethod
 	public void setUpBJProject() throws UnsupportedEncodingException{
+		log.info("setUpBJProject");
 		MocoServer.response("bjgetEditUserInfo.json", "/getEditUserInfo");
 		MocoServer.response("bjlogin.json", "/login.json");
 		MocoServer.response("bjtrainlist.json", "/trainlist");
@@ -92,5 +94,25 @@ public class TestBeijingProject extends BaseCase{
 	@MocoServerConfig(responseJsonFile="courselist.json",requestUri="/courselist")
 	public void testCourseFromTask() throws InterruptedException{
 		app.homePage().enterCoursePage();
+	}
+	
+	@Test
+	@TakeScreenshotAndAssert
+	@MocoServerConfig(responseJsonFile="courselist.json",requestUri="/courselist")
+	public void testSwitchCourseFiltration() throws InterruptedException{
+		app.homePage().enterCoursePage();
+		app.coursePage().switchSegment();
+		app.coursePage().switchSubject();
+		app.coursePage().switchStage();
+	}
+	
+	@Test
+	@TakeScreenshotAndAssert
+	@MocoServerConfig(responseJsonFile="courselist.json",requestUri="/courselist")
+	public void testSwitchCourseFiltration2() throws InterruptedException{
+		app.homePage().enterCoursePage();
+		app.coursePage().switchStage();
+		app.coursePage().switchSubject2();
+		app.coursePage().switchSegment2();
 	}
 }

@@ -58,7 +58,8 @@ public class MocoServerConfigListener implements IInvokedMethodListener {
 			} catch (InvocationTargetException e) {
 				Throwable t = e.getTargetException();
 				t.printStackTrace();
-				Assert.assertFalse(true);
+				testResult.setStatus(2);
+				
 			}
 			
 		}
