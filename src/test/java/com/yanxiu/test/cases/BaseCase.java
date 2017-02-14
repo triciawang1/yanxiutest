@@ -72,7 +72,7 @@ public class BaseCase {
 	protected Runner runner;
 	protected HttpServer server;
 	protected AnyProxy proxy = new AnyProxy();
-//	protected MocoServer mocoServer = new MocoServer();
+	// protected MocoServer mocoServer = new MocoServer();
 	private static File baseDir;
 	protected Rectangle container;
 
@@ -148,32 +148,28 @@ public class BaseCase {
 		startProxy();
 		// AppiumServerLog serverLogThread = AppiumServerLog.getServer();
 		// serverLogThread.start();
-		
-
 
 		screenShotPrepare();
 
 	}
 
-	
 	public void screenShotPrepare() throws IOException {
 		String baseDirPath = System.getProperty("user.dir");
 		String actualDir = "actual";
 
-		log.info("current directory is:"+baseDirPath);
+		log.info("current directory is:" + baseDirPath);
 
 		baseDir = new File(baseDirPath, actualDir);
 
 		if (!baseDir.exists()) {
 			log.info("actual file folder does not exist, create one");
 			baseDir.mkdirs();
-			
 
 		}
 		for (File file : baseDir.listFiles()) {
 			file.delete();
 		}
-		
+
 		String failDir = "fail";
 		File failDirPath = new File(baseDirPath, failDir);
 		if (!failDirPath.exists()) {
@@ -219,18 +215,16 @@ public class BaseCase {
 	}
 
 	private void mockStartupData() throws UnsupportedEncodingException {
-		
-//		mocoServer.response("login.json", "/login.json");
-		MocoServer.response("initialize.json", "/initialize");
-//		mocoServer.response("getEditUserInfo.json", "/getEditUserInfo");
 
-//		mocoServer.response("trainlist.json", "/trainlist");
+		// mocoServer.response("login.json", "/login.json");
+		MocoServer.response("initialize.json", "/initialize");
+		// mocoServer.response("getEditUserInfo.json", "/getEditUserInfo");
+
+		// mocoServer.response("trainlist.json", "/trainlist");
 		MocoServer.response("noticeList.json", "/noticeList");
 		MocoServer.response("briefList.json", "/briefList");
-//		mocoServer.response("taskList.json", "/taskList");
+		// mocoServer.response("taskList.json", "/taskList");
 	}
-	
-	
 
 	@AfterMethod(alwaysRun = true)
 	public void tearDown() throws IOException {
@@ -260,20 +254,23 @@ public class BaseCase {
 		return true;
 	}
 
-	protected void takeScreenShotAndAssert(String screenshotFileName) throws IOException {
+	public void takeScreenShotAndAssert(String screenshotFileName) {
 
+		log.info("start to take screenshot:" + screenshotFileName);
 		File screenshot = driver.getScreenshotAs(OutputType.FILE);
-		
-		File localScreenshot = new File(baseDir, screenshotFileName);
 
-		FileUtils.copyFile(screenshot, localScreenshot);
-		
-		
-		
-		BufferedImage subImage = ImageIO.read(localScreenshot).getSubimage(container.x, container.y, container.width,container.height);
-	    ImageIO.write(subImage, "png", localScreenshot);
-	    
-	    Assert.assertFalse(ScreenshotUtil.hasDiff(screenshotFileName));
+		File localScreenshot = new File(baseDir, screenshotFileName);
+		try {
+			FileUtils.copyFile(screenshot, localScreenshot);
+
+			BufferedImage subImage = ImageIO.read(localScreenshot).getSubimage(container.x, container.y,
+					container.width, container.height);
+			ImageIO.write(subImage, "png", localScreenshot);
+
+			Assert.assertFalse(ScreenshotUtil.hasDiff(screenshotFileName));
+		} catch (IOException e) {
+            Assert.assertFalse(true);
+		}
 	}
 
 	protected void pageDown() throws InterruptedException {
@@ -282,6 +279,5 @@ public class BaseCase {
 		}
 		Thread.sleep(2000);
 	}
-	
-	
+
 }

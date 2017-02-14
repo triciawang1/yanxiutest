@@ -35,6 +35,10 @@ public class HomePage extends PageBase{
 	
 	@AndroidFindBy(uiAutomator="new UiSelector().text(\"作业\")")
 	private MobileElement homeWorkItem;
+	
+	@AndroidFindBy(uiAutomator="new UiSelector().text(\"课程\")")
+	private MobileElement course;
+	
 	public void tapTask(){
 		tabTask.click();
 	}
@@ -43,6 +47,11 @@ public class HomePage extends PageBase{
 		homeWorkItem.click();
 	}
 	
+	public void enterCoursePage() throws InterruptedException{
+		tabTask.click();
+		course.click();
+		Thread.sleep(4000);
+	}
 
 	public Rectangle getContainer(){
 

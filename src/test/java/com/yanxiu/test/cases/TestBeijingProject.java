@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 import com.yanxiu.common.MocoServer;
 import com.yanxiu.test.MocoServerConfig;
 import com.yanxiu.test.MocoServerConfigListener;
+import com.yanxiu.test.TakeScreenshotAndAssert;
 import com.yanxiu.test.TestMethodCapture;
 
 //@Listeners(value = TestMethodCapture.class)
@@ -76,7 +77,7 @@ public class TestBeijingProject extends BaseCase{
 	@Test
 	@MocoServerConfig(responseJsonFile="homeworkInfo.json",requestUri="/homeworkInfo")
 	public void testTapHomework() throws InterruptedException, IOException{
-		System.out.println("case:"+TestMethodCapture.getMethodName());
+		
 		app.examinPage().scrollDownPageForBJProject();
 		
 		app.bjexaminePage().tapHomework();
@@ -84,5 +85,12 @@ public class TestBeijingProject extends BaseCase{
 		String fileName = TestMethodCapture.getMethodName().concat(".png");
 		takeScreenShotAndAssert(fileName);
 	
+	}
+	
+	@Test
+	@TakeScreenshotAndAssert
+	@MocoServerConfig(responseJsonFile="courselist.json",requestUri="/courselist")
+	public void testCourseFromTask() throws InterruptedException{
+		app.homePage().enterCoursePage();
 	}
 }
