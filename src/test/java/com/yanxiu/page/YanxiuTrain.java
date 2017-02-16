@@ -48,4 +48,8 @@ public class YanxiuTrain {
 	public CoursePage coursePage(){
 		return new CoursePage(driver);
 	}
+	
+	public ActivityPage activityPage(){
+		return new ActivityPage(driver);
+	}
 }

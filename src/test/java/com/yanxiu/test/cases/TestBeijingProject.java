@@ -115,4 +115,45 @@ public class TestBeijingProject extends BaseCase{
 		app.coursePage().switchSubject2();
 		app.coursePage().switchSegment2();
 	}
+	
+	@Test
+	@TakeScreenshotAndAssert
+	@MocoServerConfig(responseJsonFile="homeworkInfo.json",requestUri="/homeworkInfo")
+	public void testHomworkFromTask(){
+		app.homePage().tapTask();
+		app.homePage().enterHomeworkPage();
+		app.homeworkPage().tapKnownButton();
+	}
+	
+	@Test
+	@TakeScreenshotAndAssert
+	@MocoServerConfig(responseJsonFile="bjactives.json",requestUri="/actives")
+	public void testActivitiesFromTask() throws InterruptedException, UnsupportedEncodingException{
+		MocoServer.response("condition.json", "/condition");
+		app.homePage().enterActivityPage();
+	}
+	
+	@Test
+	@TakeScreenshotAndAssert
+	@MocoServerConfig(responseJsonFile="bjactives.json",requestUri="/actives")
+	public void testSwitchActivityFiltration() throws UnsupportedEncodingException, InterruptedException{
+		MocoServer.response("condition.json", "/condition");
+		app.homePage().enterActivityPage();
+
+		app.activityPage().switchSegment();
+		app.activityPage().switchSubject();
+		app.activityPage().switchStage();
+	}
+	
+	@Test
+	@TakeScreenshotAndAssert
+	@MocoServerConfig(responseJsonFile="bjactives.json",requestUri="/actives")
+	public void testSwitchActivityFiltration2() throws UnsupportedEncodingException, InterruptedException{
+		MocoServer.response("condition.json", "/condition");
+		app.homePage().enterActivityPage();
+
+		app.activityPage().switchStage();
+		app.activityPage().switchSubject2();
+		app.activityPage().switchSegment2();
+	}
 }

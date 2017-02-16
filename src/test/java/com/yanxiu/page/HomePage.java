@@ -39,6 +39,9 @@ public class HomePage extends PageBase{
 	@AndroidFindBy(uiAutomator="new UiSelector().text(\"课程\")")
 	private MobileElement course;
 	
+	@AndroidFindBy(uiAutomator="new UiSelector().text(\"活动\")")
+	private MobileElement activity;
+	
 	public void tapTask(){
 		tabTask.click();
 	}
@@ -65,6 +68,12 @@ public class HomePage extends PageBase{
 	public void switchTo15(){
 		tv_title.click();
 		projectName.click();
+	}
+	
+	public void enterActivityPage() throws InterruptedException{
+		tabTask.click();
+		activity.click();
+		Thread.sleep(4000);
 	}
 
 }
