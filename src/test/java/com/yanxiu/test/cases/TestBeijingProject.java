@@ -156,4 +156,59 @@ public class TestBeijingProject extends BaseCase{
 		app.activityPage().switchSubject2();
 		app.activityPage().switchSegment2();
 	}
+	
+	
+	@Test
+	@TakeScreenshotAndAssert
+	@MocoServerConfig(responseJsonFile="bjactive.json",requestUri="/active")
+	public void testActivityDetail() throws UnsupportedEncodingException, InterruptedException{
+		MocoServer.response("bjactives.json", "/actives");
+		MocoServer.response("condition.json", "/condition");
+		app.homePage().enterActivityPage();
+		app.activityPage().enterActiveDetailPage();
+		
+
+	}
+	
+	@Test
+	@TakeScreenshotAndAssert
+	@MocoServerConfig(responseJsonFile="bjactive.json",requestUri="/active")
+	public void testStepsDetail() throws InterruptedException, UnsupportedEncodingException{
+		MocoServer.response("bjactives.json", "/actives");
+		MocoServer.response("condition.json", "/condition");
+		app.homePage().enterActivityPage();
+		app.activityPage().enterActiveDetailPage();
+		app.activityPage().enterStepDetailPage();
+	}
+	
+	@Test
+	@TakeScreenshotAndAssert
+	@MocoServerConfig(responseJsonFile="bjactive.json",requestUri="/active")
+	public void testReplyList() throws InterruptedException, UnsupportedEncodingException{
+		MocoServer.response("bjactives.json", "/actives");
+		MocoServer.response("condition.json", "/condition");
+		MocoServer.response("replies.json", "/replies");
+		
+		app.homePage().enterActivityPage();
+		app.activityPage().enterActiveDetailPage();
+		app.activityPage().enterStepDetailPage();
+		app.activityPage().enterReplyListPage();
+		
+	}
+	
+	@Test
+	@TakeScreenshotAndAssert
+	@MocoServerConfig(responseJsonFile="bjactive.json",requestUri="/active")
+	public void testPostReply() throws UnsupportedEncodingException, InterruptedException{
+		MocoServer.response("bjactives.json", "/actives");
+		MocoServer.response("condition.json", "/condition");
+		MocoServer.response("replies.json", "/replies");
+		MocoServer.response("reply.json", "/reply");
+		
+		app.homePage().enterActivityPage();
+		app.activityPage().enterActiveDetailPage();
+		app.activityPage().enterStepDetailPage();
+		app.activityPage().enterReplyListPage();
+		app.activityPage().postReply();
+	}
 }
