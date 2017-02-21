@@ -49,29 +49,34 @@ public class ActivityPage extends PageBase {
 	private MobileElement iv_activity_statue;
 	private MobileElement btn_add;
 	
-	public void switchSegment(){
+	public void switchSegment() throws InterruptedException{
 		primarySchool.click();
 		highSchool.click();
+		Thread.sleep(1000);
 		
 	}
-	public void switchSubject(){
+	public void switchSubject() throws InterruptedException{
 		subject.click();
 		physics.click();
+		Thread.sleep(1000);
 		
 	}
 	
-	public void switchStage(){
+	public void switchStage() throws InterruptedException{
 		tech.click();
 		casetype.click();
+		Thread.sleep(1000);
 	}
 	
-	public void switchSubject2(){
+	public void switchSubject2() throws InterruptedException{
 		subject.click();
 		math.click();
+		Thread.sleep(1000);
 	}
-	public void switchSegment2(){
+	public void switchSegment2() throws InterruptedException{
 		primarySchool.click();
 		juniorSchool.click();
+		Thread.sleep(1000);
 	}
 	
 	public void enterActiveDetailPage(){
