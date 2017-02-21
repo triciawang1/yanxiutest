@@ -16,6 +16,10 @@
      </class>
 	  <class name="com.yanxiu.test.cases.TestBeijingProject" >
 	  </class>
+	  	  <class name="com.yanxiu.test.cases.TestBriefList" >
+	  </class>
+	  	  <class name="com.yanxiu.test.cases.TestNotice" >
+	  </class>
         </classes>
   </test> <!-- Default test -->
       <listeners>

@@ -139,9 +139,9 @@ public class BaseCase {
 
 	@BeforeSuite()
 	public void prepairEnv() throws IOException, InterruptedException, URISyntaxException {
-		if (CommonUtil.isAndroidDevicePluggin()) {
-			CommonUtil.reinstallApk();
-		}
+//		if (CommonUtil.isAndroidDevicePluggin()) {
+//			CommonUtil.reinstallApk();
+//		}
 		CommonUtil.installProxySetterApk();
 		WifiProxy.setWifiProxy();
 		startAppiumServer();
