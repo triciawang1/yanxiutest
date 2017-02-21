@@ -45,6 +45,14 @@ public class HomePage extends PageBase{
 	public void tapTask(){
 		tabTask.click();
 	}
+	public void tapNotice() throws InterruptedException{
+		tabNotice.click();
+		Thread.sleep(2000);
+	}
+	public void tapBulletin() throws InterruptedException{
+		tabBulletin.click();
+		Thread.sleep(2000);
+	}
 	
 	public void enterHomeworkPage(){
 		homeWorkItem.click();

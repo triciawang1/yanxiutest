@@ -21,5 +21,6 @@
       <listeners>
         <listener class-name="com.yanxiu.test.RetryListener" /> 
 		<listener class-name="com.yanxiu.test.TestMethodCapture" />
+		<listener class-name="com.yanxiu.test.MocoServerConfigListener" />
     </listeners>
 </suite> <!-- Default suite -->
