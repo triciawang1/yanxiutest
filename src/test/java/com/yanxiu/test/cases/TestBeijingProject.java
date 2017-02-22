@@ -211,4 +211,17 @@ public class TestBeijingProject extends BaseCase{
 		app.activityPage().enterReplyListPage();
 		app.activityPage().postReply();
 	}
+	
+	@Test
+	@TakeScreenshotAndAssert
+	public void testBJBriefList() throws InterruptedException{
+		app.homePage().tapBulletin();
+	}
+	
+	
+	@Test
+	@TakeScreenshotAndAssert
+	public void testBJNoticeList() throws InterruptedException{
+		app.homePage().tapNotice();
+	}
 }

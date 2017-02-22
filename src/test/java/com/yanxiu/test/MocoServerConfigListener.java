@@ -32,6 +32,7 @@ public class MocoServerConfigListener implements IInvokedMethodListener {
 
 			try {
 				MocoServer.response(responseJsonFile, requestUri);
+				
 			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

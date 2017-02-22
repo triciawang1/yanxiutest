@@ -2,6 +2,7 @@ package com.yanxiu.page;
 
 import java.util.List;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.PageFactory;
 
 import io.appium.java_client.AppiumDriver;
@@ -53,11 +54,92 @@ public class HomeworkPage extends PageBase {
 
 	@AndroidFindBy(xpath = "//android.widget.TextView[contains(@text,'作业要求')]")
 	private MobileElement textRequirement;
+	
+	@AndroidFindBy(xpath = "//android.widget.TextView[contains(@text,'作业成绩为')]")
+	private MobileElement normalHomework;
 
+	@AndroidFindBy(xpath = "//android.widget.TextView[contains(@text,'测试作业1')]")
+	private MobileElement videoHomework;
+	
+	//视频录制页面开始、暂停按钮
+	private MobileElement img_record_statue;
+	
+	//视频录制页面放弃已录制视频按钮
+	private MobileElement img_record_del;
+	
+	//视频录制页面保存视频按钮
+	private MobileElement img_record_save;
+	
+	//放弃视频确认弹窗上的放弃按钮
+	private MobileElement tv_right;
+	
+	//放弃视频确认弹窗上的取消按钮
+	private MobileElement tv_left;
+	
+	private MobileElement rl_record;
+	
+	
+	private MobileElement tv_upload;
 	public void tapKnownButton() {
 		knownButton.click();
 	}
+	
+	public void enterHomeworkDetailPage(){
+		normalHomework.click();
+		waitForElementVisible(textScore);
+	}
+	
+	public void enterVideoWorkDetailPage(){
+		videoHomework.click();
+		waitForElementVisible(textScore);
+	}
 
+	public void startRecord(){
+		rl_record.click();
+		waitForElementVisible(img_record_statue);
+	}
+	
+	public void pauseRecord() throws InterruptedException{
+		img_record_statue.click();
+		Thread.sleep(2000);
+		img_record_statue.click();
+	}
+	public void giveupRecord(){
+		img_record_del.click();
+		waitForElementVisible(tv_right);
+		tv_right.click();
+	}
+	
+	public void cancelGiveupRecord(){
+		img_record_del.click();
+		waitForElementVisible(tv_left);
+		tv_left.click();
+	}
+	
+	public boolean isGiveupButtonShown(){
+		boolean isShown = false;
+		try{
+			isShown = img_record_del.isDisplayed();
+		}catch(NoSuchElementException e){
+			e.printStackTrace();
+			isShown = false;
+		}
+		return isShown;
+	}
+	
+	public boolean isRecordButtonShown(){
+		waitForElementVisible(img_record_statue);
+		return img_record_statue.isDisplayed();
+	}
+	
+	public void saveRecord(){
+		img_record_save.click();
+		waitForElementVisible(textScore);
+	}
+	
+	public String getTextUploadStatus(){
+		return tv_upload.getText();
+	}
 	public void tapAllHomeworkItem() {
 
 		String lastHomeworkName = "";
