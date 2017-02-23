@@ -78,6 +78,24 @@ public class HomeworkPage extends PageBase {
 	
 	private MobileElement rl_record;
 	
+	//上传视频按钮
+	private MobileElement rl_upload_video;
+	
+	//填写作业信息页面，作业标题文本框
+	private MobileElement et_title;
+	//填写作业信息页面，学段
+	private MobileElement rl_period;
+	
+	//填写作业信息页面，学科
+	private MobileElement rl_subjects;
+	
+	//填写作业信息页面，版本
+	private MobileElement rl_version;
+	//填写作业信息页面，书册
+	private MobileElement rl_book;
+	
+	//填写作业信息页面，内容
+	private MobileElement et_knowledge;
 	
 	private MobileElement tv_upload;
 	public void tapKnownButton() {
@@ -140,6 +158,17 @@ public class HomeworkPage extends PageBase {
 	public String getTextUploadStatus(){
 		return tv_upload.getText();
 	}
+
+	public void uploadVideo() throws InterruptedException{
+		rl_upload_video.click();
+		waitForElementVisible(et_title);
+		et_title.sendKeys("this is title");
+		rl_period.click();
+		Thread.sleep(2000);;
+		System.out.println(driver.getPageSource());
+		
+		
+	}
 	public void tapAllHomeworkItem() {
 
 		String lastHomeworkName = "";
@@ -160,6 +189,7 @@ public class HomeworkPage extends PageBase {
 		} while (!lastHomeworkName.equals(homeworkNames.get(homeworkNames.size() - 1).getText()));
 	}
 
+	
 	public void findNormalHomework() {
 		String lastHomeworkName = "";
 		do {
