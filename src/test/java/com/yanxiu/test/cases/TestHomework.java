@@ -133,17 +133,6 @@ public class TestHomework extends BaseCase {
 		app.homeworkPage().saveRecord();
 		Assert.assertEquals(app.homeworkPage().getTextUploadStatus(),"已录制未上传视频");
 	}
-//	
-//	@Test
-//	@MocoServerConfig(responseJsonFile="homeworkInfo16Video.json",requestUri="/homeworkInfo")
-//	public void testUploadVideo() throws UnsupportedEncodingException, InterruptedException{
-//		MocoServer.response("homeworkList16.json", "/homeworkList");
-//		gotoHomeworkList();
-//		app.homeworkPage().enterVideoWorkDetailPage();
-//		app.homeworkPage().startRecord();
-//		app.homeworkPage().pauseRecord();
-//		app.homeworkPage().saveRecord();
-//		
-//		app.homeworkPage().uploadVideo();
-//	}
+	
+
 }

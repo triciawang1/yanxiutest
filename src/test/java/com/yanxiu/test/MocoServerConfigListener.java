@@ -1,6 +1,7 @@
 package com.yanxiu.test;
 
 import java.io.UnsupportedEncodingException;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -22,12 +23,17 @@ public class MocoServerConfigListener implements IInvokedMethodListener {
 	@Override
 	public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {
 		log.info("start:"+method.getTestMethod().getMethodName());
-		if (method.isTestMethod() && annotationPresent(method, MocoServerConfig.class)) {
+		
+		if (method.isTestMethod() && annotationPresent(method, MocoServerConfigs.class)||annotationPresent2(method, MocoServerConfig.class)) {
 			log.info("beforeAnnotation...");
-			responseJsonFile = method.getTestMethod().getConstructorOrMethod().getMethod()
-					.getAnnotation(MocoServerConfig.class).responseJsonFile();
-			requestUri = method.getTestMethod().getConstructorOrMethod().getMethod()
-					.getAnnotation(MocoServerConfig.class).requestUri();
+			
+			for(MocoServerConfig config:method.getTestMethod().getConstructorOrMethod().getMethod().getAnnotationsByType(MocoServerConfig.class)){
+//			responseJsonFile = method.getTestMethod().getConstructorOrMethod().getMethod()
+//					.getAnnotation(MocoServerConfig.class).responseJsonFile();
+//			requestUri = method.getTestMethod().getConstructorOrMethod().getMethod()
+//					.getAnnotation(MocoServerConfig.class).requestUri();
+			responseJsonFile = config.responseJsonFile();
+			requestUri = config.requestUri();
 			log.info("responseJsonFile: " + responseJsonFile + " requestUri: " + requestUri);
 
 			try {
@@ -37,7 +43,7 @@ public class MocoServerConfigListener implements IInvokedMethodListener {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
+			}
 		}
 
 	}
@@ -68,7 +74,11 @@ public class MocoServerConfigListener implements IInvokedMethodListener {
 
 	}
 
-	private boolean annotationPresent(IInvokedMethod method, Class<MocoServerConfig> clazz) {
+	private boolean annotationPresent(IInvokedMethod method, Class<MocoServerConfigs> clazz) {
+
+		return method.getTestMethod().getConstructorOrMethod().getMethod().isAnnotationPresent(clazz) ? true : false;
+	}
+	private boolean annotationPresent2(IInvokedMethod method, Class<MocoServerConfig> clazz) {
 
 		return method.getTestMethod().getConstructorOrMethod().getMethod().isAnnotationPresent(clazz) ? true : false;
 	}

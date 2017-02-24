@@ -18,12 +18,28 @@ public class SiderbarPage extends PageBase{
 	@AndroidFindBy(uiAutomator="new UiSelector().text(\"资源\")")
 	@iOSFindBy(xpath="//UIATableCell[contains(@name,'资源')]")
 	private MobileElement resource;
+	@AndroidFindBy(uiAutomator="new UiSelector().text(\"我的工作坊\")")
+	private MobileElement myWorkShop;
+	@AndroidFindBy(uiAutomator="new UiSelector().text(\"消息动态\")")
+	private MobileElement messages;
 	
-	public void enterHotPotPage(){
+	public void enterHotPotPage() throws InterruptedException{
 		hotPot.click();
+		Thread.sleep(3000);
 	}
 	
-	public void enterResourcePage(){
+	public void enterResourcePage() throws InterruptedException{
 		resource.click();
+		Thread.sleep(2000);
+	}
+	
+	public void enterMyWorkShopPage() throws InterruptedException{
+		myWorkShop.click();
+		Thread.sleep(3000);
+	}
+	
+	public void enterMessagesPage() throws InterruptedException{
+		messages.click();
+		Thread.sleep(3000);
 	}
 }
