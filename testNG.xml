@@ -20,7 +20,7 @@
 	  </class>
 	  	  <class name="com.yanxiu.test.cases.TestNotice" >
 	  </class>
-	  	  </class>
+	  	
 	  	  <class name="com.yanxiu.test.cases.TestHomework" >
 	  </class>
         </classes>
