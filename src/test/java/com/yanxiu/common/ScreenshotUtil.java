@@ -38,7 +38,7 @@ public class ScreenshotUtil {
 		ImageDiff diff = new ImageDiffer().makeDiff(actualScreenshot, expectedScreenshot);
 		if(diff.hasDiff()){
 			BufferedImage diffImage = diff.getMarkedImage();
-			ImageIO.write(diffImage , "png", new File(failedDir,fileName+".png"));
+			ImageIO.write(diffImage , "png", new File(failedDir,fileName));
 			return true;
 		}
 

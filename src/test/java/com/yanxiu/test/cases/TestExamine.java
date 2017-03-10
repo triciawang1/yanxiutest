@@ -10,6 +10,7 @@ import org.testng.log4testng.Logger;
 
 import com.yanxiu.common.MocoServer;
 import com.yanxiu.common.ScreenshotUtil;
+import com.yanxiu.test.MocoServerConfigListener;
 import com.yanxiu.test.TestMethodCapture;
 import com.yanxiu.test.TestngRetry;
 
@@ -29,7 +30,7 @@ import java.lang.reflect.Method;
 
 import javax.imageio.ImageIO;
 
-@Listeners(value = TestMethodCapture.class)
+@Listeners({TestMethodCapture.class,MocoServerConfigListener.class})
 public class TestExamine extends BaseCase {
 
 	private Logger log = Logger.getLogger(TestExamine.class);

@@ -146,8 +146,8 @@ public class BaseCase {
 		WifiProxy.setWifiProxy();
 		startAppiumServer();
 		startProxy();
-		// AppiumServerLog serverLogThread = AppiumServerLog.getServer();
-		// serverLogThread.start();
+//		 AppiumServerLog serverLogThread = AppiumServerLog.getServer();
+//		 serverLogThread.start();
 
 		screenShotPrepare();
 
