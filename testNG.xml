@@ -23,6 +23,8 @@
 	  	
 	  	  <class name="com.yanxiu.test.cases.TestHomework" >
 	  </class>
+	  	  	  <class name="com.yanxiu.test.cases.TestSiderbar" >
+	  </class>
         </classes>
   </test> <!-- Default test -->
       <listeners>
