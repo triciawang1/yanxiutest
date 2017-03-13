@@ -146,6 +146,7 @@ public class BaseCase {
 		WifiProxy.setWifiProxy();
 		startAppiumServer();
 		startProxy();
+		//是否显示appium返回的日志
 //		 AppiumServerLog serverLogThread = AppiumServerLog.getServer();
 //		 serverLogThread.start();
 

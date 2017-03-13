@@ -133,6 +133,22 @@ public class TestHomework extends BaseCase {
 		app.homeworkPage().saveRecord();
 		Assert.assertEquals(app.homeworkPage().getTextUploadStatus(),"已录制未上传视频");
 	}
-	
+
+	@Test
+	@MocoServerConfig(responseJsonFile="homeworkInfo16Video.json",requestUri="/homeworkInfo")
+	@MocoServerConfig(responseJsonFile="homeworkList16.json",requestUri="/homeworkList")
+	@MocoServerConfig(responseJsonFile="genUploadToken.json",requestUri="/genUploadToken")
+	@MocoServerConfig(responseJsonFile="listc2.json",requestUri="/listc2")
+	@MocoServerConfig(responseJsonFile="cascade2.json",requestUri="/cascade2")
+	@MocoServerConfig(responseJsonFile="resource.json",requestUri="/resource")
+	public void testUploadVideo() throws InterruptedException{
+		gotoHomeworkList();
+		app.homeworkPage().enterVideoWorkDetailPage();
+		app.homeworkPage().startRecord();
+		app.homeworkPage().pauseRecord();
+		app.homeworkPage().saveRecord();
+		app.homeworkPage().uploadVideo();
+		Assert.assertEquals(app.homeworkPage().getVideoTitle(),"this is title");
+	}
 
 }

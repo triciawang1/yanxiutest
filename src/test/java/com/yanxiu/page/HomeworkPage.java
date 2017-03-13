@@ -97,7 +97,24 @@ public class HomeworkPage extends PageBase {
 	//填写作业信息页面，内容
 	private MobileElement et_knowledge;
 	
+	@AndroidFindBy(xpath = "//android.widget.TextView[contains(@text,'初中')]")
+	private MobileElement junior;
+	
+	@AndroidFindBy(xpath = "//android.widget.TextView[contains(@text,'散步')]")
+	private MobileElement mulu;
+	
+	
+	private MobileElement scr_write;
+	//填写作业信息页面，保存并上传按钮
+	private MobileElement save_upload;
 	private MobileElement tv_upload;
+	
+	
+	@AndroidFindBy(xpath = "//android.widget.TextView[contains(@text,'修改作业信息')]")
+	private MobileElement modifyHomework;
+	
+	private MobileElement tv_mtitle;
+	
 	public void tapKnownButton() {
 		knownButton.click();
 	}
@@ -164,10 +181,21 @@ public class HomeworkPage extends PageBase {
 		waitForElementVisible(et_title);
 		et_title.sendKeys("this is title");
 		rl_period.click();
-		Thread.sleep(2000);;
-		System.out.println(driver.getPageSource());
+		junior.click();
+	
+		mulu.click();
+		mulu.click();
+
+		et_knowledge.sendKeys("this is content");
+		scr_write.swipe(SwipeElementDirection.UP, 100, 100, 500);
+		save_upload.click();
+		waitForElementVisible(tv_mtitle);
 		
 		
+	}
+	
+	public String getVideoTitle(){
+		return tv_mtitle.getText();
 	}
 	public void tapAllHomeworkItem() {
 
@@ -255,6 +283,17 @@ public class HomeworkPage extends PageBase {
 		}catch(Exception e){
 			return false;
 		}
+	}
+	
+	public void fillHomework(){
+		waitForElementVisible(et_title);
+		et_title.sendKeys("作业标题");
+		rl_period.click();
+		junior.click();
+		mulu.click();
+		et_knowledge.sendKeys("作业内容");
+		scr_write.swipe(SwipeElementDirection.UP, 100, 100, 500);
+		save_upload.click();
 	}
 	
 }
