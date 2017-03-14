@@ -17,11 +17,12 @@ public class WorkShopPage extends PageBase {
 	@AndroidFindAll({@AndroidFindBy(id = "com.yanxiu.gphone.training.teacher:id/tv_workshop_name")})
 	private List<MobileElement> workshops;
 
-	public void enterEachWorkShop(){
+	public void enterEachWorkShop() throws InterruptedException{
 		for(int i=0;i<workshops.size();i++){
 			workshops.get(i).click();
 			pressBackButton();
 		}
 		workshops.get(0).click();
+		Thread.sleep(2000);
 	}
 }

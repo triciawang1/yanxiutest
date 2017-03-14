@@ -76,12 +76,13 @@ public class ResourcePage extends PageBase{
 		Thread.sleep(2000);
 	}
 	
-	public void searchResouce(){
+	public void searchResouce() throws InterruptedException{
 		title_right.click();
 		et_serach.sendKeys("word");
 		if (driver instanceof AndroidDriver) {
 			((AndroidDriver<MobileElement>) driver).pressKeyCode(66);
 		}
+		Thread.sleep(2000);
 		
 	}
 }
