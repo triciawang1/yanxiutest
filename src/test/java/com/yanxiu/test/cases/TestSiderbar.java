@@ -53,9 +53,51 @@ public class TestSiderbar extends BaseCase {
 	
 	@Test(groups = "BVT")
 	@TakeScreenshotAndAssert
+	@MocoServerConfig(responseJsonFile="stagecataelelist.json",requestUri="/stagecataelelist")
+	@MocoServerConfig(responseJsonFile="search.json",requestUri="/search")
+	@MocoServerConfig(responseJsonFile="myResourceList.json",requestUri="/myResourceList")
+	public void testFiteration() throws InterruptedException{
+		app.siderbarPage().enterResourcePage();
+		app.resourcePage().setFiterOptions();
+	}
+	
+	
+	@Test(groups = "BVT")
+	@TakeScreenshotAndAssert
+	@MocoServerConfig(responseJsonFile="stagecataelelist.json",requestUri="/stagecataelelist")
+	@MocoServerConfig(responseJsonFile="search.json",requestUri="/search")
+	@MocoServerConfig(responseJsonFile="myResourceList.json",requestUri="/myResourceList")
+	public void testMyResource() throws InterruptedException{
+		app.siderbarPage().enterResourcePage();
+		app.resourcePage().tapMyResource();
+	}
+	
+	@Test(groups = "BVT")
+	@TakeScreenshotAndAssert
+	@MocoServerConfig(responseJsonFile="stagecataelelist.json",requestUri="/stagecataelelist")
+	@MocoServerConfig(responseJsonFile="search.json",requestUri="/search")
+	@MocoServerConfig(responseJsonFile="myResourceList.json",requestUri="/myResourceList")
+	public void testSearchResource() throws InterruptedException{
+		app.siderbarPage().enterResourcePage();
+		app.resourcePage().searchResouce();
+	}
+	
+	@Test(groups = "BVT")
+	@TakeScreenshotAndAssert
 	@MocoServerConfig(responseJsonFile="cooperatelist.json",requestUri="/cooperate/list")
 	public void testMyWorkShop() throws InterruptedException{
 		app.siderbarPage().enterMyWorkShopPage();
+	}
+	
+	@Test(groups = "BVT")
+	@TakeScreenshotAndAssert
+	@MocoServerConfig(responseJsonFile="cooperatelist.json",requestUri="/cooperate/list")
+	@MocoServerConfig(responseJsonFile="detail.json",requestUri="/detail")
+	@MocoServerConfig(responseJsonFile="memberlist.json",requestUri="/memberlist")
+	public void testWorkShopDetail() throws InterruptedException{
+		app.siderbarPage().enterMyWorkShopPage();
+		app.workshopPage().enterEachWorkShop();
+		
 	}
 	
 	@Test(groups = "BVT")
@@ -64,4 +106,12 @@ public class TestSiderbar extends BaseCase {
 	public void testMessages() throws InterruptedException{
 		app.siderbarPage().enterMessagesPage();
 	}
+	
+	@Test(groups = "BVT")
+	@TakeScreenshotAndAssert
+	public void testUserInfo(){
+		app.siderbarPage().enterUserInfoPage();
+	}
+	
+	
 }

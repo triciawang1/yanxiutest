@@ -23,6 +23,12 @@ public class SiderbarPage extends PageBase{
 	@AndroidFindBy(uiAutomator="new UiSelector().text(\"消息动态\")")
 	private MobileElement messages;
 	
+	//左侧栏个人中心头像
+	private MobileElement img_user_avatar;
+	
+	//个人中心页面头像
+	private MobileElement iv_profile_portrait;
+	
 	public void enterHotPotPage() throws InterruptedException{
 		hotPot.click();
 		Thread.sleep(3000);
@@ -41,5 +47,9 @@ public class SiderbarPage extends PageBase{
 	public void enterMessagesPage() throws InterruptedException{
 		messages.click();
 		Thread.sleep(3000);
+	}
+	public void enterUserInfoPage(){
+		img_user_avatar.click();
+		waitForElementVisible(iv_profile_portrait);
 	}
 }

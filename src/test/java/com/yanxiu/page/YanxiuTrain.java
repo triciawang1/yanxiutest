@@ -52,4 +52,8 @@ public class YanxiuTrain {
 	public ActivityPage activityPage(){
 		return new ActivityPage(driver);
 	}
+	
+	public WorkShopPage workshopPage(){
+		return new WorkShopPage(driver);
+	}
 }
