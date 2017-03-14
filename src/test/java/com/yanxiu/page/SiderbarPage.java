@@ -23,6 +23,11 @@ public class SiderbarPage extends PageBase{
 	@AndroidFindBy(uiAutomator="new UiSelector().text(\"消息动态\")")
 	private MobileElement messages;
 	
+	private MobileElement ll_setting;
+	
+	@AndroidFindBy(uiAutomator="new UiSelector().text(\"退出登录\")")
+	private MobileElement logoutButton;
+	
 	//左侧栏个人中心头像
 	private MobileElement img_user_avatar;
 	
@@ -51,5 +56,14 @@ public class SiderbarPage extends PageBase{
 	public void enterUserInfoPage(){
 		img_user_avatar.click();
 		waitForElementVisible(iv_profile_portrait);
+	}
+	
+	public void enterSettingPage(){
+		ll_setting.click();
+		waitForElementVisible(logoutButton);
+	}
+	
+	public void logout(){
+		logoutButton.click();
 	}
 }

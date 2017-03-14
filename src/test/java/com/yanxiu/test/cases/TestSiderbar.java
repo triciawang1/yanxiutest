@@ -112,6 +112,15 @@ public class TestSiderbar extends BaseCase {
 	public void testUserInfo(){
 		app.siderbarPage().enterUserInfoPage();
 	}
-	
-	
+	@Test(groups = "BVT")
+	@TakeScreenshotAndAssert
+	public void testSeetingPage(){
+		app.siderbarPage().enterSettingPage();
+	}
+	@Test(groups = "BVT")
+	public void testLogout(){
+		app.siderbarPage().enterSettingPage();
+		app.siderbarPage().logout();
+		Assert.assertTrue(app.loginPage().isLoginButtonDisplayed());
+	}
 }
