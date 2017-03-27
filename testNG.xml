@@ -16,6 +16,8 @@
 	  </class>
 	  	  	  <class name="com.yanxiu.test.cases.TestSiderbar" >
 	  </class>
+	  	  	  	  <class name="com.yanxiu.test.cases.TestRole" >
+	  </class>
         </classes>
   </test> <!-- Default test -->
       <listeners>
