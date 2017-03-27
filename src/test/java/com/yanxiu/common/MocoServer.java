@@ -3,10 +3,13 @@ package com.yanxiu.common;
 import static com.github.dreamhead.moco.Runner.runner;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.testng.log4testng.Logger;
 
 import com.github.dreamhead.moco.HttpServer;
+import com.github.dreamhead.moco.ResponseHandler;
 import com.github.dreamhead.moco.Runner;
 
 
@@ -42,6 +45,18 @@ public class MocoServer  {
         mocoServer.request(by(uri(requestUri))).response(with(text(body)),header("content-type", "application/json; charset=UTF-8"));
 //		mocoServer.request(by(uri(requestUri))).response(body);
 
+	}
+	
+	public static void seqResponse(String requestUri, String... jsonFiles){
+//		List<ResponseHandler> handlers = new ArrayList<ResponseHandler>();
+		ResponseHandler[] handlers = new ResponseHandler[jsonFiles.length];
+		int i=0;
+		for(String file:jsonFiles){
+			
+			String body = CommonUtil.getJSONObjectFromFile(file).toString();
+			handlers[i++] = with(text(body));
+		}
+		mocoServer.request(by(uri(requestUri))).response(seq(handlers));
 	}
 	
 	public static void responseWithPlainText(String jsonFile,String requestUri) throws UnsupportedEncodingException{

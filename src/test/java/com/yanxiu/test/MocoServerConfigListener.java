@@ -16,7 +16,7 @@ import com.yanxiu.common.MocoServer;
 
 public class MocoServerConfigListener implements IInvokedMethodListener {
 
-	private String responseJsonFile;
+	private String[] responseJsonFile;
 	private String requestUri;
 	private static Logger log = Logger.getLogger(MocoServerConfigListener.class);
 
@@ -34,10 +34,17 @@ public class MocoServerConfigListener implements IInvokedMethodListener {
 //					.getAnnotation(MocoServerConfig.class).requestUri();
 			responseJsonFile = config.responseJsonFile();
 			requestUri = config.requestUri();
-			log.info("responseJsonFile: " + responseJsonFile + " requestUri: " + requestUri);
+			log.info("responseJsonFile: " + responseJsonFile[0] + " requestUri: " + requestUri);
 
 			try {
-				MocoServer.response(responseJsonFile, requestUri);
+				if(responseJsonFile.length==1){
+				MocoServer.response(responseJsonFile[0], requestUri);
+				log.info("response with single");
+				}else if (responseJsonFile.length>1){
+					MocoServer.seqResponse(requestUri, responseJsonFile);
+					
+					log.info("response sequence");
+				}
 				
 			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block

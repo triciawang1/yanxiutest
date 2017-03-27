@@ -5,9 +5,12 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.SwipeElementDirection;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidKeyCode;
+import io.appium.java_client.pagefactory.AndroidFindAll;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSFindBy;
+
+import java.util.List;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -100,11 +103,20 @@ public class PageBase {
 	
 	private MobileElement iv_know;
 	
+	@AndroidFindBy(className = "android.widget.ImageView")
+	private MobileElement iknow;
+	
+	@AndroidFindAll(@AndroidFindBy(className = "android.widget.ImageView"))
+	private List<MobileElement> imageViews;
+	
 	public void tapIKnow(){
 		try{
 		iv_know.click();
+		imageViews.get(2).click();
 		}catch(Exception e){
 			
 		}
 	}
+	
+	
 }

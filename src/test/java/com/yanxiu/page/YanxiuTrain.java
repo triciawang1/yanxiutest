@@ -56,4 +56,7 @@ public class YanxiuTrain {
 	public WorkShopPage workshopPage(){
 		return new WorkShopPage(driver);
 	}
+	public RolePage rolePage(){
+		return new RolePage(driver);
+	}
 }

@@ -1,7 +1,10 @@
 package com.yanxiu.page;
 
+import java.util.List;
+
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.pagefactory.AndroidFindAll;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSFindBy;
 
@@ -22,6 +25,18 @@ public class SiderbarPage extends PageBase{
 	private MobileElement myWorkShop;
 	@AndroidFindBy(uiAutomator="new UiSelector().text(\"消息动态\")")
 	private MobileElement messages;
+	
+	@AndroidFindAll(@AndroidFindBy(id = "tv_news_feed_content"))
+	private List<MobileElement> messageContents;
+	@AndroidFindAll(@AndroidFindBy(id = "tv_news_feed_time"))
+	private List<MobileElement> timeOfMessages;
+	
+	public String getTitleOfLatestMessage(){
+		return messageContents.get(0).getText();
+	}
+	public String getTimeofLatestMessage(){
+		return timeOfMessages.get(0).getText();
+	}
 	
 	private MobileElement ll_setting;
 	
@@ -65,5 +80,19 @@ public class SiderbarPage extends PageBase{
 	
 	public void logout(){
 		logoutButton.click();
+	}
+	//我是学员
+	private MobileElement rl_normal;
+	//我是坊主
+	private MobileElement rl_leader;
+	
+	public void switchToStudent() throws InterruptedException{
+		rl_normal.click();
+		Thread.sleep(2000);
+	}
+	
+	public void switchToFangzhu() throws InterruptedException{
+		rl_leader.click();
+		Thread.sleep(2000);
 	}
 }

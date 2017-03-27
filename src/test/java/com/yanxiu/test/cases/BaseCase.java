@@ -25,6 +25,7 @@ import javax.imageio.ImageIO;
 import org.apache.commons.exec.ExecuteException;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.WebElement;
@@ -279,4 +280,5 @@ public class BaseCase {
 		Thread.sleep(2000);
 	}
 
+	
 }

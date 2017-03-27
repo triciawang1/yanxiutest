@@ -141,6 +141,7 @@ public class TestHomework extends BaseCase {
 	@MocoServerConfig(responseJsonFile="listc2.json",requestUri="/listc2")
 	@MocoServerConfig(responseJsonFile="cascade2.json",requestUri="/cascade2")
 	@MocoServerConfig(responseJsonFile="resource.json",requestUri="/resource")
+	@MocoServerConfig(responseJsonFile="newupload.json",requestUri="/newupload")
 	public void testUploadVideo() throws InterruptedException{
 		gotoHomeworkList();
 		app.homeworkPage().enterVideoWorkDetailPage();

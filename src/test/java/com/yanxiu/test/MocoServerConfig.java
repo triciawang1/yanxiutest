@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
 @Target(METHOD)
 @Repeatable(MocoServerConfigs.class)
 public @interface MocoServerConfig {
-	public String responseJsonFile();
+	public String[] responseJsonFile();
 	public String requestUri();
 	
 }
