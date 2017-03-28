@@ -1,6 +1,7 @@
 package com.yanxiu.common;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.testng.log4testng.Logger;
 
@@ -31,4 +32,7 @@ public class AnyProxy extends AbstractServer {
 		super(serverName, successfullMsg, jsFile, "--port", port, "--rule",  ruleFile);		
 	}
 
+	public Boolean isServerStarted() throws IOException{
+		return isServerStarted(port);
+	}
 }

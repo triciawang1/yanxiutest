@@ -140,16 +140,16 @@ public class BaseCase {
 
 	@BeforeSuite()
 	public void prepairEnv() throws IOException, InterruptedException, URISyntaxException {
-//		if (CommonUtil.isAndroidDevicePluggin()) {
-//			CommonUtil.reinstallApk();
-//		}
+		// if (CommonUtil.isAndroidDevicePluggin()) {
+		// CommonUtil.reinstallApk();
+		// }
 		CommonUtil.installProxySetterApk();
 		WifiProxy.setWifiProxy();
 		startAppiumServer();
 		startProxy();
-		//是否显示appium返回的日志
-//		 AppiumServerLog serverLogThread = AppiumServerLog.getServer();
-//		 serverLogThread.start();
+		// 是否显示appium返回的日志
+		// AppiumServerLog serverLogThread = AppiumServerLog.getServer();
+		// serverLogThread.start();
 
 		screenShotPrepare();
 
@@ -207,6 +207,9 @@ public class BaseCase {
 		} else {
 			log.info("no device is connected, please plug in a device");
 			System.exit(0);
+		}
+		if (!proxy.isServerStarted()) {
+			startProxy();
 		}
 		setConnection();
 		startMocoServer();
@@ -280,5 +283,4 @@ public class BaseCase {
 		Thread.sleep(2000);
 	}
 
-	
 }

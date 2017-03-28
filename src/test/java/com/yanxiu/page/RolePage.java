@@ -46,10 +46,11 @@ public class RolePage extends PageBase {
 	@AndroidFindAll(@AndroidFindBy(className = "android.widget.ImageView"))
 	private List<MobileElement> imageViews;
 
-	public void enterXueqingPage() {
+	public void enterXueqingPage() throws InterruptedException {
 		management.click();
 		rl_student_study.click();
 		imageViews.get(0).click();
+		Thread.sleep(1000);
 	}
 
 	private MobileElement recycler_student_study_list;

@@ -32,12 +32,13 @@ public class TestRole extends BaseCase {
 	
 	@Test	
 	@TakeScreenshotAndAssert
-	public void testXueqing() throws IOException{
+	public void testXueqing() throws IOException, InterruptedException{
 		
 		Assert.assertEquals(app.rolePage().getScore(), "6.25");
 		for(int i=0;i<2;i++){
 		app.rolePage().pageDown();
 		}
+		Thread.sleep(2000);
 	}
 	
 	@Test
@@ -86,12 +87,10 @@ public class TestRole extends BaseCase {
 		String fileName = TestMethodCapture.getMethodName().concat("0.png");
 		takeScreenShotAndAssert(fileName);
 		app.rolePage().notifyStudent();
-		fileName = TestMethodCapture.getMethodName().concat("1.png");
-		takeScreenShotAndAssert(fileName);
+		app.rolePage().pressBackButton();
 		stopMocoServer();
-		
 		checkMessaageReceived("XY03117218@yanxiu.com", "123456","刚刚");
-		startMocoServer();
+		
 	}
 
 	private void checkMessaageReceived(String username,String pwd,String time) throws InterruptedException {		
@@ -120,6 +119,6 @@ public class TestRole extends BaseCase {
 		checkMessaageReceived("XY03117219@yanxiu.com", "123456","1分钟前");
 		checkMessaageReceived("XY03117220@yanxiu.com", "123456","1分钟前");
 		checkMessaageReceived("XY03117217@yanxiu.com", "123456","2分钟前");
-		startMocoServer();
+		
 	}
 }

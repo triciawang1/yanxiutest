@@ -15,7 +15,7 @@ import org.testng.log4testng.Logger;
 public abstract class AbstractServer {
 
 	private Logger log = Logger.getLogger(AbstractServer.class);
-	protected Boolean isServerStarted = false;
+	protected static Boolean isServerStarted = false;
 	protected String serverName;
 	private static final int RETRY_TIMES = 3;
 	private static final int TIMEOUT = 30000;
@@ -56,7 +56,10 @@ public abstract class AbstractServer {
 		PumpStreamHandler psh = new PumpStreamHandler(out);
 		executor.setStreamHandler(psh);
 		int i = 0;
-
+		
+		log.info("isServerStarted:"+isServerStarted);
+		
+		
 		while (!isServerStarted && i < RETRY_TIMES) {
 			log.info("try to start " + serverName + " " + i + " time");
 
@@ -111,8 +114,31 @@ public abstract class AbstractServer {
 
 	}
 
-	public Boolean isServerStarted() {
+	public Boolean isServerStarted(String port) throws IOException {
+		String str;
+		if (!CommonUtil.isMacOs()) {
+			// str = CommonUtil.execCmd("tasklist |findstr
+			// node.exe").toString().trim();
+			str = CommonUtil.execCmd("netstat -aon|findstr \""+port+"\"").toString().trim();
+			log.info("check whether server is started");
+			String[] lines = str.split("\n");
+
+			if (str.length() > 0 && lines.length >= 1 && str.contains("LISTENING")) {
+				isServerStarted = true;
+				return true;
+			}
+		} else {
+			str = CommonUtil.execCmd("lsof -i tcp:"+port).toString().trim();
+			String[] lines = str.split("\n");
+			if (lines.length >= 1 && lines.length >= 1 && str.contains("LISTEN")) {
+				isServerStarted = true;
+				return true;
+			}
+		}
+		log.info("server is not started");
+		isServerStarted = false;
 		return false;
+		
 	}
 
 }
