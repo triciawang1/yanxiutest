@@ -40,11 +40,14 @@ for(var i = 0, l = urls.length; i < l; i++)
 
         client.get(urls[req.replaceLocalFile], function(err, res, body)  //触发mock，到moco中获取mock响应数据
                 {
-                   console.log('the resp is ------------------------->',res.statusCode,res.headers,body);
+					
+                    console.log('the resp is ------------------------->',res.statusCode,res.headers,body);
                     var newDataStr=JSON.stringify(body);
                     callback(res.statusCode,res.headers,newDataStr); //mock数据返回给客户端
+					
                 }
             );
+
 			//console.log(fs.readFileSync(LOCAL_JSON).toString());
 //if(req.replaceLocalFile){
 	//callback(200,{"content-type":"application/json;charset=UTF-8"},fs.readFileSync(LOCAL_JSON).toString())
