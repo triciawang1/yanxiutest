@@ -118,7 +118,22 @@ public class TestRole extends BaseCase {
 		checkMessaageReceived("XY03117218@yanxiu.com", "123456","刚刚");
 		checkMessaageReceived("XY03117219@yanxiu.com", "123456","1分钟前");
 		checkMessaageReceived("XY03117220@yanxiu.com", "123456","1分钟前");
-		checkMessaageReceived("XY03117217@yanxiu.com", "123456","2分钟前");
+		checkMessaageReceived("XY03117217@yanxiu.com", "123456","2分钟前");		
+	}
+	
+	@Test
+	@TakeScreenshotAndAssert
+	@MocoServerConfig(responseJsonFile="getStudioListduofang.json",requestUri="/getStudioList")
+	@MocoServerConfig(responseJsonFile={"getLearningInfoList16.json","getLearningInfoListzhongxue.json"},requestUri="/getLearningInfoList")
+	public void testSwitchFang() throws InterruptedException{
+		app.rolePage().enterXueqingPage();
+		app.rolePage().swichFang();
+	}
+	
+	@Test
+	@MocoServerConfig(responseJsonFile="getStudioListduofang.json",requestUri="/getStudioList")
+	@MocoServerConfig(responseJsonFile={"getLearningInfoList16.json","getLearningInfoListzhongxue.json"},requestUri="/getLearningInfoList")
+	public void testStudentFilteration(){
 		
 	}
 }
