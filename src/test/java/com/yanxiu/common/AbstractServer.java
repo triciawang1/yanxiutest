@@ -15,7 +15,7 @@ import org.testng.log4testng.Logger;
 public abstract class AbstractServer {
 
 	private Logger log = Logger.getLogger(AbstractServer.class);
-	protected static Boolean isServerStarted = false;
+	protected Boolean isServerStarted = false;
 	protected String serverName;
 	private static final int RETRY_TIMES = 3;
 	private static final int TIMEOUT = 30000;

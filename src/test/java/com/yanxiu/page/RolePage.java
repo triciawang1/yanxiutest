@@ -89,4 +89,36 @@ public class RolePage extends PageBase {
 		tv_all_notify.click();
 		Thread.sleep(2000);
 	}
+	
+	private MobileElement ll_study_leader;
+	
+	@AndroidFindAll(@AndroidFindBy(id = "tv_subject_version_name"))
+	private List<MobileElement> tv_subject_version_name;
+	
+	public void swichFang() throws InterruptedException{
+		ll_study_leader.click();
+		tv_subject_version_name.get(1).click();
+		Thread.sleep(2000);
+	}
+	
+	//筛选
+	private MobileElement ll_study_filter;
+	
+	private MobileElement rb_study_filter_had_join;
+	
+	private MobileElement rb_study_filter_had_study;
+	
+	private MobileElement rb_study_filter_had_pass;
+	
+	private MobileElement tv_study_filter_submit;
+	
+	public void filterStudent() throws InterruptedException{
+		ll_study_filter.click();
+		rb_study_filter_had_join.click();
+		rb_study_filter_had_study.click();
+		rb_study_filter_had_pass.click();
+		tv_study_filter_submit.click();
+		Thread.sleep(2000);
+	}
+	
 }

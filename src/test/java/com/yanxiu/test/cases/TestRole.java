@@ -131,9 +131,11 @@ public class TestRole extends BaseCase {
 	}
 	
 	@Test
+	@TakeScreenshotAndAssert
 	@MocoServerConfig(responseJsonFile="getStudioListduofang.json",requestUri="/getStudioList")
-	@MocoServerConfig(responseJsonFile={"getLearningInfoList16.json","getLearningInfoListzhongxue.json"},requestUri="/getLearningInfoList")
-	public void testStudentFilteration(){
-		
+	@MocoServerConfig(responseJsonFile={"getLearningInfoList16.json","getLearningInfoListempty.json"},requestUri="/getLearningInfoList")
+	public void testStudentFilteration() throws InterruptedException{
+		app.rolePage().enterXueqingPage();
+		app.rolePage().filterStudent();
 	}
 }
