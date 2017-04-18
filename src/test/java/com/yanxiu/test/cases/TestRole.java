@@ -88,7 +88,8 @@ public class TestRole extends BaseCase {
 		takeScreenShotAndAssert(fileName);
 		app.rolePage().notifyStudent();
 		app.rolePage().pressBackButton();
-		stopMocoServer();
+		proxy.stopServer();
+//		stopMocoServer();
 		checkMessaageReceived("XY03117218@yanxiu.com", "123456");
 		
 	}

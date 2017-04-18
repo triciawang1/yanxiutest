@@ -134,8 +134,10 @@ public class BaseCase {
 
 	@AfterSuite()
 	public void stopAppiumSever() throws IOException {
+//		proxy.stopServer();
 		Server.stopServer(isRemoteRun());
 		WifiProxy.clearWifiProxy();
+		
 	}
 
 	@BeforeSuite()
