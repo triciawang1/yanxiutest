@@ -20,7 +20,7 @@ public class AnyProxy extends AbstractServer {
 		if (CommonUtil.isMacOs()) {
 			jsFile = "/usr/local/lib/node_modules/anyproxy/bin.js";			
 		} else if (CommonUtil.isWindowsOS()) {
-			jsFile = "C:/Users/Administrator/AppData/Roaming/npm/node_modules/anyproxy/bin.js";
+			jsFile = "C:/Users/admin/AppData/Roaming/npm/node_modules/anyproxy/bin.js";
 		
 		}
 		String ruleFilePath = AnyProxy.class.getResource("/").getPath();

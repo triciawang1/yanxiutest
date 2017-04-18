@@ -146,10 +146,10 @@ public class BaseCase {
 		CommonUtil.installProxySetterApk();
 		WifiProxy.setWifiProxy();
 		startAppiumServer();
-		startProxy();
+    	startProxy();
 		// 是否显示appium返回的日志
-		// AppiumServerLog serverLogThread = AppiumServerLog.getServer();
-		// serverLogThread.start();
+		 //AppiumServerLog serverLogThread = AppiumServerLog.getServer();
+		 //serverLogThread.start();
 
 		screenShotPrepare();
 

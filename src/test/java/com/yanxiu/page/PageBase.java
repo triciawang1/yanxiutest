@@ -109,10 +109,14 @@ public class PageBase {
 	@AndroidFindAll(@AndroidFindBy(className = "android.widget.ImageView"))
 	private List<MobileElement> imageViews;
 	
+	//坊主蒙版提示
+	private MobileElement ll_leader_guide;
+	
 	public void tapIKnow(){
 		try{
 		iv_know.click();
-		imageViews.get(2).click();
+		ll_leader_guide.click();
+		
 		}catch(Exception e){
 			
 		}

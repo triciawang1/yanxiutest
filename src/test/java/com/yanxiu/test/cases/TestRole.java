@@ -89,18 +89,18 @@ public class TestRole extends BaseCase {
 		app.rolePage().notifyStudent();
 		app.rolePage().pressBackButton();
 		stopMocoServer();
-		checkMessaageReceived("XY03117218@yanxiu.com", "123456","刚刚");
+		checkMessaageReceived("XY03117218@yanxiu.com", "123456");
 		
 	}
 
-	private void checkMessaageReceived(String username,String pwd,String time) throws InterruptedException {		
+	private void checkMessaageReceived(String username,String pwd) throws InterruptedException {		
 		app.siderbarPage().gotoSiderbar();
 		app.siderbarPage().enterSettingPage();
 		app.siderbarPage().logout();
 		app.loginPage().login(username,pwd);
 		app.siderbarPage().gotoSiderbar();
 		app.siderbarPage().enterMessagesPage();
-		Assert.assertEquals(app.siderbarPage().getTimeofLatestMessage(),time);
+		Assert.assertTrue(app.siderbarPage().getTimeofLatestMessage().contains("刚刚")|| app.siderbarPage().getTimeofLatestMessage().contains("分钟前"));
 		Assert.assertEquals(app.siderbarPage().getTitleOfLatestMessage(), "坊主提醒：请尽快完成研修任务");
 		app.homePage().pressBackButton();
 		Thread.sleep(2000);
@@ -115,10 +115,10 @@ public class TestRole extends BaseCase {
 		app.rolePage().notifyMoreStudents();
 		app.rolePage().pressBackButton();
 		stopMocoServer();
-		checkMessaageReceived("XY03117218@yanxiu.com", "123456","刚刚");
-		checkMessaageReceived("XY03117219@yanxiu.com", "123456","1分钟前");
-		checkMessaageReceived("XY03117220@yanxiu.com", "123456","1分钟前");
-		checkMessaageReceived("XY03117217@yanxiu.com", "123456","2分钟前");		
+		checkMessaageReceived("XY03117218@yanxiu.com", "123456");
+		checkMessaageReceived("XY03117219@yanxiu.com", "123456");
+		checkMessaageReceived("XY03117220@yanxiu.com", "123456");
+		checkMessaageReceived("XY03117217@yanxiu.com", "123456");		
 	}
 	
 	@Test

@@ -30,7 +30,7 @@ public class AppiumServer extends AbstractServer {
 		} else if (CommonUtil.isWindowsOS()) {
 //			executor = "D:/Program Files (x86)/Appium/node.exe";
 //			executor = "D:/Program Files/nodejs/node.exe";
-			jsFile = "D:/Program Files (x86)/Appium/node_modules/appium/bin/Appium.js";
+			jsFile = "C:/Program Files (x86)/Appium/node_modules/appium/bin/Appium.js";
 		}
 	}
 

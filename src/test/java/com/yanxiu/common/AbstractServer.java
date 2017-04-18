@@ -28,7 +28,7 @@ public abstract class AbstractServer {
 		if (CommonUtil.isMacOs()) {
 			executor = "/usr/local/bin/node";			
 		} else if (CommonUtil.isWindowsOS()) {
-			executor = "D:/Program Files/nodejs/node.exe";			
+			executor = "C:/Program Files/nodejs/node.exe";			
 		}
 	}
 	
