@@ -136,7 +136,7 @@ public class CommonUtil {
 		} else {
 			return devices;
 		}
-		String[] lines = str.split("\n");
+		String[] lines = str.trim().split("\n");
 		log.info("list ios devices:"+str);
 		log.info("length of device list:"+lines.length);
 		if (lines.length < 1) {
