@@ -137,7 +137,7 @@ public class CommonUtil {
 			return devices;
 		}
 		String[] lines = str.split("\n");
-
+		log.info("list ios devices:"+str);
 		if (lines.length < 1) {
 			log.info("no ios device connected");
 

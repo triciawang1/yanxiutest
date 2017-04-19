@@ -98,6 +98,7 @@ public class BaseCase {
 
 	protected AndroidDriver<MobileElement> getAndroidDriver(String deviceName)
 			throws InterruptedException, IOException {
+		log.info("create an androidDriver");
 		capabilities.setCapability("platformName", "Android");
 
 		capabilities.setCapability("deviceName", deviceName);
