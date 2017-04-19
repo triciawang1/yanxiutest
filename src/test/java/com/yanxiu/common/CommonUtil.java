@@ -136,13 +136,12 @@ public class CommonUtil {
 		} else {
 			return devices;
 		}
-		String[] lines = str.trim().split("\n");
-		log.info("list ios devices:"+str);
-		log.info("length of str"+str.length());
-		log.info("length of device list:"+lines.length);
-		if (lines.length < 1) {
+		String[] lines = {};
+		if (str.length() < 1) {
 			log.info("no ios device connected");
 
+		}else{
+			 lines = str.trim().split("\n");
 		}
 		for (int i = 0; i < lines.length; i++) {
 			devices.put("udid", lines[i]);
