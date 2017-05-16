@@ -54,8 +54,9 @@ public class HomePage extends PageBase{
 		Thread.sleep(2000);
 	}
 	
-	public void enterHomeworkPage(){
+	public void enterHomeworkPage() throws InterruptedException{
 		homeWorkItem.click();
+		Thread.sleep(2000);
 	}
 	
 	public void enterCoursePage() throws InterruptedException{

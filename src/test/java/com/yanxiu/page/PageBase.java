@@ -122,5 +122,7 @@ public class PageBase {
 		}
 	}
 	
-	
+	protected void pageDown(MobileElement element){
+		element.swipe(SwipeElementDirection.UP, 100, 100, 500);
+	}
 }

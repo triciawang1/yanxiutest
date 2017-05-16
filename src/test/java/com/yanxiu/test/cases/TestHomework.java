@@ -45,7 +45,7 @@ public class TestHomework extends BaseCase {
 	@Test
 	@TakeScreenshotAndAssert
 	@MocoServerConfig(responseJsonFile="homeworkList16.json",requestUri="/homeworkList")
-	public void testHomeworkList() throws UnsupportedEncodingException{
+	public void testHomeworkList() throws UnsupportedEncodingException, InterruptedException{
 		
 		gotoHomeworkList();
 		
@@ -53,7 +53,7 @@ public class TestHomework extends BaseCase {
 	}
 
 
-	private void gotoHomeworkList() {
+	private void gotoHomeworkList() throws InterruptedException {
 		app.homePage().tapTask();
 		app.homePage().enterHomeworkPage();
 		app.homeworkPage().tapKnownButton();
@@ -62,7 +62,7 @@ public class TestHomework extends BaseCase {
 	@Test
 	@TakeScreenshotAndAssert
 	@MocoServerConfig(responseJsonFile="homeworkList16.json",requestUri="/homeworkList")
-	public void testNormalHomeworkDetail(){
+	public void testNormalHomeworkDetail() throws InterruptedException{
 		gotoHomeworkList();
 		app.homeworkPage().enterHomeworkDetailPage();
 
@@ -70,7 +70,7 @@ public class TestHomework extends BaseCase {
 	@Test
 	@TakeScreenshotAndAssert
 	@MocoServerConfig(responseJsonFile="homeworkInfo16Video.json",requestUri="/homeworkInfo")
-	public void testVideoHomeworkDetail() throws UnsupportedEncodingException{
+	public void testVideoHomeworkDetail() throws UnsupportedEncodingException, InterruptedException{
 		MocoServer.response("homeworkList16.json", "/homeworkList");
 		gotoHomeworkList();
 		app.homeworkPage().enterVideoWorkDetailPage();
@@ -79,7 +79,7 @@ public class TestHomework extends BaseCase {
 	
 	@Test
 	@MocoServerConfig(responseJsonFile="homeworkInfo16Video.json",requestUri="/homeworkInfo")
-	public void testRecordVideo() throws UnsupportedEncodingException{
+	public void testRecordVideo() throws UnsupportedEncodingException, InterruptedException{
 		MocoServer.response("homeworkList16.json", "/homeworkList");
 		gotoHomeworkList();
 		app.homeworkPage().enterVideoWorkDetailPage();

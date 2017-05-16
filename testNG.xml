@@ -18,6 +18,12 @@
 	  </class>
 	  	  	  	  <class name="com.yanxiu.test.cases.TestRole" >
 	  </class>
+	  	  </class>
+	  	  	  	  <class name="com.yanxiu.test.cases.TestTheme" >
+	  </class>
+	  	  	  </class>
+	  	  	  	  <class name="com.yanxiu.test.cases.TestSelectLayer" >
+	  </class>
         </classes>
   </test> <!-- Default test -->
       <listeners>

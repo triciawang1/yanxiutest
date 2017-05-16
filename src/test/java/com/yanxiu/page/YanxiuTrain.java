@@ -59,4 +59,7 @@ public class YanxiuTrain {
 	public RolePage rolePage(){
 		return new RolePage(driver);
 	}
+	public LayerPage layerPage(){
+		return new LayerPage(driver);
+	}
 }

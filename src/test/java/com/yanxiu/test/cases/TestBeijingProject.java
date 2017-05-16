@@ -119,7 +119,7 @@ public class TestBeijingProject extends BaseCase{
 	@Test
 	@TakeScreenshotAndAssert
 	@MocoServerConfig(responseJsonFile="homeworkInfo.json",requestUri="/homeworkInfo")
-	public void testHomworkFromTask(){
+	public void testHomworkFromTask() throws InterruptedException{
 		app.homePage().tapTask();
 		app.homePage().enterHomeworkPage();
 		app.homeworkPage().tapKnownButton();
