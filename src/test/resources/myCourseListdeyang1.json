@@ -1,0 +1,248 @@
+{
+    "BaseBeanCreateTime": 1494928704027,
+    "code": "0",
+    "debugDesc": "[debug_token:  http-nio-8080-exec-96-1494928703988-NULLADDR_NULLPORT ] 返回数据成功 backen code[0]",
+    "desc": "返回数据成功",
+    "body": {
+        "BaseBeanCreateTime": 1494928704026,
+        "title": "2017年德阳市教师全员培训项目-义务教育教师培训（学前）",
+        "modules": [
+            {
+                "BaseBeanCreateTime": 1494928704026,
+                "module_id": "4723",
+                "module_name": "阶段一 专业理念与师德",
+                "more": "false",
+                "courses": [
+                    {
+                        "BaseBeanCreateTime": 1494928704026,
+                        "courses_id": "10397149",
+                        "course_title": "与你相逢，缘起“老师”，开启职业幸福",
+                        "course_img": "",
+                        "record": "0",
+                        "is_selected": "0",
+                        "template": "Default0610",
+                        "type": "102",
+                        "credit": "0",
+                        "quiz": {
+                            "finish": 0,
+                            "total": 2
+                        },
+                        "isSupportApp": true
+                    },
+                    {
+                        "BaseBeanCreateTime": 1494928704026,
+                        "courses_id": "10397150",
+                        "course_title": "你我同行，用心去爱，追求职业幸福",
+                        "course_img": "",
+                        "record": "0",
+                        "is_selected": "0",
+                        "template": "Default0610",
+                        "type": "102",
+                        "credit": "0",
+                        "quiz": {
+                            "finish": 0,
+                            "total": 2
+                        },
+                        "isSupportApp": true
+                    },
+                    {
+                        "BaseBeanCreateTime": 1494928704026,
+                        "courses_id": "10397151",
+                        "course_title": "珍惜相伴，温暖相处，体验职业幸福",
+                        "course_img": "",
+                        "record": "0",
+                        "is_selected": "0",
+                        "template": "Default0610",
+                        "type": "102",
+                        "credit": "0",
+                        "quiz": {
+                            "finish": 0,
+                            "total": 2
+                        },
+                        "isSupportApp": true
+                    },
+                    {
+                        "BaseBeanCreateTime": 1494928704026,
+                        "courses_id": "10397152",
+                        "course_title": "做一名有爱的幼儿教师",
+                        "course_img": "",
+                        "record": "0",
+                        "is_selected": "0",
+                        "template": "Default0610",
+                        "type": "102",
+                        "credit": "0",
+                        "quiz": {
+                            "finish": 0,
+                            "total": 2
+                        },
+                        "isSupportApp": true
+                    },
+                    {
+                        "BaseBeanCreateTime": 1494928704026,
+                        "courses_id": "10397153",
+                        "course_title": "走进童心世界——如何与幼儿玩到一起",
+                        "course_img": "",
+                        "record": "0",
+                        "is_selected": "0",
+                        "template": "Default0610",
+                        "type": "102",
+                        "credit": "0",
+                        "quiz": {
+                            "finish": 0,
+                            "total": 2
+                        },
+                        "isSupportApp": true
+                    },
+                    {
+                        "BaseBeanCreateTime": 1494928704026,
+                        "courses_id": "10397154",
+                        "course_title": "唱响我们心中的歌——说说教师的那些案头工作",
+                        "course_img": "",
+                        "record": "0",
+                        "is_selected": "0",
+                        "template": "Default0610",
+                        "type": "102",
+                        "credit": "0",
+                        "quiz": {
+                            "finish": 0,
+                            "total": 3
+                        },
+                        "isSupportApp": true
+                    },
+                    {
+                        "BaseBeanCreateTime": 1494928704026,
+                        "courses_id": "10397155",
+                        "course_title": "优秀教师眼中的孩子总是善良的",
+                        "course_img": "",
+                        "record": "0",
+                        "is_selected": "0",
+                        "template": "Default0610",
+                        "type": "101",
+                        "credit": "0",
+                        "quiz": {
+                            "finish": 0,
+                            "total": 1
+                        },
+                        "isSupportApp": true
+                    },
+                    {
+                        "BaseBeanCreateTime": 1494928704026,
+                        "courses_id": "10397156",
+                        "course_title": "幼儿教师的心理健康与调适",
+                        "course_img": "",
+                        "record": "0",
+                        "is_selected": "0",
+                        "template": "NewDefault",
+                        "type": "101",
+                        "credit": "0",
+                        "quiz": {
+                            "finish": 0,
+                            "total": 1
+                        },
+                        "isSupportApp": true
+                    },
+                    {
+                        "BaseBeanCreateTime": 1494928704026,
+                        "courses_id": "10397157",
+                        "course_title": "教师依法执教与学生管理的法治化",
+                        "course_img": "",
+                        "record": "0",
+                        "is_selected": "0",
+                        "template": "NewDefault",
+                        "type": "101",
+                        "credit": "0",
+                        "quiz": {
+                            "finish": 0,
+                            "total": 4
+                        },
+                        "isSupportApp": true
+                    },
+                    {
+                        "BaseBeanCreateTime": 1494928704026,
+                        "courses_id": "10397158",
+                        "course_title": "结伴同行话成长——如何和家长聊到一起",
+                        "course_img": "",
+                        "record": "0",
+                        "is_selected": "0",
+                        "template": "Default0610",
+                        "type": "101",
+                        "credit": "0",
+                        "quiz": {
+                            "finish": 0,
+                            "total": 3
+                        },
+                        "isSupportApp": true
+                    }
+                ]
+            }
+        ],
+        "coursecount": "20",
+        "total": "20",
+        "progress": null,
+        "segments": [
+            {
+                "BaseBeanCreateTime": 1494928704026,
+                "id": "0",
+                "name": "通识"
+            },
+            {
+                "BaseBeanCreateTime": 1494928704026,
+                "id": "40",
+                "name": "学前"
+            }
+        ],
+        "stages": [
+            {
+                "BaseBeanCreateTime": 1494928704026,
+                "id": "4723",
+                "name": "阶段一 专业理念与师德",
+                "quiz": {
+                    "finish": 0,
+                    "total": 0
+                }
+            },
+            {
+                "BaseBeanCreateTime": 1494928704026,
+                "id": "4724",
+                "name": "阶段二 专业知识",
+                "quiz": {
+                    "finish": 0,
+                    "total": 0
+                }
+            },
+            {
+                "BaseBeanCreateTime": 1494928704026,
+                "id": "4726",
+                "name": "线下研修",
+                "quiz": {
+                    "finish": 0,
+                    "total": 0
+                }
+            }
+        ],
+        "studys": [
+            {
+                "BaseBeanCreateTime": 1494928704026,
+                "id": "0",
+                "name": "通识"
+            },
+            {
+                "BaseBeanCreateTime": 1494928704026,
+                "id": "36",
+                "name": "幼儿教育"
+            }
+        ],
+        "types": [
+            {
+                "BaseBeanCreateTime": 1494928704026,
+                "id": "101",
+                "name": "选修课"
+            },
+            {
+                "BaseBeanCreateTime": 1494928704026,
+                "id": "102",
+                "name": "必修课"
+            }
+        ]
+    }
+}
